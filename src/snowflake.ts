@@ -4,17 +4,20 @@ class Snowflake {
   public positionY: number;
   private size: number;
   private velocityY: number;
+  private velocityX: number;
 
   // Constructor
   constructor() {
-    this.positionY = -10;
+    this.positionY = 10;
     this.positionX = random(0, width);
     this.size = random(1, 6);
     this.velocityY = random(0.3, 0.6) * this.size;
+    this.velocityX = random(-0.5, 0.5);
   }
   // Methods
   public update() {
     this.positionY += this.velocityY;
+    this.positionX += this.velocityX;
   }
 
   public draw() {
