@@ -1,30 +1,30 @@
 class Snowflake {
   // Properties
-  private positionX: number;
-  public positionY: number;
+  public position: p5.Vector;
   private size: number;
-  private velocityY: number;
-  private velocityX: number;
+  private velocity: p5.Vector;
 
   // Constructor
   constructor() {
-    this.positionY = 10;
-    this.positionX = random(0, width);
+    this.position = createVector(random(0, width), 10);
     this.size = random(1, 6);
-    this.velocityY = random(0.3, 0.6) * this.size;
-    this.velocityX = random(-0.5, 0.5);
+    this.velocity = createVector(
+      random(-0.5, 0.5),
+      random(0.3, 0.6) * this.size
+    );
   }
   // Methods
   public update() {
-    this.positionY += this.velocityY;
-    this.positionX += this.velocityX;
+    // this.position.add(this.velocity);
+    this.position.x += this.velocity.x;
+    this.position.y += this.velocity.y;
   }
 
   public draw() {
     push();
     noStroke();
     fill(255);
-    circle(this.positionX, this.positionY, this.size);
+    circle(this.position.x, this.position.y, this.size);
     pop();
   }
 }
