@@ -1,41 +1,24 @@
 class Game {
   private isCircleVisible: boolean;
-  private snow: Snowflake[];
+  private snow: Snow;
 
   constructor() {
     this.isCircleVisible = false;
-    this.snow = [];
+    this.snow = new Snow();
   }
 
   public update() {
     this.isCircleVisible = mouseIsPressed;
-    this.snow.push(new Snowflake());
-    this.updateSnow();
-  }
-
-  private updateSnow() {
-    for (const flake of this.snow) {
-      flake.update();
-      if (flake.positionY > height) {
-        const index = this.snow.indexOf(flake);
-        this.snow.splice(index, 1);
-      }
-    }
+    this.snow.update();
   }
 
   public draw() {
     background("black");
     this.drawText();
-    this.drawSnow();
+    this.snow.draw();
 
     if (this.isCircleVisible) {
       this.drawCircle();
-    }
-  }
-
-  private drawSnow() {
-    for (const flake of this.snow) {
-      flake.draw();
     }
   }
 
