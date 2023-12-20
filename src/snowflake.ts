@@ -18,6 +18,19 @@ class Snowflake {
     // this.position.add(this.velocity);
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
+    this.moveAwayFromMouse();
+  }
+
+  private moveAwayFromMouse() {
+    const mouseVector = createVector(mouseX, mouseY);
+    const dist = mouseVector.dist(this.position);
+    if (dist < 100) {
+      if (this.position.x > mouseX) {
+        this.position.x += this.velocity.y;
+      } else {
+        this.position.x -= this.velocity.y;
+      }
+    }
   }
 
   public draw() {
