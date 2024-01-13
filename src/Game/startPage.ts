@@ -1,4 +1,4 @@
-class Wall extends Entity {
+class StartPage extends Game {
     constructor() {
         super();
     }
