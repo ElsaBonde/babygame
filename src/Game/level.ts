@@ -5,8 +5,8 @@ class Level extends Game {
     private score: number;
     private time: Time;
 
-    constructor() {
-        super();
+    constructor(currentPage: 'start' | 'level' | 'end', levelFactory: LevelFactory, level: Level, startPage: StartPage, endOfGame: EndOfGame, totalScore: number, enteties: Entity[], currentLevel: number, score: number, time: Time) {
+        super(currentPage, levelFactory, level, startPage, endOfGame, totalScore);
         this.enteties = [];
         this.currentLevel = 0;
         this.score = 0;

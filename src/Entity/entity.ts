@@ -4,14 +4,14 @@ class Entity {
     private x: number;
     private y: number;
 
-    constructor() {
+    constructor(image: p5.Image, size: number, x: number, y: number) {
         this.image = new p5.Image();
         this.size = 0;
         this.x = 0;
         this.y = 0;
     }
     draw() {
-        
+
     }
 
 }

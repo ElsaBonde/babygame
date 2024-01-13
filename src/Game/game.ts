@@ -7,22 +7,24 @@ class Game {
   private endOfGame: EndOfGame;
   private totalScore: number;
 
-  constructor() {
+  constructor(currentPage: 'start' | 'level' | 'end', levelFactory: LevelFactory, level: Level, startPage: StartPage, endOfGame: EndOfGame, totalScore: number) {
     this.currentPage = 'start';
     this.levelFactory = new LevelFactory();
     this.level = new Level();
     this.startPage = new StartPage();
     this.endOfGame = new EndOfGame();
     this.totalScore = 0;
+  }
 
-    public changePage() {
+  public changePage() {
 
-    }
-    draw() {
+  }
 
-    }
+  draw() {
+
+  }
     update() {
-      
+
     }
   }
 

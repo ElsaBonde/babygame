@@ -9,9 +9,9 @@ class Baby extends Entity {
 
     private controls: Controls;
 
-    constructor() {
-        super();
-        this.controls = new Controls();
+    constructor(image: p5.Image, size: number, x: number, y: number, controls: Controls) {
+        super(image, size, x, y);
+        this.controls = controls;
     }
     private getX() {
 

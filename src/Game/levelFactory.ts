@@ -7,8 +7,8 @@ class LevelFactory extends Game {
     private colorLevel1: p5.color;
     private colorLevel2: p5.color;
 
-    constructor() {
-        super();
+    constructor(currentPage: 'start' | 'level' | 'end', levelFactory: LevelFactory, level: Level, startPage: StartPage, endOfGame: EndOfGame, totalScore: number, numbersGridLevel1: number[][], numbersGridLevel2: number[][], backgroundLevel1: p5.Image, backgroundLevel2: p5.Image, colorLevel1: p5.color, colorLevel2: p5.color) {
+        super(currentPage, levelFactory, level, startPage, endOfGame, totalScore);
         this.numbersGridLevel1 = [];
         this.numbersGridLevel2 = [];
         this.backgroundLevel1 = new p5.Image();
@@ -17,8 +17,9 @@ class LevelFactory extends Game {
         this.colorLevel2 = new p5.color();
     }
 
-    private generateLevel(number: number): Level {
-        let level: Level;
+    private generateLevel() {
+        
+        
     }
 
 }
