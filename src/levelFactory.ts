@@ -22,4 +22,37 @@ class LevelFactory extends Game {
         
     }
 
+    draw() {
+        const entities = [];
+ 
+const numbers = [
+  [0,0,0,0,0,0,2,0,0,0],
+  [0,2,0,2,0,0,2,2,0,0],
+  [0,2,0,2,0,0,0,0,0,0],
+  [0,0,2,2,0,0,0,0,0,0],
+  [0,2,0,0,0,0,0,0,0,0],
+  [9,2,0,0,0,0,0,0,0,0],
+]
+ 
+// ett block är 40px
+const blockSize = 40;
+ 
+for (let x = 0; x < numbers.length; x++) {
+  for (let y = 0; y < numbers[x].length; y++) {
+    if (numbers[x][y] === 2) {
+      // Skapa en vägg
+      entities.push(new Wall(, 40, x * blockSize, y * blockSize));
+    }
+    if (numbers[x][y] === 9) {
+      // Skapa en bebis
+      entities.push(new Baby(x * blockSize, y * blockSize));
+    }
+    if (numbers[x][y] === 1) {
+      // Skapa en vällingflaska
+      entities.push(new Vällingflaska(x * blockSize, y * blockSize));
+    }
+  }
+}
+    }
+
 }

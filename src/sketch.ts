@@ -22,11 +22,12 @@ function preload() {
  * in the draw function belows
  */
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1600, 1200);
   frameRate(60);
   music.mystery.setVolume(0.8);
 
-  game = new Game();
+  let levelFactoryInstance = new LevelFactory()
+  game = new Game('level', levelFactoryInstance, Level, StartPage, EndOfGame, Number);
 }
 
 /**
@@ -36,6 +37,7 @@ function setup() {
  */
 function draw() {
   game.update();
+  console.log('tja');
   game.draw();
 }
 
