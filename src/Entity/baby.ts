@@ -1,3 +1,5 @@
+/// <reference path="./entity.ts" />
+
 type Controls = {
     up: number;
     left: number;

@@ -1,16 +1,11 @@
-class Time extends Level {
-    private digits: number;
+class Time {
+  private digits: number;
 
-    constructor() {
-        super();
-        this.digits = 0;
-    }
+  constructor() {
+    this.digits = 0;
+  }
 
-    private countDown() {
-        
-    }
-    update() {
-    }
-    draw() {
-    }
+  private countDown() {}
+  update() {}
+  draw() {}
 }
