@@ -22,7 +22,7 @@ function preload() {
  * in the draw function belows
  */
 function setup() {
-  createCanvas(1600, 1200);
+  createCanvas(1400, 800);
   frameRate(60);
   music.mystery.setVolume(0.8);
 
