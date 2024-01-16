@@ -44,7 +44,7 @@ function setup() {
   music.mystery.setVolume(0.8);
 
   game = new Game();
-  game.startPage = new StartPage();
+  game.startPage = new StartPage(); 
 }
 
 /**
