@@ -1,5 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
+let player: Baby; // För att skapa cirkel på canvas
 let music: {
   mystery: p5.SoundFile;
 };
@@ -27,6 +28,12 @@ function setup() {
   music.mystery.setVolume(0.8);
 
   game = new Game();
+  player = new Baby(30, 200, 200, {
+    up: UP_ARROW,
+    left: LEFT_ARROW,
+    down: DOWN_ARROW,
+    right: RIGHT_ARROW,
+  });
 }
 
 /**
@@ -38,6 +45,8 @@ function draw() {
   game.update();
   game.draw();
   background("white");
+  player.draw();
+  player.update();
 }
 
 /**
