@@ -6,6 +6,7 @@ let playerImages: {
   down: p5.Image;
   right: p5.Image;
 };
+let backgroundImg: p5.Image;
 let music: {
   mystery: p5.SoundFile;
 };
@@ -24,6 +25,8 @@ function preload() {
     right: loadImage("/assets/img/babyright.png"),
   };
 
+  backgroundImg= loadImage("/assets/img/startpage.png")
+
   music = {
     mystery: loadSound("/assets/music/mystery.mp3"),
   };
@@ -41,6 +44,7 @@ function setup() {
   music.mystery.setVolume(0.8);
 
   game = new Game();
+  game.startPage = new StartPage(); 
 }
 
 /**
@@ -52,6 +56,12 @@ function draw() {
   background("white");
   game.update();
   game.draw();
+}
+
+function keyPressed() {
+  if (keyCode === 32) {
+    game.startPage.keyPressedStart();
+  }
 }
 
 /**

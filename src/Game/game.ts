@@ -1,8 +1,8 @@
 class Game {
-  private currentPage: "start" | "level" | "end";
+  public currentPage: "start" | "level" | "end";
   private levelFactory: LevelFactory;
   private level: Level;
-  private startPage: StartPage;
+  public startPage: StartPage;
   private endOfGame: EndOfGame;
   private totalScore: number;
   public player: Baby;
@@ -24,12 +24,20 @@ class Game {
     });
   }
 
-  public changePage() {}
+  public getCurrentPage(): "start"| "level" | "end" {
+    return this.currentPage;
+  }
+
+  public changePage() {
+   this.currentPage = "level";
+  }
 
   draw() {
     this.player.draw();
     if (this.currentPage === "start") {
       this.startPage.draw();
+      this.startPage.startButton();
+      this.startPage.keyPressedStart();
     } else if (this.currentPage === "level") {
       this.level.draw();
     } else if (this.currentPage === "end") {
