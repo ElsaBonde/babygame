@@ -22,7 +22,7 @@ function preload() {
  * in the draw function belows
  */
 function setup() {
-  createCanvas(1400, 800);
+  createCanvas(1000, 600);
   frameRate(60);
   music.mystery.setVolume(0.8);
 
@@ -37,7 +37,7 @@ function setup() {
 function draw() {
   game.update();
   game.draw();
-  background("red");
+  background("white");
 }
 
 /**
