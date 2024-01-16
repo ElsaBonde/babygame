@@ -16,7 +16,7 @@ class Game {
     this.endOfGame = new EndOfGame();
 
     //creates the player/baby
-    this.player = new Baby(30, 200, 200, {
+    this.player = new Baby(playerImg, 30, 200, 200, {
       up: UP_ARROW,
       left: LEFT_ARROW,
       down: DOWN_ARROW,

@@ -11,12 +11,13 @@ class Baby extends Entity {
   private controls: Controls;
 
   constructor(
-    /* image: p5.Image, */ size: number,
+    image: p5.Image,
+    size: number,
     x: number,
     y: number,
     controls: Controls
   ) {
-    super(/* image, */ size, x, y);
+    super(image, size, x, y);
     this.controls = controls;
   }
   public getX() {

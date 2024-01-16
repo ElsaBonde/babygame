@@ -7,12 +7,7 @@ class Clock extends Entity {
     x: number,
     y: number
   ) {
-    super(
-      //image,
-      size,
-      x,
-      y
-    );
+    super(//image,  size, x, y);
   }
   freezeTime(time: Time) {}
   draw() {}

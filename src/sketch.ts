@@ -1,5 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
+let playerImg: p5.Image;
 let music: {
   mystery: p5.SoundFile;
 };
@@ -10,6 +11,8 @@ let music: {
  * sound files, images etc...
  */
 function preload() {
+  playerImg = loadImage("/assets/img/baby.png");
+
   music = {
     mystery: loadSound("/assets/music/mystery.mp3"),
   };
