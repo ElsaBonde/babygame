@@ -17,6 +17,7 @@ let music: {
  */
 
 function preload() {
+  //picture for babys
   playerImages = {
     up: loadImage("/assets/img/babyup.png"),
     left: loadImage("/assets/img/babyleft.png"),
