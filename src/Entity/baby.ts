@@ -15,8 +15,7 @@ class Baby extends Entity {
     size: number,
     x: number,
     y: number,
-    controls: Controls,
-
+    controls: Controls
   ) {
     super(image, size, x, y);
     this.controls = controls;
@@ -34,26 +33,41 @@ class Baby extends Entity {
   public move() {
     if (keyIsDown(this.controls.up)) {
       this.y -= 2;
-
     }
     if (keyIsDown(this.controls.down)) {
       this.y += 2;
     }
     if (keyIsDown(this.controls.right)) {
       this.x += 2;
-
     }
     if (keyIsDown(this.controls.left)) {
       this.x -= 2;
-
     }
   }
 
-  private limitToScreen() {}
+  private limitToScreen() {
+    // player size delat på 2 = halfSize
+    const halfSize = this.size / 2;
+
+    if (this.x - halfSize < 0) {
+      this.x = halfSize;
+    }
+    if (this.y - halfSize < 0) {
+      this.y = halfSize;
+    }
+    if (this.x + halfSize > width) {
+      this.x = width - halfSize;
+    }
+    if (this.y + halfSize > height) {
+      this.y = height - halfSize;
+    }
+  }
+
   private checkCollision() {}
 
   update() {
     this.move();
+    this.limitToScreen();
   }
 
   /***
@@ -66,7 +80,7 @@ class Baby extends Entity {
 
     // Rita bilden centrerad inuti cirkeln
     imageMode(CENTER);
-    image(this.image, 0, 0, this.size, this.size);
+    image(this.image, 0, 0, this.size);
 
     pop();
   }
