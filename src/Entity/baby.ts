@@ -19,25 +19,28 @@ class Baby extends Entity {
     super(/* image, */ size, x, y);
     this.controls = controls;
   }
-  private getX() {
+  public getX() {
     return this.x;
   }
-  private getY() {
+  public getY() {
     return this.y;
   }
 
+  /***
+   * Får bebisen att röra sig 2 px för varje tryck med piltangenterna
+   */
   public move() {
     if (keyIsDown(this.controls.up)) {
-      this.y -= 10;
+      this.y -= 2;
     }
     if (keyIsDown(this.controls.down)) {
-      this.y += 10;
+      this.y += 2;
     }
     if (keyIsDown(this.controls.right)) {
-      this.x += 10;
+      this.x += 2;
     }
     if (keyIsDown(this.controls.left)) {
-      this.x -= 10;
+      this.x -= 2;
     }
   }
 
@@ -48,10 +51,13 @@ class Baby extends Entity {
     this.move();
   }
 
+  /***
+   * Målar ut pricken
+   */
   draw() {
     push();
     fill("red");
-    circle(30, 30, 30);
+    circle(this.x, this.y, this.size);
     pop();
   }
 }

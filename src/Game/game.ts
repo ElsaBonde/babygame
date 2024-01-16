@@ -5,6 +5,7 @@ class Game {
   private startPage: StartPage;
   private endOfGame: EndOfGame;
   private totalScore: number;
+  public player: Baby;
 
   constructor() {
     this.currentPage = "start";
@@ -13,11 +14,20 @@ class Game {
     this.level = this.levelFactory.generateLevel(1);
     this.startPage = new StartPage();
     this.endOfGame = new EndOfGame();
+
+    //creates the player/baby
+    this.player = new Baby(30, 200, 200, {
+      up: UP_ARROW,
+      left: LEFT_ARROW,
+      down: DOWN_ARROW,
+      right: RIGHT_ARROW,
+    });
   }
 
   public changePage() {}
 
   draw() {
+    this.player.draw();
     if (this.currentPage === "start") {
       this.startPage.draw();
     } else if (this.currentPage === "level") {
@@ -26,5 +36,7 @@ class Game {
       this.endOfGame.draw();
     }
   }
-  update() {}
+  update() {
+    this.player.update();
+  }
 }
