@@ -9,16 +9,30 @@ type Controls = {
 
 class Baby extends Entity {
   private controls: Controls;
+  private images: {
+    up: p5.Image;
+    left: p5.Image;
+    down: p5.Image;
+    right: p5.Image;
+  };
 
-  constructor(
-    image: p5.Image,
+  constructor (
+    images: {
+      up: p5.Image;
+      left: p5.Image;
+      down: p5.Image;
+      right: p5.Image;
+    },
+
     size: number,
     x: number,
     y: number,
     controls: Controls
   ) {
-    super(image, size, x, y);
+    super(images.left, size, x, y);
     this.controls = controls;
+    this.images = images;
+    
   }
   public getX() {
     return this.x;
@@ -33,15 +47,19 @@ class Baby extends Entity {
   public move() {
     if (keyIsDown(this.controls.up)) {
       this.y -= 2;
+      this.image = this.images.up;
     }
-    if (keyIsDown(this.controls.down)) {
+   if (keyIsDown(this.controls.down)) {
       this.y += 2;
+      this.image = this.images.down
     }
     if (keyIsDown(this.controls.right)) {
       this.x += 2;
+      this.image = this.images.right;
     }
     if (keyIsDown(this.controls.left)) {
       this.x -= 2;
+      this.image = this.images.left;
     }
   }
 

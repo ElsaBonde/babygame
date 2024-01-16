@@ -1,10 +1,14 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
-let playerImage: p5.Image;
+let playerImages: {
+  up: p5.Image;
+  left: p5.Image;
+  down: p5.Image;
+  right: p5.Image;
+};
 let music: {
   mystery: p5.SoundFile;
 };
-
 
 /**
  * Built in preload function in P5
@@ -13,8 +17,12 @@ let music: {
  */
 
 function preload() {
-  playerImage = loadImage('/assets/img/babyright.png')
-
+  playerImages = {
+    up: loadImage("/assets/img/babyup.png"),
+    left: loadImage("/assets/img/babyleft.png"),
+    down: loadImage("/assets/img/babydown.png"),
+    right: loadImage("/assets/img/babyright.png"),
+  };
 
   music = {
     mystery: loadSound("/assets/music/mystery.mp3"),
