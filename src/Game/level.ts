@@ -5,7 +5,14 @@ class Level {
   private time: Time;
 
   constructor() {
-    this.entities = [];
+    this.entities = [
+      new Baby(/* loadImage("./assets./img./baby.png"), */ 30, 200, 200, {
+        up: UP_ARROW,
+        left: LEFT_ARROW,
+        down: DOWN_ARROW,
+        right: RIGHT_ARROW,
+      }),
+    ];
     this.currentLevel = 0;
     this.score = 0;
     this.time = new Time();
