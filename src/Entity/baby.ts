@@ -15,7 +15,8 @@ class Baby extends Entity {
     size: number,
     x: number,
     y: number,
-    controls: Controls
+    controls: Controls,
+
   ) {
     super(image, size, x, y);
     this.controls = controls;
@@ -33,15 +34,18 @@ class Baby extends Entity {
   public move() {
     if (keyIsDown(this.controls.up)) {
       this.y -= 2;
+
     }
     if (keyIsDown(this.controls.down)) {
       this.y += 2;
     }
     if (keyIsDown(this.controls.right)) {
       this.x += 2;
+
     }
     if (keyIsDown(this.controls.left)) {
       this.x -= 2;
+
     }
   }
 
@@ -57,8 +61,13 @@ class Baby extends Entity {
    */
   draw() {
     push();
-    fill("red");
-    circle(this.x, this.y, this.size);
+    // Flytta origin till cirkelns centrum
+    translate(this.x, this.y);
+
+    // Rita bilden centrerad inuti cirkeln
+    imageMode(CENTER);
+    image(this.image, 0, 0, this.size, this.size);
+
     pop();
   }
 }

@@ -6,7 +6,7 @@ class Level {
 
   constructor() {
     this.entities = [
-      new Baby(/* loadImage("./assets./img./baby.png"), */ 30, 200, 200, {
+      new Baby(playerImage, 30, 200, 200, {
         up: UP_ARROW,
         left: LEFT_ARROW,
         down: DOWN_ARROW,

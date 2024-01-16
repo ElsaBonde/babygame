@@ -1,17 +1,20 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
-let playerImg: p5.Image;
+let playerImage: p5.Image;
 let music: {
   mystery: p5.SoundFile;
 };
+
 
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
  * sound files, images etc...
  */
+
 function preload() {
-  playerImg = loadImage("/assets/img/baby.png");
+  playerImage = loadImage('/assets/img/babyright.png')
+
 
   music = {
     mystery: loadSound("/assets/music/mystery.mp3"),
