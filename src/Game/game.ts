@@ -6,6 +6,7 @@ class Game {
   private endOfGame: EndOfGame;
   private totalScore: number;
   public player: Baby;
+  public camera: Camera;
 
   constructor() {
     this.currentPage = "start";
@@ -14,6 +15,7 @@ class Game {
     this.level = this.levelFactory.generateLevel(1);
     this.startPage = new StartPage();
     this.endOfGame = new EndOfGame();
+    this.camera = new Camera();
 
     //creates the player/baby
     this.player = new Baby(playerImages, 30, 950, 550, {
@@ -43,8 +45,10 @@ class Game {
     } else if (this.currentPage === "end") {
       this.endOfGame.draw();
     }
+    translate(-this.camera.x, -this.camera.y);
   }
   update() {
     this.player.update();
+    this.camera.follow(this.player);
   }
 }

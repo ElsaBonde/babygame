@@ -7,6 +7,35 @@ type Controls = {
   right: number;
 };
 
+class Camera {
+  x: number;
+  y: number;
+  fixedScale: number;
+
+  constructor() {
+    this.x = 0;
+    this.y = 0;
+    this.fixedScale = 2.0;
+  }
+
+  follow(target: Baby) {
+    // Adjust the camera's position to focus on the Baby
+    const targetX = target.getX() - width / 2;
+    const targetY = target.getY() - height / 2;
+
+    const dx = targetX - this.x;
+    const dy = targetY - this.y;
+
+    this.x += dx * 0.1;
+    this.y += dy * 0.1;
+  }
+  
+  apply() {
+    //Apply the zoom
+    translate(-this.x, -this.y);
+    scale(this.fixedScale);
+  }
+}
 class Baby extends Entity {
   private controls: Controls;
   private images: {
@@ -15,15 +44,17 @@ class Baby extends Entity {
     down: p5.Image;
     right: p5.Image;
   };
+  
+  private camera: Camera; // Add a camera property
 
-  constructor (
+  constructor(
     images: {
       up: p5.Image;
       left: p5.Image;
       down: p5.Image;
       right: p5.Image;
     },
-
+    
     size: number,
     x: number,
     y: number,
@@ -32,7 +63,7 @@ class Baby extends Entity {
     super(images.left, size, x, y);
     this.controls = controls;
     this.images = images;
-    
+    this.camera = new Camera(); // Initialize the camera
   }
   public getX() {
     return this.x;
@@ -86,6 +117,7 @@ class Baby extends Entity {
   update() {
     this.move();
     this.limitToScreen();
+    this.camera.follow(this);
   }
 
   /***
@@ -95,6 +127,8 @@ class Baby extends Entity {
     push();
     // Flytta origin till cirkelns centrum
     translate(this.x, this.y);
+        // Translates the camera position
+    this.camera.apply();
 
     // Rita bilden centrerad inuti cirkeln
     imageMode(CENTER);
