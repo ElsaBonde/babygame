@@ -6,6 +6,7 @@ let playerImages: {
   down: p5.Image;
   right: p5.Image;
 };
+let levelOne: p5.Image;
 let backgroundImg: p5.Image;
 let music: {
   mystery: p5.SoundFile;
@@ -25,8 +26,9 @@ function preload() {
     right: loadImage("/assets/img/babyright.png"),
   };
 
-  backgroundImg= loadImage("/assets/img/startpage.png")
+  backgroundImg = loadImage("/assets/img/startpage.png");
 
+  levelOne = loadImage("/assets/img/levelOne.png");
   music = {
     mystery: loadSound("/assets/music/mystery.mp3"),
   };
@@ -44,7 +46,7 @@ function setup() {
   music.mystery.setVolume(0.8);
 
   game = new Game();
-  game.startPage = new StartPage(); 
+  game.startPage = new StartPage();
 }
 
 /**
@@ -53,7 +55,7 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-  background("white");
+  background(levelOne); // Tillfälligt, för att kunna bygga labyrinten
   game.update();
   game.draw();
 }
