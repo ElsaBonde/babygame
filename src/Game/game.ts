@@ -7,11 +7,12 @@ class Game {
   private totalScore: number;
   public player: Baby;
 
+
   constructor() {
     this.currentPage = "start";
     this.totalScore = 0;
     this.levelFactory = new LevelFactory();
-    this.level = this.levelFactory.generateLevel(1);
+    this.level = new Level(this.levelFactory); //levelFactory.generateLevel(1) as Level;
     this.startPage = new StartPage();
     this.endOfGame = new EndOfGame();
 
@@ -23,25 +24,31 @@ class Game {
       right: RIGHT_ARROW,
     });
   }
-
-  public getCurrentPage(): "start"| "level" | "end" {
+ 
+  public getCurrentPage(): "start" | "level" | "end" {
     return this.currentPage;
   }
 
   public changePage() {
-   this.currentPage = "level";
+    this.currentPage = "level";
   }
 
   draw() {
     this.player.draw();
-    if (this.currentPage === "start") {
-      this.startPage.draw();
-      this.startPage.startButton();
-      this.startPage.keyPressedStart();
-    } else if (this.currentPage === "level") {
-      this.level.draw();
-    } else if (this.currentPage === "end") {
-      this.endOfGame.draw();
+
+    switch (this.currentPage) {
+      case "start":
+        this.startPage.draw();
+        this.startPage.startButton();
+        this.startPage.keyPressedStart();
+        break;
+      case "level":
+        this.level.draw();
+        this.level.update();
+        break;
+      case "end":
+        this.endOfGame.draw();
+        break;
     }
   }
   update() {
