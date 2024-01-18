@@ -89,10 +89,10 @@ class Baby extends Entity {
   }
 
   /***
-   * Målar ut pricken
+   * Målar ut bebisen - FELAKTIGT!!!!!
    */
   draw() {
-    push();
+    /* push();
     // Flytta origin till cirkelns centrum
     translate(this.x, this.y);
 
@@ -100,6 +100,6 @@ class Baby extends Entity {
     imageMode(CENTER);
     image(this.image, 0, 0, this.size);
 
-    pop();
+    pop(); */
   }
 }
