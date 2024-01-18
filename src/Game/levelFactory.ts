@@ -76,7 +76,7 @@ class LevelFactory {
       ],
       [
         10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 15,
+        20, 20, 20, 20, 20, 20, 10,
       ],
       [
         10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
@@ -105,8 +105,9 @@ class LevelFactory {
         }
 
         if (this.numbersGridLevel1[x][y] === 10) {
-          const blackWall = new BlackWall(image, 100, x * 100, y * 100);
+          const blackWall = new BlackWall(null,blockSize, y * blockSize, x * blockSize );
           //this.level.entities.push(blackWall);
+          blackWall.draw();
           console.log("sally");
         }
 

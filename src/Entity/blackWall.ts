@@ -8,7 +8,8 @@ class BlackWall extends Entity {
   draw() {
     pop();
     fill("black");
-    square(this.x, this.y, 40, 40);
+    rect(this.x, this.y, 40, 40);
+    // stroke("white") // bara för att se så det stämmer
     push();
   }
 }
