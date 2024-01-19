@@ -1,10 +1,10 @@
 /// <reference path="./entity.ts" />
 
 class Formula extends Entity {
-  constructor(image: p5.Image, size: number, x: number, y: number) {
-    super(image, size, x, y);
+  constructor(size: number, x: number, y: number) {
+    super(formulaImg, size, x, y);
   }
-  private getPoints() {}
-  update() {}
-  draw() {}
+  /* private getPoints() {} */
+  /* update() {}
+  draw() {} */
 }

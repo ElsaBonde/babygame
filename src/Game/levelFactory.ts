@@ -3,7 +3,7 @@
 11 = block / vägg
 12= in/ utgång
 13 = öl
-14 = välling
+14 = välling (formula)
 15 = bebis
 16 = klocka
 20 = tom ruta */
@@ -42,6 +42,7 @@ class LevelFactory {
     this.colorLevel1 = color("#B20076");
     // this.colorLevel2 = new p5.color();
   }
+  // prettier-ignore
 
   public generateLevel(levelNumber: number): Level {
     // här kommer vi behöva lägga en if-sats som kollar vilken level som ska genereras
@@ -61,10 +62,17 @@ class LevelFactory {
           );
         }
         if (this.numbersGridLevel1[y][x] === 13) {
-          const beerSize = 0.8 * blockSize;
-          const offset = 0.1 * blockSize;
+          const beerSize = 0.9 * blockSize;
+          const offset = 0.05 * blockSize;
           entities.push(
             new Beer(beerSize, x * blockSize + offset, y * blockSize + offset)
+          );
+        }
+        if (this.numbersGridLevel1[y][x] === 14) {
+          const formulaSize = 0.7 * blockSize;
+          const offset = 0.15 * blockSize;
+          entities.push(
+            new Formula(formulaSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
         if (this.numbersGridLevel1[y][x] === 15) {
