@@ -1,37 +1,40 @@
 class Level {
-  public entities: Entity[];
+  private entities: Entity[]; // Level är experten på entiteter!
   private currentLevel: number;
   private score: number;
   private time: Time;
-  private levelFactory: LevelFactory
 
-  constructor(levelFactory: LevelFactory) {
-    this.entities = [ 
-      /* new Baby(playerImage, 30, 200, 200, {
-        up: UP_ARROW,
-        left: LEFT_ARROW,
-        down: DOWN_ARROW,
-        right: RIGHT_ARROW,
-      }, */
-    ];
+  // DEFINITION - SPECA VAD VI TAR EMOT
+  constructor(entities: Entity[]) {
+    this.entities = entities;
     this.currentLevel = 0;
     this.score = 0;
     this.time = new Time();
-    this.levelFactory = levelFactory;
+    console.log(entities);
   }
+
   update() {
-  }
-  
-  public addEntity(entity: Entity) {
-    this.entities.push(entity);
+    for (let entity of this.entities) {
+      if (entity instanceof Baby) {
+        entity.update();
+      }
+    }
+    // todo: kolla kollisioner
   }
 
   //den som hämtas som level1
   draw() {
-    console.log("ELSA");
-    this.levelFactory.draw();
+    image(levelOne, 0, 0, width, height);
     for (let entity of this.entities) {
       entity.draw();
     }
   }
 }
+
+// DEFINITION - SPECAR VAD SOM SKA TAS EMOT
+function print(message: string) {
+  console.log(message);
+}
+
+// ANROP - SKICKAR VI VÄRDEN
+// print("HELLO")

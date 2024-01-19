@@ -9,7 +9,7 @@ type Controls = {
 
 class Baby extends Entity {
   private controls: Controls;
-  private images: {
+  public images: {
     up: p5.Image;
     left: p5.Image;
     down: p5.Image;
@@ -17,21 +17,23 @@ class Baby extends Entity {
   };
 
   constructor (
-    images: {
-      up: p5.Image;
-      left: p5.Image;
-      down: p5.Image;
-      right: p5.Image;
-    },
-
     size: number,
     x: number,
     y: number,
-    controls: Controls
   ) {
-    super(images.left, size, x, y);
-    this.controls = controls;
-    this.images = images;
+    super(playerImages.up, size, x, y);
+    this.controls = {
+      up: UP_ARROW,
+      left: LEFT_ARROW,
+      down: DOWN_ARROW,
+      right: RIGHT_ARROW,
+    };
+    this.images = {
+      up: playerImages.up,
+      left: playerImages.left,
+      down: playerImages.down,
+      right: playerImages.right,
+    };
     
   }
   public getX() {
@@ -44,7 +46,7 @@ class Baby extends Entity {
   /***
    * Får bebisen att röra sig 2 px för varje tryck med piltangenterna
    */
-  public move() {
+  private move() {
     if (keyIsDown(this.controls.up)) {
       this.y -= 2;
       this.image = this.images.up;
@@ -81,25 +83,8 @@ class Baby extends Entity {
     }
   }
 
-  private checkCollision() {}
-
   update() {
     this.move();
     this.limitToScreen();
-  }
-
-  /***
-   * Målar ut bebisen - FELAKTIGT!!!!!
-   */
-  draw() {
-    /* push();
-    // Flytta origin till cirkelns centrum
-    translate(this.x, this.y);
-
-    // Rita bilden centrerad inuti cirkeln
-    imageMode(CENTER);
-    image(this.image, 0, 0, this.size);
-
-    pop(); */
   }
 }

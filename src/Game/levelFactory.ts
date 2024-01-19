@@ -10,145 +10,67 @@
 
 class LevelFactory {
   public numbersGridLevel1: number[][];
-  //private numbersGridLevel2: number[][];
   public levelOne: p5.Image;
-  //private backgroundLevel2: p5.Image;
   private colorLevel1: p5.Color;
-  public level: Level;
 
-  constructor(
-    numbersGridLevel1: number[][],
-    levelOne: p5.Image,
-    colorLevel1: p5.Color
-  ) {
-    this.numbersGridLevel1 = [ //level 1
-      [
-        10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
-        10, 10, 10, 10, 10, 10, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
-        10, 10, 10, 10, 10, 10, 10,
-      ],
+  //private numbersGridLevel2: number[][];
+  //private backgroundLevel2: p5.Image;
+
+  constructor() {
+    // prettier-ignore
+    this.numbersGridLevel1 = [
+      [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 15,],
     ];
+
     // this.numbersGridLevel2 = [];
-    this.levelOne = new p5.Image(1000, 600);
+    (this.levelOne = new p5.Image(1000, 600)), levelOne;
     // this.backgroundLevel2 = new p5.Image();
     this.colorLevel1 = color("#B20076");
     // this.colorLevel2 = new p5.color();
-    this.level = new Level(this);
   }
 
-  drawGamePlan() {
-    console.log("Drawing game plan");
-    const blockSize = 40;
+  public generateLevel(levelNumber: number): Level {
+    // här kommer vi behöva lägga en if-sats som kollar vilken level som ska genereras
+    const entities: Entity[] = [];
+    const blockSize: number = 40;
 
-    for (let x = 0; x < this.numbersGridLevel1.length; x++) {
-      for (let y = 0; y < this.numbersGridLevel1[x].length; y++) {
-        
-        if (this.numbersGridLevel1[x][y] === 20) {
-          fill("0, 0, 0, 127"); //transparent färg
-          /*   noStroke() */
-          square(y * blockSize, x * blockSize, blockSize);
-        }
-
-        if (this.numbersGridLevel1[x][y] === 10) {
-          const blackWall = new BlackWall(null,blockSize, y * blockSize, x * blockSize );
-          //this.level.entities.push(blackWall);
-          blackWall.draw();
-          console.log("sally");
-        }
-
-        if (this.numbersGridLevel1[x][y] === 15) {
-          const baby = new Baby(
-            {
-              up: imageBabyUp,
-              left: imageBabyLeft,
-              down: imageBabyDown,
-              right: imageBabyRight,
-            },
-            40,
-            x * blockSize,
-            y * blockSize,
-            {
-              up: UP_ARROW,
-              left: LEFT_ARROW,
-              down: DOWN_ARROW,
-              right: RIGHT_ARROW,
-            }
+    for (let y = 0; y < this.numbersGridLevel1.length; y++) {
+      for (let x = 0; x < this.numbersGridLevel1[y].length; x++) {
+        if (this.numbersGridLevel1[y][x] === 10) {
+          entities.push(
+            new Wall("black", blockSize, x * blockSize, y * blockSize)
           );
+        }
 
-          this.level.entities.push(baby);
+        if (this.numbersGridLevel1[y][x] === 15) {
+          const babySize = 0.8 * blockSize;
+          const offset = 0.1 * blockSize;
+          entities.push(
+            new Baby(babySize, x * blockSize + offset, y * blockSize + offset)
+          );
         }
       }
     }
-  }
+    // 1. SKAPA DELARNA (entitierna)
+    // 2. SKAPA CYKEL (level)
 
-  draw() {
-    console.log("ELIN");
-    this.drawGamePlan();
-  }
-
-  public generateLevel(levelNumber: number) {
-    // här kommer vi behöva lägga en if-sats som kollar vilken level som ska genereras
-    if (levelNumber === 1) {
-      const level = new Level(this);
-      level.draw();
-      return level;
-    } else if (levelNumber === 2) {
-      return new Level(this);
-    }
+    // ANROPA KONSTUKTORN: SKICKA ETT VÄRDE
+    return new Level(entities);
   }
 }
+
+// Const kollision = babyY > this.y && babyY < this.y + height
