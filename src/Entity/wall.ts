@@ -11,6 +11,7 @@ class Wall extends Entity {
   draw() {
     push();
     fill(this.color);
+    noStroke();
     rect(this.x, this.y, 40, 40);
     pop();
   }
