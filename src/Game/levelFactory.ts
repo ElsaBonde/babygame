@@ -60,6 +60,13 @@ class LevelFactory {
             new Wall("#B20076", blockSize, x * blockSize, y * blockSize)
           );
         }
+        if (this.numbersGridLevel1[y][x] === 13) {
+          const beerSize = 0.8 * blockSize;
+          const offset = 0.1 * blockSize;
+          entities.push(
+            new Beer(beerSize, x * blockSize + offset, y * blockSize + offset)
+          );
+        }
         if (this.numbersGridLevel1[y][x] === 15) {
           const babySize = 0.8 * blockSize;
           const offset = 0.1 * blockSize;
