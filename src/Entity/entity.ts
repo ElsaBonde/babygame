@@ -11,5 +11,8 @@ class Entity {
     this.y = y;
   }
   draw() {
+    push();
+    image(this.image, this.x, this.y, this.size, this.size);
+    pop();
   }
 }

@@ -12,13 +12,13 @@ class LevelFactory {
   public numbersGridLevel1: number[][];
   public levelOne: p5.Image;
   private colorLevel1: p5.Color;
-  
+
   //private numbersGridLevel2: number[][];
   //private backgroundLevel2: p5.Image;
 
   constructor() {
     // prettier-ignore
-    this.numbersGridLevel1 = [ //level 1
+    this.numbersGridLevel1 = [
       [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,],
       [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
       [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
@@ -35,9 +35,9 @@ class LevelFactory {
       [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
       [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 15,],
     ];
-    
+
     // this.numbersGridLevel2 = [];
-    this.levelOne = new p5.Image(1000, 600), levelOne;
+    (this.levelOne = new p5.Image(1000, 600)), levelOne;
     // this.backgroundLevel2 = new p5.Image();
     this.colorLevel1 = color("#B20076");
     // this.colorLevel2 = new p5.color();
@@ -48,40 +48,20 @@ class LevelFactory {
     const entities: Entity[] = [];
     const blockSize: number = 40;
 
-    for (let x = 0; x < this.numbersGridLevel1.length; x++) {
-      for (let y = 0; y < this.numbersGridLevel1[x].length; y++) {
-        
-        if (this.numbersGridLevel1[x][y] === 20) {
-          fill("0, 0, 0, 127"); //transparent färg
-          /*   noStroke() */
-          square(y * blockSize, x * blockSize, blockSize);
-        }
-
-        if (this.numbersGridLevel1[x][y] === 10) {
-          const blackWall = new BlackWall(null,blockSize, y * blockSize, x * blockSize );
-          entities.push(blackWall);
-        }
-
-        if (this.numbersGridLevel1[x][y] === 15) {
-          const baby = new Baby(
-            {
-              up: playerImages.up,
-              left: playerImages.left,
-              down: playerImages.down,
-              right: playerImages.right,
-            },
-            40,
-            x * blockSize,
-            y * blockSize,
-            {
-              up: UP_ARROW,
-              left: LEFT_ARROW,
-              down: DOWN_ARROW,
-              right: RIGHT_ARROW,
-            }
+    for (let y = 0; y < this.numbersGridLevel1.length; y++) {
+      for (let x = 0; x < this.numbersGridLevel1[y].length; x++) {
+        if (this.numbersGridLevel1[y][x] === 10) {
+          entities.push(
+            new Wall("black", blockSize, x * blockSize, y * blockSize)
           );
-        
-          entities.push(baby); // Hamnar i LvlFactory, varför
+        }
+
+        if (this.numbersGridLevel1[y][x] === 15) {
+          const babySize = 0.8 * blockSize;
+          const offset = 0.1 * blockSize;
+          entities.push(
+            new Baby(babySize, x * blockSize + offset, y * blockSize + offset)
+          );
         }
       }
     }
@@ -92,3 +72,5 @@ class LevelFactory {
     return new Level(entities);
   }
 }
+
+// Const kollision = babyY > this.y && babyY < this.y + height

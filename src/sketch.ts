@@ -20,17 +20,17 @@ let music: {
 
 function preload() {
   playerImages = {
-    up: loadImage("/assets/img/babyup.png"),
-    left: loadImage("/assets/img/babyleft.png"),
-    down: loadImage("/assets/img/babydown.png"),
-    right: loadImage("/assets/img/babyright.png"),
+    up: loadImage("./assets/img/babyup.png"),
+    left: loadImage("./assets/img/babyleft.png"),
+    down: loadImage("./assets/img/babydown.png"),
+    right: loadImage("./assets/img/babyright.png"),
   };
 
-  backgroundImg = loadImage("/assets/img/startpage.png");
+  backgroundImg = loadImage("./assets/img/startpage.png");
 
-  levelOne = loadImage("/assets/img/levelOne.png");
+  levelOne = loadImage("./assets/img/levelOne.png");
   music = {
-    mystery: loadSound("/assets/music/mystery.mp3"),
+    mystery: loadSound("./assets/music/mystery.mp3"),
   };
 }
 
@@ -46,7 +46,6 @@ function setup() {
   music.mystery.setVolume(0.8);
 
   game = new Game();
-  game.startPage = new StartPage();
 }
 
 /**
@@ -55,10 +54,8 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-  background('white'); // Tillfälligt, för att kunna bygga labyrinten
   game.update();
   game.draw();
-  //game.level.draw();
 }
 
 function keyPressed() {
