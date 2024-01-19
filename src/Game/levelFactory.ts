@@ -10,90 +10,43 @@
 
 class LevelFactory {
   public numbersGridLevel1: number[][];
-  //private numbersGridLevel2: number[][];
   public levelOne: p5.Image;
-  //private backgroundLevel2: p5.Image;
   private colorLevel1: p5.Color;
-  public level: Level;
+  
+  //private numbersGridLevel2: number[][];
+  //private backgroundLevel2: p5.Image;
 
-  constructor(
-    numbersGridLevel1: number[][],
-    levelOne: p5.Image,
-    colorLevel1: p5.Color
-  ) {
+  constructor() {
+    // prettier-ignore
     this.numbersGridLevel1 = [ //level 1
-      [
-        10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
-        10, 10, 10, 10, 10, 10, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
-        20, 20, 20, 20, 20, 20, 10,
-      ],
-      [
-        10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
-        10, 10, 10, 10, 10, 10, 10,
-      ],
+      [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 10,],
+      [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 15,],
     ];
+    
     // this.numbersGridLevel2 = [];
-    this.levelOne = new p5.Image(1000, 600);
+    this.levelOne = new p5.Image(1000, 600), levelOne;
     // this.backgroundLevel2 = new p5.Image();
     this.colorLevel1 = color("#B20076");
     // this.colorLevel2 = new p5.color();
-    this.level = new Level(this);
   }
 
-  drawGamePlan() {
-    console.log("Drawing game plan");
-    const blockSize = 40;
+  public generateLevel(levelNumber: number): Level {
+    // här kommer vi behöva lägga en if-sats som kollar vilken level som ska genereras
+    const entities: Entity[] = [];
+    const blockSize: number = 40;
 
     for (let x = 0; x < this.numbersGridLevel1.length; x++) {
       for (let y = 0; y < this.numbersGridLevel1[x].length; y++) {
@@ -106,18 +59,16 @@ class LevelFactory {
 
         if (this.numbersGridLevel1[x][y] === 10) {
           const blackWall = new BlackWall(null,blockSize, y * blockSize, x * blockSize );
-          //this.level.entities.push(blackWall);
-          blackWall.draw();
-          console.log("sally");
+          entities.push(blackWall);
         }
 
         if (this.numbersGridLevel1[x][y] === 15) {
           const baby = new Baby(
             {
-              up: imageBabyUp,
-              left: imageBabyLeft,
-              down: imageBabyDown,
-              right: imageBabyRight,
+              up: playerImages.up,
+              left: playerImages.left,
+              down: playerImages.down,
+              right: playerImages.right,
             },
             40,
             x * blockSize,
@@ -129,26 +80,15 @@ class LevelFactory {
               right: RIGHT_ARROW,
             }
           );
-
-          this.level.entities.push(baby);
+        
+          entities.push(baby); // Hamnar i LvlFactory, varför
         }
       }
     }
-  }
+    // 1. SKAPA DELARNA (entitierna)
+    // 2. SKAPA CYKEL (level)
 
-  draw() {
-    console.log("ELIN");
-    this.drawGamePlan();
-  }
-
-  public generateLevel(levelNumber: number) {
-    // här kommer vi behöva lägga en if-sats som kollar vilken level som ska genereras
-    if (levelNumber === 1) {
-      const level = new Level(this);
-      level.draw();
-      return level;
-    } else if (levelNumber === 2) {
-      return new Level(this);
-    }
+    // ANROPA KONSTUKTORN: SKICKA ETT VÄRDE
+    return new Level(entities);
   }
 }

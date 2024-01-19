@@ -1,18 +1,17 @@
 class Game {
   public currentPage: "start" | "level" | "end";
-  private levelFactory: LevelFactory;
-  private level: Level;
+  public levelFactory: LevelFactory;
+  public level: Level;
   public startPage: StartPage;
   private endOfGame: EndOfGame;
   private totalScore: number;
   public player: Baby;
 
-
   constructor() {
     this.currentPage = "start";
     this.totalScore = 0;
     this.levelFactory = new LevelFactory();
-    this.level = new Level(this.levelFactory); //levelFactory.generateLevel(1) as Level;
+    this.level = this.levelFactory.generateLevel(1);
     this.startPage = new StartPage();
     this.endOfGame = new EndOfGame();
 

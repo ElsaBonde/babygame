@@ -11,6 +11,5 @@ class Entity {
     this.y = y;
   }
   draw() {
-    
   }
 }
