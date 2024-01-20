@@ -10,6 +10,7 @@ let levelOne: p5.Image;
 let backgroundImg: p5.Image;
 let beerImg: p5.Image;
 let formulaImg: p5.Image;
+let clockImg: p5.Image;
 let music: {
   mystery: p5.SoundFile;
 };
@@ -32,6 +33,7 @@ function preload() {
   levelOne = loadImage("./assets/img/levelOne.png");
   beerImg = loadImage("./assets/img/beer.png");
   formulaImg = loadImage("./assets/img/formula.png");
+  clockImg = loadImage("./assets/img/clock.png");
 
   music = {
     mystery: loadSound("./assets/music/mystery.mp3"),
