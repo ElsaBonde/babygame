@@ -1,14 +1,9 @@
 /// <reference path="./entity.ts" />
 
 class Clock extends Entity {
-  constructor(
-    image: p5.Image,
-    size: number,
-    x: number,
-    y: number
-  ) {
-    super(image, size, x, y); 
+  constructor(size: number, x: number, y: number) {
+    super(clockImg, size, x, y);
   }
-  freezeTime(time: Time) {}
-  draw() {}
+  // freezeTime(time: Time) {}
+  // draw() {}
 }

@@ -82,6 +82,13 @@ class LevelFactory {
             new Baby(babySize, x * blockSize + offset, y * blockSize + offset)
           );
         }
+        if (this.numbersGridLevel1[y][x] === 16) {
+          const clockSize = 0.8 * blockSize;
+          const offset = 0.1 * blockSize;
+          entities.push(
+            new Clock(clockSize, x * blockSize + offset, y * blockSize + offset)
+          );
+        }
       }
     }
     // 1. SKAPA DELARNA (entitierna)
