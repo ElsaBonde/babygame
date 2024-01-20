@@ -15,12 +15,11 @@ class Baby extends Entity {
     down: p5.Image;
     right: p5.Image;
   };
+  private previousX: number;  
+  private previousY: number;
+  
 
-  constructor (
-    size: number,
-    x: number,
-    y: number,
-  ) {
+  constructor(size: number, x: number, y: number) {
     super(playerImages.up, size, x, y);
     this.controls = {
       up: UP_ARROW,
@@ -34,7 +33,8 @@ class Baby extends Entity {
       down: playerImages.down,
       right: playerImages.right,
     };
-    
+    this.previousX = this.x;
+    this.previousY = this.y;
   }
   public getX() {
     return this.x;
@@ -47,13 +47,16 @@ class Baby extends Entity {
    * Får bebisen att röra sig 2 px för varje tryck med piltangenterna
    */
   private move() {
+    this.previousX = this.x;
+    this.previousY = this.y;
+
     if (keyIsDown(this.controls.up)) {
       this.y -= 2;
       this.image = this.images.up;
     }
-   if (keyIsDown(this.controls.down)) {
+    if (keyIsDown(this.controls.down)) {
       this.y += 2;
-      this.image = this.images.down
+      this.image = this.images.down;
     }
     if (keyIsDown(this.controls.right)) {
       this.x += 2;
@@ -65,26 +68,23 @@ class Baby extends Entity {
     }
   }
 
-  private limitToScreen() {
-    // player size delat på 2 = halfSize
-    const halfSize = this.size / 2;
-
-    if (this.x - halfSize < 0) {
-      this.x = halfSize;
-    }
-    if (this.y - halfSize < 0) {
-      this.y = halfSize;
-    }
-    if (this.x + halfSize > width) {
-      this.x = width - halfSize;
-    }
-    if (this.y + halfSize > height) {
-      this.y = height - halfSize;
+  //hämtar alla väggar och kollar om bebisen krockar med någon av dem
+  private checkWallCollision(walls: Wall[]) { 
+    for (const wall of walls) {
+      if ( //om bebisens position är mindre än väggens position + storlek och om bebisens position + storlek är större än väggens position och om bebisens position är mindre än väggens position + storlek och om bebisens position + storlek är större än väggens position ska bebisen återvända till tidigare position
+        this.x < wall.x + wall.size &&
+      this.x + this.size > wall.x &&
+      this.y < wall.y + wall.size &&
+      this.y + this.size > wall.y
+      ) {
+        this.x = this.previousX;
+        this.y = this.previousY;
+      }
     }
   }
 
-  update() {
+  update(walls: Wall[]) {
     this.move();
-    this.limitToScreen();
+    this.checkWallCollision(walls);
   }
 }

@@ -61,8 +61,8 @@ function setup() {
  * This is a good place to call public methods of the object
  * you created in the setup function above
  */
-function draw() {
-  game.update();
+function draw(walls: Wall[]) {
+  game.update(walls);
   game.draw();
 }
 
