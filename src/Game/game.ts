@@ -24,7 +24,7 @@ class Game {
     this.currentPage = "level";
   }
 
-  update(walls: Wall[], beers: Beer[]) {
+  update(walls: Wall[], beers: Beer[], formulas: Formula[], clocks: Clock[]) {
     // if (paused) return;
     // 60 frames/sekund
     // 1000 / 60 = deltaTime
@@ -37,7 +37,7 @@ class Game {
         this.startPage.keyPressedStart();
         break;
       case "level":
-        this.level.update(walls, beers);
+        this.level.update(walls, beers, formulas, clocks);
         break;
       case "end":
         // this.endOfGame.update();

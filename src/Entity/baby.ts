@@ -109,10 +109,24 @@ class Baby extends Entity {
     }
   }
 
-  update(walls: Wall[], beers: Beer[], formulas: Formula[]) {
+  private checkClockCollision(clocks: Clock[]) {
+    for (const clock of clocks) {
+      if (
+        this.x < clock.x + clock.size &&
+        this.x + this.size > clock.x &&
+        this.y < clock.y + clock.size &&
+        this.y + this.size > clock.y
+      ) {
+        clock.remove();
+      }
+    }
+  }
+
+  update(walls: Wall[], beers: Beer[], formulas: Formula[], clocks: Clock[]) {
     this.move();
     this.checkWallCollision(walls);
     this.checkBeerCollision(beers);
     this.checkFormulaCollision(formulas);
+    this.checkClockCollision(clocks);
   }
 }

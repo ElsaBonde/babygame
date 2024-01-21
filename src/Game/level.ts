@@ -6,6 +6,7 @@ class Level {
   private walls: Wall[];
   private beers: Beer[];
   private formulas: Formula[];
+  private clocks: Clock[];
 
   // DEFINITION - SPECA VAD VI TAR EMOT
   constructor(entities: Entity[]) {
@@ -20,12 +21,15 @@ class Level {
     this.formulas = entities.filter(
       (entity) => entity instanceof Formula
     ) as Formula[];
+    this.clocks = entities.filter(
+      (entity) => entity instanceof Clock
+    ) as Clock[];
   }
 
   update() {
     for (let entity of this.entities) {
       if (entity instanceof Baby) {
-        entity.update(this.walls, this.beers, this.formulas);
+        entity.update(this.walls, this.beers, this.formulas, this.clocks);
       }
     }
     // todo: kolla kollisioner - KLAR
