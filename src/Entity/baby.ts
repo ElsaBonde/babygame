@@ -96,9 +96,23 @@ class Baby extends Entity {
     }
   }
 
-  update(walls: Wall[], beers: Beer[]) {
+  private checkFormulaCollision(formulas: Formula[]) {
+    for (const formula of formulas) {
+      if (
+        this.x < formula.x + formula.size &&
+        this.x + this.size > formula.x &&
+        this.y < formula.y + formula.size &&
+        this.y + this.size > formula.y
+      ) {
+        formula.remove();
+      }
+    }
+  }
+
+  update(walls: Wall[], beers: Beer[], formulas: Formula[]) {
     this.move();
     this.checkWallCollision(walls);
     this.checkBeerCollision(beers);
+    this.checkFormulaCollision(formulas);
   }
 }

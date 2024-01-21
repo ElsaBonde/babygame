@@ -5,6 +5,7 @@ class Level {
   private time: Time;
   private walls: Wall[];
   private beers: Beer[];
+  private formulas: Formula[];
 
   // DEFINITION - SPECA VAD VI TAR EMOT
   constructor(entities: Entity[]) {
@@ -16,12 +17,15 @@ class Level {
     //walls är en array som endast innehåller väggarna i aktiv level, detta hämtas med hjälp av filter som i sin tur hämtar alla väggar från entities
     this.walls = entities.filter((entity) => entity instanceof Wall) as Wall[];
     this.beers = entities.filter((entity) => entity instanceof Beer) as Beer[];
+    this.formulas = entities.filter(
+      (entity) => entity instanceof Formula
+    ) as Formula[];
   }
 
   update() {
     for (let entity of this.entities) {
       if (entity instanceof Baby) {
-        entity.update(this.walls, this.beers);
+        entity.update(this.walls, this.beers, this.formulas);
       }
     }
     // todo: kolla kollisioner - KLAR
