@@ -5,6 +5,10 @@ class Beer extends Entity {
     super(beerImg, size, x, y);
   }
 
+  remove() {
+    this.x = -100;
+    this.y = -100;
+  }
   /* public goSlow() {}
   private spinAround() {} */
   /*   draw() {} */
