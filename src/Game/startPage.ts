@@ -1,14 +1,20 @@
 class StartPage {
   private buttonColor: p5.Color;
+  private gameStarted: boolean;
 
   constructor() {
     this.buttonColor = color(150);
+    this.gameStarted = false;
   }
 
   draw() {
     background("#441F61");
     background(backgroundImg);
     this.startButton();
+
+    if (this.gameStarted) {
+      this.handleGameStart();
+    }
   }
 
   /**
@@ -27,6 +33,22 @@ class StartPage {
     textFont("VT323");
     text("PRESS SPACE TO START", 388, 580);
     pop();
+    if (keyCode === 32 && !this.gameStarted) {
+      this.startGame();
+    }
+  }
+  
+  startGame() {
+    this.gameStarted = true;
+  }
+
+  handleGameStart() {
+    countdownTimer.update();
+    countdownTimer.draw();
+
+    if (countdownTimer.isGameOver()) {
+      noLoop();
+    }
   }
 
   // Skapa en glittrande effekt på färgen

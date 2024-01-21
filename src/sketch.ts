@@ -12,6 +12,8 @@ let beerImg: p5.Image;
 let formulaImg: p5.Image;
 let clockImg: p5.Image;
 let doorClosedImg: p5.Image;
+let countdownTimer: CountdownTimer;
+let startPage: StartPage;
 let music: {
   mystery: p5.SoundFile;
 };
@@ -51,6 +53,8 @@ function preload() {
 function setup() {
   createCanvas(1000, 600);
   frameRate(60);
+  countdownTimer = new CountdownTimer(60);
+  startPage = new StartPage();
   music.mystery.setVolume(0.8);
 
   game = new Game();
@@ -69,11 +73,13 @@ function draw(
 ) {
   game.update(walls, beers, formulas, clocks);
   game.draw();
+  startPage.draw();
 }
 
 function keyPressed() {
   if (keyCode === 32) {
-    game.startPage.keyPressedStart();
+    startPage.startGame();
+    countdownTimer.update();
   }
 }
 
