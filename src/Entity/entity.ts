@@ -10,6 +10,12 @@ class Entity {
     this.x = x;
     this.y = y;
   }
+
+  remove() {
+    this.x = -100;
+    this.y = -100;
+  }
+
   draw() {
     push();
     image(this.image, this.x, this.y, this.size, this.size);

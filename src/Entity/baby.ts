@@ -113,56 +113,7 @@ class Baby extends Entity {
     );
   }
 
-  // Städa upp, till en gemensam metod
-  //hämtar alla ölflaskor och kollar om bebisen krockar med någon av dem
-  private checkBeerCollision(beers: Beer[]) {
-    for (const beer of beers) {
-      if (
-        //om bebisens position är mindre än ölens position + storlek och om bebisens position + storlek är större än ölens position och om bebisens position är mindre än ölens position + storlek och om bebisens position + storlek är större än ölens position ska bebisen återvända till tidigare position
-        this.x < beer.x + beer.size &&
-        this.x + this.size > beer.x &&
-        this.y < beer.y + beer.size &&
-        this.y + this.size > beer.y
-      ) {
-        beer.remove(); //Kallar på remove-funktionen i beer.ts och tar bort ölen
-      }
-    }
-  }
-
-  //hämtar alla vällingflaskor och kollar om bebisen krockar med någon av dem
-  private checkFormulaCollision(formulas: Formula[]) {
-    for (const formula of formulas) {
-      if (
-        //om bebisens position är mindre än vällingens position + storlek och om bebisens position + storlek är större än vällingens position och om bebisens position är mindre än vällingens position + storlek och om bebisens position + storlek är större än vällingens position ska bebisen återvända till tidigare position
-        this.x < formula.x + formula.size &&
-        this.x + this.size > formula.x &&
-        this.y < formula.y + formula.size &&
-        this.y + this.size > formula.y
-      ) {
-        formula.remove(); //Kallar på remove-funktionen i formula.ts och tar bort vällingen
-      }
-    }
-  }
-
-  //hämtar alla klockor och kollar om bebisen krockar med någon av dem
-  private checkClockCollision(clocks: Clock[]) {
-    for (const clock of clocks) {
-      if (
-        //om bebisens position är mindre än klockans position + storlek och om bebisens position + storlek är större än klockans position och om bebisens position är mindre än klockans position + storlek och om bebisens position + storlek är större än klockans position ska bebisen återvända till tidigare position
-        this.x < clock.x + clock.size &&
-        this.x + this.size > clock.x &&
-        this.y < clock.y + clock.size &&
-        this.y + this.size > clock.y
-      ) {
-        clock.remove(); //Kallar på remove-funktionen i clock.ts och tar bort klockan
-      }
-    }
-  }
-
-  update(walls: Wall[], beers: Beer[], formulas: Formula[], clocks: Clock[]) {
+  update(walls: Wall[]) {
     this.move(walls);
-    this.checkBeerCollision(beers);
-    this.checkFormulaCollision(formulas);
-    this.checkClockCollision(clocks);
   }
 }

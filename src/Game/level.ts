@@ -26,13 +26,38 @@ class Level {
     ) as Clock[];
   }
 
-  update() {
-    for (let entity of this.entities) {
-      if (entity instanceof Baby) {
-        entity.update(this.walls, this.beers, this.formulas, this.clocks);
+  private checkCollision(
+    baby: Baby,
+    entities: Entity[],
+    removeEntity: (entity: Entity) => void
+  ) {
+    for (const entity of entities) {
+      if (
+        baby.x < entity.x + entity.size &&
+        baby.x + baby.size > entity.x &&
+        baby.y < entity.y + entity.size &&
+        baby.y + baby.size > entity.y
+      ) {
+        removeEntity(entity);
       }
     }
-    // todo: kolla kollisioner - KLAR
+  }
+  update() {
+    let baby: Baby | null = null;
+
+    for (let entity of this.entities) {
+      if (entity instanceof Baby) {
+        baby = entity;
+        break;
+        //entity.update(this.walls, this.beers, this.formulas, this.clocks);
+      }
+    }
+    if (baby) {
+      baby.update(this.walls);
+      this.checkCollision(baby, this.beers, (beer) => beer.remove());
+      this.checkCollision(baby, this.formulas, (formula) => formula.remove());
+      this.checkCollision(baby, this.clocks, (clock) => clock.remove());
+    }
   }
 
   //den som hämtas som level1
@@ -43,11 +68,3 @@ class Level {
     }
   }
 }
-
-// DEFINITION - SPECAR VAD SOM SKA TAS EMOT
-/* function print(message: string) {
-  console.log(message);
-} */
-
-// ANROP - SKICKAR VI VÄRDEN
-// print("HELLO")
