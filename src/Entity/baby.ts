@@ -70,17 +70,26 @@ class Baby extends Entity {
   //hämtar alla väggar och kollar om bebisen krockar med någon av dem
   private checkWallCollision(walls: Wall[]) {
     for (const wall of walls) {
-      if (
-        //om bebisens position är mindre än väggens position + storlek och om bebisens position + storlek är större än väggens position och om bebisens position är mindre än väggens position + storlek och om bebisens position + storlek är större än väggens position ska bebisen återvända till tidigare position
-        this.x < wall.x + wall.size &&
-        this.x + this.size > wall.x &&
-        this.y < wall.y + wall.size &&
-        this.y + this.size > wall.y
-      ) {
+      if (this.entitiesOverlap(this, wall)) {
+        const currentX = this.x;
         this.x = this.previousX;
-        this.y = this.previousY;
+        if (!this.entitiesOverlap(this, wall)) {
+          continue;
+        } else {
+          this.x = currentX;
+          this.y = this.previousY;
+        }
       }
     }
+  }
+
+  private entitiesOverlap(e1: Entity, e2: Entity) {
+    return (
+      e1.x < e2.x + e2.size &&
+      e1.x + e1.size > e2.x &&
+      e1.y < e2.y + e2.size &&
+      e1.y + e1.size > e2.y
+    );
   }
 
   //hämtar alla ölflaskor och kollar om bebisen krockar med någon av dem
