@@ -46,39 +46,6 @@ class Baby extends Entity {
    * Får bebisen att röra sig 2 px för varje tryck med piltangenterna
    */
 
-  //hämtar alla väggar och kollar om bebisen krockar med någon av dem
-  private checkWallCollision(walls: Wall[]) {
-    const collidedWalls: Wall[] = [];
-
-    // Identifierar vilka väggar bebis har krockat med
-    for (const wall of walls) {
-      if (this.entitiesOverlap(this, wall)) {
-        collidedWalls.push(wall);
-      }
-    }
-
-    // Om bebis har krockat med någon vägg, återgå till tidigare position
-    if (collidedWalls.length > 0) {
-      this.x = this.previousX;
-      this.y = this.previousY;
-    }
-  }
-
-  // Lägga till if sats..
-  private entitiesOverlap(e1: Entity, e2: Entity) {
-    if (e1 === undefined || e2 === undefined) {
-      return false;
-    } else {
-      const overlap =
-        e1.x < e2.x + e2.size &&
-        e1.x + e1.size > e2.x &&
-        e1.y < e2.y + e2.size &&
-        e1.y + e1.size > e2.y;
-
-      return overlap;
-    }
-  }
-
   private move(walls: Wall[]) {
     let potentialX = this.x;
     let potentialY = this.y;
@@ -86,35 +53,41 @@ class Baby extends Entity {
     if (keyIsDown(this.controls.up)) {
       potentialY -= 2;
       this.image = this.images.up;
-      if (!this.wouldCollideWithWalls(this.x, potentialY, walls)) {
-        this.y = potentialY;
-      }
+      this.yCollideAndMove(potentialY, walls);
     }
     if (keyIsDown(this.controls.down)) {
       potentialY += 2;
       this.image = this.images.down;
-      if (!this.wouldCollideWithWalls(this.x, potentialY, walls)) {
-        this.y = potentialY;
-      }
+      this.yCollideAndMove(potentialY, walls);
     }
     if (keyIsDown(this.controls.right)) {
       potentialX += 2;
       this.image = this.images.right;
-      if (!this.wouldCollideWithWalls(potentialX, this.y, walls)) {
-        this.x = potentialX;
-      }
+      this.xCollideAndMove(potentialX, walls);
     }
     if (keyIsDown(this.controls.left)) {
       potentialX -= 2;
       this.image = this.images.left;
-      if (!this.wouldCollideWithWalls(potentialX, this.y, walls)) {
-        this.x = potentialX;
-      }
+      this.xCollideAndMove(potentialX, walls);
     }
 
     if (!this.wouldCollideWithWalls(potentialX, potentialY, walls)) {
       this.x = potentialX;
       this.y = potentialY;
+    }
+  }
+
+  //hämtar if-sats som används för att kontrollera + promenera med baby i y-led
+  private yCollideAndMove(potentialY: number, walls: Wall[]) {
+    if (!this.wouldCollideWithWalls(this.x, potentialY, walls)) {
+      this.y = potentialY;
+    }
+  }
+
+  //hämtar if-sats som används för att kontrollera + promenera med baby i x-led
+  private xCollideAndMove(potentialX: number, walls: Wall[]) {
+    if (!this.wouldCollideWithWalls(potentialX, this.y, walls)) {
+      this.x = potentialX;
     }
   }
 
@@ -188,7 +161,6 @@ class Baby extends Entity {
 
   update(walls: Wall[], beers: Beer[], formulas: Formula[], clocks: Clock[]) {
     this.move(walls);
-    this.checkWallCollision(walls);
     this.checkBeerCollision(beers);
     this.checkFormulaCollision(formulas);
     this.checkClockCollision(clocks);
