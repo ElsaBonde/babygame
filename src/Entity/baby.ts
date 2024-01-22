@@ -45,44 +45,102 @@ class Baby extends Entity {
   /***
    * Får bebisen att röra sig 2 px för varje tryck med piltangenterna
    */
-  private move() {
-    this.previousX = this.x;
-    this.previousY = this.y;
-
-    if (keyIsDown(this.controls.up)) {
-      this.y -= 2;
-      this.image = this.images.up;
-    }
-    if (keyIsDown(this.controls.down)) {
-      this.y += 2;
-      this.image = this.images.down;
-    }
-    if (keyIsDown(this.controls.right)) {
-      this.x += 2;
-      this.image = this.images.right;
-    }
-    if (keyIsDown(this.controls.left)) {
-      this.x -= 2;
-      this.image = this.images.left;
-    }
-  }
 
   //hämtar alla väggar och kollar om bebisen krockar med någon av dem
   private checkWallCollision(walls: Wall[]) {
+    const collidedWalls: Wall[] = [];
+
+    // Identifierar vilka väggar bebis har krockat med
     for (const wall of walls) {
-      if (
-        //om bebisens position är mindre än väggens position + storlek och om bebisens position + storlek är större än väggens position och om bebisens position är mindre än väggens position + storlek och om bebisens position + storlek är större än väggens position ska bebisen återvända till tidigare position
-        this.x < wall.x + wall.size &&
-        this.x + this.size > wall.x &&
-        this.y < wall.y + wall.size &&
-        this.y + this.size > wall.y
-      ) {
-        this.x = this.previousX;
-        this.y = this.previousY;
+      if (this.entitiesOverlap(this, wall)) {
+        collidedWalls.push(wall);
       }
+    }
+
+    // Om bebis har krockat med någon vägg, återgå till tidigare position
+    if (collidedWalls.length > 0) {
+      this.x = this.previousX;
+      this.y = this.previousY;
     }
   }
 
+  // Lägga till if sats..
+  private entitiesOverlap(e1: Entity, e2: Entity) {
+    if (e1 === undefined || e2 === undefined) {
+      return false;
+    } else {
+      const overlap =
+        e1.x < e2.x + e2.size &&
+        e1.x + e1.size > e2.x &&
+        e1.y < e2.y + e2.size &&
+        e1.y + e1.size > e2.y;
+
+      return overlap;
+    }
+  }
+
+  private move(walls: Wall[]) {
+    let potentialX = this.x;
+    let potentialY = this.y;
+
+    if (keyIsDown(this.controls.up)) {
+      potentialY -= 2;
+      this.image = this.images.up;
+      if (!this.wouldCollideWithWalls(this.x, potentialY, walls)) {
+        this.y = potentialY;
+      }
+    }
+    if (keyIsDown(this.controls.down)) {
+      potentialY += 2;
+      this.image = this.images.down;
+      if (!this.wouldCollideWithWalls(this.x, potentialY, walls)) {
+        this.y = potentialY;
+      }
+    }
+    if (keyIsDown(this.controls.right)) {
+      potentialX += 2;
+      this.image = this.images.right;
+      if (!this.wouldCollideWithWalls(potentialX, this.y, walls)) {
+        this.x = potentialX;
+      }
+    }
+    if (keyIsDown(this.controls.left)) {
+      potentialX -= 2;
+      this.image = this.images.left;
+      if (!this.wouldCollideWithWalls(potentialX, this.y, walls)) {
+        this.x = potentialX;
+      }
+    }
+
+    if (!this.wouldCollideWithWalls(potentialX, potentialY, walls)) {
+      this.x = potentialX;
+      this.y = potentialY;
+    }
+  }
+
+  private wouldCollideWithWalls(
+    potentialX: number,
+    potentialY: number,
+    walls: Wall[]
+  ) {
+    for (const wall of walls) {
+      if (this.wouldOverlap(potentialX, potentialY, this.size, wall)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private wouldOverlap(x1: number, y1: number, size1: number, e2: Entity) {
+    return (
+      x1 < e2.x + e2.size &&
+      x1 + size1 > e2.x &&
+      y1 < e2.y + e2.size &&
+      y1 + size1 > e2.y
+    );
+  }
+
+  // Städa upp, till en gemensam metod
   //hämtar alla ölflaskor och kollar om bebisen krockar med någon av dem
   private checkBeerCollision(beers: Beer[]) {
     for (const beer of beers) {
@@ -129,7 +187,7 @@ class Baby extends Entity {
   }
 
   update(walls: Wall[], beers: Beer[], formulas: Formula[], clocks: Clock[]) {
-    this.move();
+    this.move(walls);
     this.checkWallCollision(walls);
     this.checkBeerCollision(beers);
     this.checkFormulaCollision(formulas);
