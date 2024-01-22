@@ -69,20 +69,31 @@ class Baby extends Entity {
 
   //hämtar alla väggar och kollar om bebisen krockar med någon av dem
   private checkWallCollision(walls: Wall[]) {
+    const collidedWalls: Wall[] = [];
+
+    // Identifierar vilka väggar bebis har krockat med
     for (const wall of walls) {
       if (this.entitiesOverlap(this, wall)) {
-        const currentX = this.x;
-        this.x = this.previousX;
-        if (!this.entitiesOverlap(this, wall)) {
-          continue;
-        } else {
-          this.x = currentX;
-          this.y = this.previousY;
-        }
+        collidedWalls.push(wall);
       }
     }
+
+    // Försök flytta bebis i rätt riktning och kontrollera om den krockar med någon vägg
+    const currentX = this.x;
+    this.x = this.previousX;
+    if (
+      !this.entitiesOverlap(this, collidedWalls[0]) &&
+      !this.entitiesOverlap(this, collidedWalls[1])
+    ) {
+      return;
+    } else {
+      this.x = currentX;
+      this.y = this.previousY;
+    }
+    // for (const collidedWall of collidedWalls) {
   }
 
+  // Lägga till if sats..
   private entitiesOverlap(e1: Entity, e2: Entity) {
     return (
       e1.x < e2.x + e2.size &&
