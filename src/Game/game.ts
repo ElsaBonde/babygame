@@ -37,7 +37,7 @@ class Game {
         this.startPage.keyPressedStart();
         break;
       case "level":
-        this.level.update(walls, beers, formulas, clocks);
+        this.level.update(/* walls, beers, formulas, clocks */);
         break;
       case "end":
         // this.endOfGame.update();
