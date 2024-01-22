@@ -86,35 +86,41 @@ class Baby extends Entity {
     if (keyIsDown(this.controls.up)) {
       potentialY -= 2;
       this.image = this.images.up;
-      if (!this.wouldCollideWithWalls(this.x, potentialY, walls)) {
-        this.y = potentialY;
-      }
+      this.yCollideAndMove(potentialY, walls);
     }
     if (keyIsDown(this.controls.down)) {
       potentialY += 2;
       this.image = this.images.down;
-      if (!this.wouldCollideWithWalls(this.x, potentialY, walls)) {
-        this.y = potentialY;
-      }
+      this.yCollideAndMove(potentialY, walls);
     }
     if (keyIsDown(this.controls.right)) {
       potentialX += 2;
       this.image = this.images.right;
-      if (!this.wouldCollideWithWalls(potentialX, this.y, walls)) {
-        this.x = potentialX;
-      }
+      this.xCollideAndMove(potentialX, walls);
     }
     if (keyIsDown(this.controls.left)) {
       potentialX -= 2;
       this.image = this.images.left;
-      if (!this.wouldCollideWithWalls(potentialX, this.y, walls)) {
-        this.x = potentialX;
-      }
+      this.xCollideAndMove(potentialX, walls);
     }
 
     if (!this.wouldCollideWithWalls(potentialX, potentialY, walls)) {
       this.x = potentialX;
       this.y = potentialY;
+    }
+  }
+
+  //hämtar if-sats som används för att kontrollera + promenera med baby i y-led
+  private yCollideAndMove(potentialY: number, walls: Wall[]) {
+    if (!this.wouldCollideWithWalls(this.x, potentialY, walls)) {
+      this.y = potentialY;
+    }
+  }
+
+  //hämtar if-sats som används för att kontrollera + promenera med baby i x-led
+  private xCollideAndMove(potentialX: number, walls: Wall[]) {
+    if (!this.wouldCollideWithWalls(potentialX, this.y, walls)) {
+      this.x = potentialX;
     }
   }
 
