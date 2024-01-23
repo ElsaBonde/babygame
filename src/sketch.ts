@@ -66,7 +66,7 @@ function draw(
   beers: Beer[],
   formulas: Formula[],
   clocks: Clock[]
-) {
+  ) {
   game.update(walls, beers, formulas, clocks);
   game.draw();
 }
