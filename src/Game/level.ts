@@ -30,7 +30,7 @@ class Level {
     baby: Baby,
     entities: Entity[],
     removeEntity: (entity: Entity) => void
-  ) {
+  ): string | null {
     for (const entity of entities) {
       if (
         baby.x < entity.x + entity.size &&
@@ -39,9 +39,12 @@ class Level {
         baby.y + baby.size > entity.y
       ) {
         removeEntity(entity);
+        return entity.constructor.name;
       }
     }
+    return null;
   }
+
   update() {
     let baby: Baby | null = null;
 
@@ -49,16 +52,66 @@ class Level {
       if (entity instanceof Baby) {
         baby = entity;
         break;
-        //entity.update(this.walls, this.beers, this.formulas, this.clocks);
       }
     }
     if (baby) {
       baby.update(this.walls);
-      this.checkCollision(baby, this.beers, (beer) => beer.remove());
-      this.checkCollision(baby, this.formulas, (formula) => formula.remove());
-      this.checkCollision(baby, this.clocks, (clock) => clock.remove());
+      const beerCollision = this.checkCollision(baby, this.beers, (beer) =>
+        beer.remove()
+      );
+      const formulaCollision = this.checkCollision(
+        baby,
+        this.formulas,
+        (formula) => formula.remove()
+      );
+      const clockCollision = this.checkCollision(baby, this.clocks, (clock) =>
+        clock.remove()
+      );
+
+      if (beerCollision === "Beer") {
+        this.score -= 1; // Decrease score when baby collides with beer
+      }
+      if (formulaCollision === "Formula") {
+        this.score += 1; // Increase score when baby collides with formula
+      }
+      console.log(this.score, "IDA");
+      // Handle clock collision if needed
     }
   }
+
+  // private checkCollision(
+  //   baby: Baby,
+  //   entities: Entity[],
+  //   removeEntity: (entity: Entity) => void
+  // ) {
+  //   for (const entity of entities) {
+  //     if (
+  //       baby.x < entity.x + entity.size &&
+  //       baby.x + baby.size > entity.x &&
+  //       baby.y < entity.y + entity.size &&
+  //       baby.y + baby.size > entity.y
+  //     ) {
+  //       removeEntity(entity);
+  //     }
+  //   }
+  // }
+  // update() {
+  //   let baby: Baby | null = null;
+
+  //   for (let entity of this.entities) {
+  //     if (entity instanceof Baby) {
+  //       baby = entity;
+  //       break;
+  //       //entity.update(this.walls, this.beers, this.formulas, this.clocks);
+  //     }
+  //   }
+  //   if (baby) {
+  //     baby.update(this.walls);
+  //     this.checkCollision(baby, this.beers, (beer) => beer.remove());
+  //     this.checkCollision(baby, this.formulas, (formula) => formula.remove());
+  //     this.checkCollision(baby, this.clocks, (clock) => clock.remove());
+  //   }
+  // }
 
   //den som hämtas som level1
   draw() {
