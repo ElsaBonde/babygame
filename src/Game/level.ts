@@ -80,15 +80,17 @@ class Level {
       );
 
       if (beerCollision === "Beer") {
+        loadSound("./assets/music/beer.mp3").play(); // Ljudet för beer
 
         baby.goSlow(); // Hamnar bebis på beer så går den långsammare
-
       }
       if (formulaCollision === "Formula") {
         this.score += 1; // Hamnar bebis på formula så får man poäng
+        loadSound("./assets/music/formula.mp3").play(); // Ljudet för formula
       }
       if (clockCollision === "Clock") {
         this.time.freezeTime(); // tiden fryses när bebis tar klocka
+        loadSound("./assets/music/clock.mp3").play(); // Ljudet för clock
       }
     }
     this.drawScore();

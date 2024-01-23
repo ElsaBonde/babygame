@@ -51,6 +51,9 @@ function preload() {
 function setup() {
   createCanvas(1000, 600);
   frameRate(60);
+  let beerSound = loadSound("./assets/music/beer.mp3");
+  let formulaSound = loadSound("./assets/music/formula.mp3");
+  let clockSound = loadSound("./assets/music/clock.mp3");
   music.mystery.setVolume(0.8);
 
   game = new Game();
@@ -66,7 +69,7 @@ function draw(
   beers: Beer[],
   formulas: Formula[],
   clocks: Clock[]
-  ) {
+) {
   game.update(walls, beers, formulas, clocks);
   game.draw();
 }
