@@ -38,13 +38,8 @@ class Level {
         baby.y < entity.y + entity.size &&
         baby.y + baby.size > entity.y
           ) {
-        if (entity instanceof Clock) {
-        this.time.freezeTime(); // tiden fryses när bebis tar klocka
-        removeEntity(entity); // Så även klockan försvinner när bebisen krockar med klockan
-        } else {
         removeEntity(entity);
         return entity.constructor.name;
-
       }
     }
     return null;
@@ -89,6 +84,9 @@ class Level {
       }
       if (formulaCollision === "Formula") {
         this.score += 10; // Hamnar bebis på formula så får man poäng
+      }
+      if (clockCollision === "Clock") {
+        this.time.freezeTime(); // tiden fryses när bebis tar klocka
       }
     }
     this.drawScore();
