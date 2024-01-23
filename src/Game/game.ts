@@ -24,6 +24,10 @@ class Game {
     this.currentPage = "level";
   }
 
+  public isTimeUp(): boolean {
+    return this.level.getTime().isGameOver;
+  }
+
   update(walls: Wall[], beers: Beer[], formulas: Formula[], clocks: Clock[]) {
     // if (paused) return;
     // 60 frames/sekund
@@ -53,6 +57,9 @@ class Game {
         break;
       case "level":
         this.level.draw();
+        if (this.level.getTime().isGameOver) {
+          this.currentPage = "end";
+        }
         break;
       case "end":
         this.endOfGame.draw();

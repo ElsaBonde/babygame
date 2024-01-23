@@ -8,6 +8,7 @@ let playerImages: {
 };
 let levelOne: p5.Image;
 let backgroundImg: p5.Image;
+let endOfGameImg: p5.Image;
 let beerImg: p5.Image;
 let formulaImg: p5.Image;
 let clockImg: p5.Image;
@@ -33,6 +34,7 @@ function preload() {
   };
 
   backgroundImg = loadImage("./assets/img/startpage.png");
+  endOfGameImg = loadImage("./assets/img/endOfGame.png");
   levelOne = loadImage("./assets/img/levelOne.png");
   beerImg = loadImage("./assets/img/beer.png");
   formulaImg = loadImage("./assets/img/formula.png");
@@ -82,7 +84,13 @@ function keyPressed() {
     game.startPage.keyPressedStart();
   }
 }
-
+/*
+function keyPressed() {
+  if (game.getCurrentPage() === "end" && keyCode === 32) {
+    game = new Game(); // Skapa ett nytt spel när användaren trycker på mellanslag
+  }
+}
+*/
 /**
  *  Built in windowResize listener function in P5
  */

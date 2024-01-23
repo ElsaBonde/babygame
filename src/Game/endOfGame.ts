@@ -1,15 +1,15 @@
-class EndOfGame{
+class EndOfGame {
+  private text: string;
+  private highscore: number;
+  private textButton: string;
 
-    private text: string;
-    private highscore: number;
-    private textButton: string;
-
-    constructor() {
-        this.text = "GAME OVER";
-        this.highscore = 0;
-        this.textButton = "PLAY AGAIN";
-    }
-    draw() {
-    }
+  constructor() {
+    this.text = "GAME OVER";
+    this.highscore = 0;
+    this.textButton = "PLAY AGAIN";
+  }
+  draw() {
+    background("#441F61");
+    background(endOfGameImg);
+  }
 }
-
