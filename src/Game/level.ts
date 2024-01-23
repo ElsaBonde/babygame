@@ -7,14 +7,26 @@ class Level {
   private beers: Beer[];
   private formulas: Formula[];
   private clocks: Clock[];
+  private music: {
+    beerSound: p5.SoundFile;
+    formulaSound: p5.SoundFile;
+    clockSound: p5.SoundFile;
+  };
 
   // DEFINITION - SPECA VAD VI TAR EMOT
-  constructor(entities: Entity[]) {
+  constructor(
+    entities: Entity[],
+    music: {
+      beerSound: p5.SoundFile;
+      formulaSound: p5.SoundFile;
+      clockSound: p5.SoundFile;
+    }
+  ) {
     this.entities = entities;
     this.currentLevel = 0;
     this.score = 0;
     this.time = new Time(60);
-
+    this.music = music;
     //walls är en array som endast innehåller väggarna i aktiv level, detta hämtas med hjälp av filter som i sin tur hämtar alla väggar från entities
     this.walls = entities.filter((entity) => entity instanceof Wall) as Wall[];
     this.beers = entities.filter((entity) => entity instanceof Beer) as Beer[];
@@ -80,17 +92,22 @@ class Level {
       );
 
       if (beerCollision === "Beer") {
-        loadSound("./assets/music/beer.mp3").play(); // Ljudet för beer
-
-        baby.goSlow(); // Hamnar bebis på beer så går den långsammare
+        baby.goSlow(); // Hamnar bebis på beer så går den slow
+        if (this.music.beerSound) {
+          this.music.beerSound.play();
+        }
       }
       if (formulaCollision === "Formula") {
         this.score += 1; // Hamnar bebis på formula så får man poäng
-        loadSound("./assets/music/formula.mp3").play(); // Ljudet för formula
+        if (this.music.formulaSound) {
+          this.music.formulaSound.play();
+        }
       }
       if (clockCollision === "Clock") {
         this.time.freezeTime(); // tiden fryses när bebis tar klocka
-        loadSound("./assets/music/clock.mp3").play(); // Ljudet för clock
+        if (this.music.clockSound) {
+          this.music.clockSound.play();
+        }
       }
     }
     this.drawScore();

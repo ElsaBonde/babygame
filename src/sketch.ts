@@ -13,7 +13,9 @@ let formulaImg: p5.Image;
 let clockImg: p5.Image;
 let doorClosedImg: p5.Image;
 let music: {
-  mystery: p5.SoundFile;
+  beerSound: p5.SoundFile;
+  formulaSound: p5.SoundFile;
+  clockSound: p5.SoundFile;
 };
 
 /**
@@ -38,7 +40,9 @@ function preload() {
   doorClosedImg = loadImage("./assets/img/doorClosed.png");
 
   music = {
-    mystery: loadSound("./assets/music/mystery.mp3"),
+    beerSound: loadSound("./assets/music/beerSound.mp3"),
+    formulaSound: loadSound("./assets/music/formulaSound.mp3"),
+    clockSound: loadSound("./assets/music/clockSound.mp3"),
   };
 }
 
@@ -51,10 +55,9 @@ function preload() {
 function setup() {
   createCanvas(1000, 600);
   frameRate(60);
-  let beerSound = loadSound("./assets/music/beer.mp3");
-  let formulaSound = loadSound("./assets/music/formula.mp3");
-  let clockSound = loadSound("./assets/music/clock.mp3");
-  music.mystery.setVolume(0.8);
+  music.beerSound.setVolume(0.8);
+  music.formulaSound.setVolume(0.8);
+  music.clockSound.setVolume(0.8);
 
   game = new Game();
 }

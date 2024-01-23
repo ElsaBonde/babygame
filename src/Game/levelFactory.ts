@@ -102,7 +102,7 @@ class LevelFactory {
     // 2. SKAPA CYKEL (level)
 
     // ANROPA KONSTUKTORN: SKICKA ETT VÄRDE
-    return new Level(entities);
+    return new Level(entities, music);
   }
 }
 
