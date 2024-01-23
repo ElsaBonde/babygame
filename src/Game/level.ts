@@ -13,7 +13,7 @@ class Level {
     this.entities = entities;
     this.currentLevel = 0;
     this.score = 0;
-    this.time = new Time();
+    this.time = new Time(60);
 
     //walls är en array som endast innehåller väggarna i aktiv level, detta hämtas med hjälp av filter som i sin tur hämtar alla väggar från entities
     this.walls = entities.filter((entity) => entity instanceof Wall) as Wall[];
@@ -85,6 +85,7 @@ class Level {
       }
     }
     this.drawScore();
+    this.time.update();
   }
 
   //den som hämtas som level1
@@ -99,5 +100,6 @@ class Level {
     textFont("Orbitron");
     fill("#64E12A");
     this.drawScore();
+    this.time.draw();
   }
 }

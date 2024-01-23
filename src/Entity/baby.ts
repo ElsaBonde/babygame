@@ -15,8 +15,6 @@ class Baby extends Entity {
     down: p5.Image;
     right: p5.Image;
   };
-  private previousX: number;
-  private previousY: number;
 
   constructor(size: number, x: number, y: number) {
     super(playerImages.up, size, x, y);
@@ -32,12 +30,12 @@ class Baby extends Entity {
       down: playerImages.down,
       right: playerImages.right,
     };
-    this.previousX = this.x;
-    this.previousY = this.y;
   }
+
   public getX() {
     return this.x;
   }
+
   public getY() {
     return this.y;
   }
