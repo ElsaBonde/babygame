@@ -49,7 +49,6 @@ class Level {
       if (entity instanceof Baby) {
         baby = entity;
         break;
-        //entity.update(this.walls, this.beers, this.formulas, this.clocks);
       }
     }
     if (baby) {
