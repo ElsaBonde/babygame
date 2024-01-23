@@ -80,7 +80,9 @@ class Level {
       );
 
       if (beerCollision === "Beer") {
-        this.score -= 1; // Drar av poäng (Tillfällig)
+
+        baby.goSlow(); // Hamnar bebis på beer så går den långsammare
+
       }
       if (formulaCollision === "Formula") {
         this.score += 1; // Hamnar bebis på formula så får man poäng
