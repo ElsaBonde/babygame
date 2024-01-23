@@ -44,9 +44,8 @@ class Level {
     }
     return null;
   }
-
-  */**
-   * Ritar ut poäng, samt koordinaterna för poängen
+  /**
+   * Ritar ut poäng, samt koordinatern
    */
   drawScore() {
     text(`Score: ${this.score}`, 41, 29);
