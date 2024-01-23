@@ -37,13 +37,19 @@ class Level {
         baby.x + baby.size > entity.x &&
         baby.y < entity.y + entity.size &&
         baby.y + baby.size > entity.y
-      ) {
+          ) {
+        if (entity instanceof Clock) {
+        this.time.freezeTime(); // tiden fryses när bebis tar klocka
+        removeEntity(entity); // Så även klockan försvinner när bebisen krockar med klockan
+        } else {
         removeEntity(entity);
         return entity.constructor.name;
+
       }
     }
     return null;
   }
+
   /**
    * Ritar ut poäng, samt koordinatern
    */
@@ -54,6 +60,7 @@ class Level {
   /**
    * Gör så om bebis krockar med beer eller formula så får man poäng eller avdragen poäng
    */
+
   update() {
     let baby: Baby | null = null;
 
@@ -87,6 +94,7 @@ class Level {
     this.drawScore();
     this.time.update();
   }
+
 
   //den som hämtas som level1
   draw() {

@@ -3,27 +3,47 @@ class Time {
   private timeLeft: number;
   private isPaused: boolean;
   private isGameOver: boolean;
+  private freezeTimeLeft: number;
 
   constructor(seconds: number) {
     this.seconds = seconds + 1; //skapar 60 sek från start
     this.timeLeft = this.seconds;
     this.isPaused = false;
     this.isGameOver = false;
+    this.freezeTimeLeft = 0;
+  }
+
+  //metod som anropas för att frysa tiden
+  freezeTime() {
+    //sätter frystiden till 5 sekunder
+    this.freezeTimeLeft = 5;
+    //sätter isPaused till true så att nedräkningen stannar
+    this.isPaused = true;
   }
 
   private countDown() {
-    //om spelet är "pausat" så pausas nedräkningen
-    if (this.isPaused || this.isGameOver) return;
+    //om spelet är "slut" så stängs nedräkningen
+    if (this.isGameOver) return;
 
-    //fortsätter nedräkning
-    this.timeLeft -= deltaTime / 1000; //millis till sek
+    //om spelet är pausat (när man tar klocka)
+    if (this.isPaused) {
+      this.freezeTimeLeft -= deltaTime / 1000;
+
+      if (this.freezeTimeLeft <= 0) {
+        this.isPaused = false; // Detta avslutar frysningen
+        this.freezeTimeLeft = 0;
+      } 
+    } else {
+      //fortsätter nedräkning
+      this.timeLeft -= deltaTime / 1000; //milli till sek
+    }
 
     //om tiden är slut så är spelet också över
     if (this.timeLeft <= 0) {
-      //this.timeLeft = 0;
       this.isGameOver = true;
     }
   }
+
 
   update() {
     this.countDown();
@@ -50,3 +70,4 @@ class Time {
     pop();
   }
 }
+ 
