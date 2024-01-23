@@ -30,7 +30,7 @@ class Level {
     baby: Baby,
     entities: Entity[],
     removeEntity: (entity: Entity) => void
-  ) {
+  ): string | null {
     for (const entity of entities) {
       if (
         baby.x < entity.x + entity.size &&
@@ -39,9 +39,21 @@ class Level {
         baby.y + baby.size > entity.y
       ) {
         removeEntity(entity);
+        return entity.constructor.name;
       }
     }
+    return null;
   }
+  /**
+   * Ritar ut poäng, samt koordinatern
+   */
+  drawScore() {
+    text(`Score: ${this.score}`, 41, 29);
+  }
+
+  /**
+   * Gör så om bebis krockar med beer eller formula så får man poäng eller avdragen poäng
+   */
   update() {
     let baby: Baby | null = null;
 
@@ -53,19 +65,41 @@ class Level {
     }
     if (baby) {
       baby.update(this.walls);
-      this.checkCollision(baby, this.beers, (beer) => beer.remove());
-      this.checkCollision(baby, this.formulas, (formula) => formula.remove());
-      this.checkCollision(baby, this.clocks, (clock) => clock.remove());
+      const beerCollision = this.checkCollision(baby, this.beers, (beer) =>
+        beer.remove()
+      );
+      const formulaCollision = this.checkCollision(
+        baby,
+        this.formulas,
+        (formula) => formula.remove()
+      );
+      const clockCollision = this.checkCollision(baby, this.clocks, (clock) =>
+        clock.remove()
+      );
+
+      if (beerCollision === "Beer") {
+        this.score -= 10; // Drar av poäng (Tillfällig)
+      }
+      if (formulaCollision === "Formula") {
+        this.score += 10; // Hamnar bebis på formula så får man poäng
+      }
     }
+    this.drawScore();
     this.time.update();
   }
 
   //den som hämtas som level1
   draw() {
+    pop();
     image(levelOne, 0, 0, width, height);
     for (let entity of this.entities) {
       entity.draw();
     }
+    push();
+    textSize(22);
+    textFont("Orbitron");
+    fill("#64E12A");
+    this.drawScore();
     this.time.draw();
   }
 }
