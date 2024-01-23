@@ -16,6 +16,7 @@ class Baby extends Entity {
     right: p5.Image;
   };
   private speed: number
+  private normalSpeed: number = 2; // skapar variabel med default värde på 2 för bebisen snabbhet i rörelse
 
   constructor(size: number, x: number, y: number) {
     super(playerImages.up, size, x, y);
@@ -43,7 +44,7 @@ class Baby extends Entity {
   }
 
   /***
-   * Får bebisen att röra sig 2 px för varje tryck med piltangenterna
+   * Får bebisen att röra sig speeds värde i px för varje tryck med piltangenterna
    */
 
   private move(walls: Wall[]) {
@@ -113,7 +114,18 @@ class Baby extends Entity {
     );
   }
 
+  //måste vara public för att kunna nås av level
+  public goSlow() {
+    //sätter bebisens speed till hälften av default
+    this.speed = 1;
+    //efter 4 sekunder får bebisen tillbaka sin normala speed igen
+    setTimeout(() => {
+      this.speed = this.normalSpeed;
+    }, 4000);
+   }
+
   update(walls: Wall[]) {
+
     this.move(walls);
   }
 }
