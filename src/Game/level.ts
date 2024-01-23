@@ -37,7 +37,7 @@ class Level {
         baby.x + baby.size > entity.x &&
         baby.y < entity.y + entity.size &&
         baby.y + baby.size > entity.y
-          ) {
+      ) {
         removeEntity(entity);
         return entity.constructor.name;
       }
@@ -49,12 +49,12 @@ class Level {
    * Ritar ut poäng, samt koordinatern
    */
   drawScore() {
-    text(`Score: ${this.score}`, 41, 29);
-  }
+    // Draw the image at a certain position
+    image(formulaImg, 36, 4, 30, 30);
 
-  /**
-   * Gör så om bebis krockar med beer eller formula så får man poäng eller avdragen poäng
-   */
+    // Draw the score at a certain position
+    text(`: ${this.score}`, 71, 29);
+  }
 
   update() {
     let baby: Baby | null = null;
@@ -80,10 +80,10 @@ class Level {
       );
 
       if (beerCollision === "Beer") {
-        this.score -= 10; // Drar av poäng (Tillfällig)
+        this.score -= 1; // Drar av poäng (Tillfällig)
       }
       if (formulaCollision === "Formula") {
-        this.score += 10; // Hamnar bebis på formula så får man poäng
+        this.score += 1; // Hamnar bebis på formula så får man poäng
       }
       if (clockCollision === "Clock") {
         this.time.freezeTime(); // tiden fryses när bebis tar klocka
@@ -92,7 +92,6 @@ class Level {
     this.drawScore();
     this.time.update();
   }
-
 
   //den som hämtas som level1
   draw() {
