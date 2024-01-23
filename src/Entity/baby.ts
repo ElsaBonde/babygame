@@ -15,6 +15,7 @@ class Baby extends Entity {
     down: p5.Image;
     right: p5.Image;
   };
+  private speed: number
 
   constructor(size: number, x: number, y: number) {
     super(playerImages.up, size, x, y);
@@ -30,6 +31,7 @@ class Baby extends Entity {
       down: playerImages.down,
       right: playerImages.right,
     };
+    this.speed = 2; // skapar variabel med default värde på 2 för bebisen snabbhet i rörelse
   }
 
   public getX() {
@@ -49,22 +51,22 @@ class Baby extends Entity {
     let potentialY = this.y;
 
     if (keyIsDown(this.controls.up)) {
-      potentialY -= 2;
+      potentialY -= this.speed;
       this.image = this.images.up;
       this.yCollideAndMove(potentialY, walls);
     }
     if (keyIsDown(this.controls.down)) {
-      potentialY += 2;
+      potentialY += this.speed;
       this.image = this.images.down;
       this.yCollideAndMove(potentialY, walls);
     }
     if (keyIsDown(this.controls.right)) {
-      potentialX += 2;
+      potentialX += this.speed;
       this.image = this.images.right;
       this.xCollideAndMove(potentialX, walls);
     }
     if (keyIsDown(this.controls.left)) {
-      potentialX -= 2;
+      potentialX -= this.speed;
       this.image = this.images.left;
       this.xCollideAndMove(potentialX, walls);
     }
