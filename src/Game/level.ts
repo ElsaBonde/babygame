@@ -37,11 +37,17 @@ class Level {
         baby.x + baby.size > entity.x &&
         baby.y < entity.y + entity.size &&
         baby.y + baby.size > entity.y
-      ) {
+          ) {
+        if (entity instanceof Clock) {
+        this.time.freezeTime(); // tiden fryses när bebis tar klocka
+        removeEntity(entity); // Så även klockan försvinner när bebisen krockar med klockan
+        } else {
         removeEntity(entity);
+        }
       }
     }
   }
+  
   update() {
     let baby: Baby | null = null;
 
@@ -59,6 +65,7 @@ class Level {
     }
     this.time.update();
   }
+
 
   //den som hämtas som level1
   draw() {
