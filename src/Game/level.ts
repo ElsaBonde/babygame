@@ -45,6 +45,10 @@ class Level {
     return null;
   }
 
+  drawScore() {
+    text(`Score: ${this.score}`, 41, 29); // Draw the score at position (10, 50)
+  }
+
   update() {
     let baby: Baby | null = null;
 
@@ -74,9 +78,9 @@ class Level {
       if (formulaCollision === "Formula") {
         this.score += 1; // Increase score when baby collides with formula
       }
-      console.log(this.score, "IDA");
       // Handle clock collision if needed
     }
+    this.drawScore();
   }
 
   // private checkCollision(
@@ -115,9 +119,15 @@ class Level {
 
   //den som hämtas som level1
   draw() {
+    pop();
     image(levelOne, 0, 0, width, height);
     for (let entity of this.entities) {
       entity.draw();
     }
+    push();
+    textSize(22);
+    textFont("Orbitron");
+    fill("#64E12A");
+    this.drawScore();
   }
 }
