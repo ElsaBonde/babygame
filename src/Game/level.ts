@@ -141,6 +141,7 @@ class Level {
     textSize(250);
     textFont("Orbitron");
     fill("#64E12A");
+    textAlign(CENTER);
     text(Math.ceil(this.countDownToStart / 1000), 400, 375);
     pop();
     //lägg här nedräkning style
