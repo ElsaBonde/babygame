@@ -12,6 +12,8 @@ class Level {
     formulaSound: p5.SoundFile;
     clockSound: p5.SoundFile;
   };
+  private countDownToStart: number;
+  //itemsToBeDeleted [] också en lösning
 
   // DEFINITION - SPECA VAD VI TAR EMOT
   constructor(
@@ -27,6 +29,7 @@ class Level {
     this.score = 0;
     this.time = new Time(60);
     this.music = music;
+    this.countDownToStart = 3000;
     //walls är en array som endast innehåller väggarna i aktiv level, detta hämtas med hjälp av filter som i sin tur hämtar alla väggar från entities
     this.walls = entities.filter((entity) => entity instanceof Wall) as Wall[];
     this.beers = entities.filter((entity) => entity instanceof Beer) as Beer[];
@@ -67,17 +70,39 @@ class Level {
   drawScore() {
     // Draw the image at a certain position
     image(formulaImg, 36, 4, 30, 30);
-
+    push();
+    textSize(22);
+    textFont("Orbitron");
+    fill("#64E12A");
     // Draw the score at a certain position
     text(`: ${this.score}`, 71, 29);
+    pop();
   }
 
   update() {
+    if (this.countDownToStart > 0) {
+      this.countDownToStart -= deltaTime;
+      return;
+    }
     let baby: Baby | null = null;
 
     for (let entity of this.entities) {
       if (entity instanceof Baby) {
         baby = entity;
+        const b = entity;
+        for (const e of this.entities) {
+          if (b === e) continue;
+          const collided = this.checkCollision(b, e);
+          if (!collided) continue;
+
+          if (e instanceof Beer) {
+            // REAKTION
+            e.remove();
+          }
+          if (e instanceof Formula) {
+            e.remove();
+          }
+        }
         break;
       }
     }
@@ -114,22 +139,26 @@ class Level {
         }
       }
     }
-    this.drawScore();
     this.time.update();
   }
 
   //den som hämtas som level1
   draw() {
-    pop();
+    push();
     image(levelOne, 0, 0, width, height);
     for (let entity of this.entities) {
       entity.draw();
     }
-    push();
-    textSize(22);
-    textFont("Orbitron");
-    fill("#64E12A");
+    pop();
     this.drawScore();
     this.time.draw();
+
+    if (this.countDownToStart > 0) {
+      this.drawCountDown();
+    }
+  }
+
+  private drawCountDown() {
+    //lägg här nedräkning style
   }
 }
