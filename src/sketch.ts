@@ -1,11 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: Game;
-let playerImages: {
-  up: p5.Image;
-  left: p5.Image;
-  down: p5.Image;
-  right: p5.Image;
-};
+let playerImages: p5.Image[];
 let levelOne: p5.Image;
 let backgroundImg: p5.Image;
 let endOfGameImg: p5.Image;
@@ -26,12 +21,20 @@ let music: {
  */
 
 function preload() {
-  playerImages = {
-    up: loadImage("./assets/img/babyup.png"),
-    left: loadImage("./assets/img/babyleft.png"),
-    down: loadImage("./assets/img/babydown.png"),
-    right: loadImage("./assets/img/babyright.png"),
-  };
+  playerImages = [
+    loadImage("./assets/img/up1.png"),
+    loadImage("./assets/img/up2.png"),
+    loadImage("./assets/img/up3.png"),
+    loadImage("./assets/img/left1.png"),
+    loadImage("./assets/img/left2.png"),
+    loadImage("./assets/img/left3.png"),
+    loadImage("./assets/img/down1.png"),
+    loadImage("./assets/img/down2.png"),
+    loadImage("./assets/img/down3.png"),
+    loadImage("./assets/img/right1.png"),
+    loadImage("./assets/img/right2.png"),
+    loadImage("./assets/img/right3.png"),
+  ];
 
   backgroundImg = loadImage("./assets/img/startpage.png");
   endOfGameImg = loadImage("./assets/img/endOfGame.png");

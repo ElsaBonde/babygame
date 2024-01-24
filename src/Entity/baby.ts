@@ -9,30 +9,31 @@ type Controls = {
 
 class Baby extends Entity {
   private controls: Controls;
-  public images: {
-    up: p5.Image;
-    left: p5.Image;
-    down: p5.Image;
-    right: p5.Image;
-  };
+  private animationIndex: number;
+  private animationSpeed: number;
+  private leftAnimationLoop: number[];
+  private rightAnimationLoop: number[];
+  private upAnimationLoop: number[];
+  private downAnimationLoop: number[];
   private speed: number
   private normalSpeed: number = 2; // skapar variabel med default värde på 2 för bebisen snabbhet i rörelse
 
   constructor(size: number, x: number, y: number) {
-    super(playerImages.up, size, x, y);
+    super(playerImages[1], size, x, y);
     this.controls = {
       up: UP_ARROW,
       left: LEFT_ARROW,
       down: DOWN_ARROW,
       right: RIGHT_ARROW,
     };
-    this.images = {
-      up: playerImages.up,
-      left: playerImages.left,
-      down: playerImages.down,
-      right: playerImages.right,
-    };
+    this.animationIndex = 0;
+    this.animationSpeed = 0.5;
     this.speed = 2; // skapar variabel med default värde på 2 för bebisen snabbhet i rörelse
+
+    this.upAnimationLoop = [0, 1, 2, 0];
+    this.leftAnimationLoop = [3, 4, 5, 3];
+    this.downAnimationLoop = [6, 7, 8, 6];
+    this.rightAnimationLoop = [9, 10, 11, 9];
   }
 
   public getX() {
@@ -44,7 +45,7 @@ class Baby extends Entity {
   }
 
   /***
-   * Får bebisen att röra sig speeds värde i px för varje tryck med piltangenterna
+   * Får bebisen att röra sig speeds värde i px för varje tryck med piltangenterna och anropar de olika loopmetoderna som kollar babyns riktning och ger rätt animation
    */
 
   private move(walls: Wall[]) {
@@ -53,22 +54,22 @@ class Baby extends Entity {
 
     if (keyIsDown(this.controls.up)) {
       potentialY -= this.speed;
-      this.image = this.images.up;
+      this.animateUp();
       this.yCollideAndMove(potentialY, walls);
     }
     if (keyIsDown(this.controls.down)) {
       potentialY += this.speed;
-      this.image = this.images.down;
+      this.animateDown();
       this.yCollideAndMove(potentialY, walls);
     }
     if (keyIsDown(this.controls.right)) {
       potentialX += this.speed;
-      this.image = this.images.right;
+      this.animateRight();
       this.xCollideAndMove(potentialX, walls);
     }
     if (keyIsDown(this.controls.left)) {
       potentialX -= this.speed;
-      this.image = this.images.left;
+      this.animateLeft();
       this.xCollideAndMove(potentialX, walls);
     }
 
@@ -123,6 +124,37 @@ class Baby extends Entity {
       this.speed = this.normalSpeed;
     }, 4000);
    }
+
+   //skapar loop för att animera babyns bilder
+private animateLoop(animatinLoop: number[]): void { 
+  this.image =
+    playerImages[
+      animatinLoop[
+        Math.floor(this.animationIndex) % animatinLoop.length
+      ]
+    ];
+
+  this.animationIndex =
+    (this.animationIndex + this.animationSpeed) %
+    (animatinLoop.length * this.animationSpeed);
+}
+
+//en metod var för varje riktning som bebisen kan gå i, anropar animateLoop med rätt riktnings loop
+   private animateLeft(): void {
+    this.animateLoop(this.leftAnimationLoop);
+  }
+ 
+  private animateRight(): void {
+   this.animateLoop(this.rightAnimationLoop);
+  }
+ 
+  private animateUp(): void {
+    this.animateLoop(this.upAnimationLoop);
+  }
+ 
+  private animateDown(): void {
+   this.animateLoop(this.downAnimationLoop);
+  }
 
   update(walls: Wall[]) {
 
