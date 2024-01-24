@@ -12,8 +12,12 @@ class Level {
     formulaSound: p5.SoundFile;
     clockSound: p5.SoundFile;
   };
+  private countDownToStart: number;
+  //itemsToBeDeleted [] också en lösning
 
-  // DEFINITION - SPECA VAD VI TAR EMOT
+  /***
+   * DEFINITION - SPECA VAD VI TAR EMOT
+   */
   constructor(
     entities: Entity[],
     music: {
@@ -27,6 +31,7 @@ class Level {
     this.score = 0;
     this.time = new Time(60);
     this.music = music;
+    this.countDownToStart = 3000;
     //walls är en array som endast innehåller väggarna i aktiv level, detta hämtas med hjälp av filter som i sin tur hämtar alla väggar från entities
     this.walls = entities.filter((entity) => entity instanceof Wall) as Wall[];
     this.beers = entities.filter((entity) => entity instanceof Beer) as Beer[];
@@ -42,11 +47,7 @@ class Level {
     return this.time;
   }
 
-  private checkCollision(
-    baby: Baby,
-    entities: Entity[],
-    removeEntity: (entity: Entity) => void
-  ): string | null {
+  private checkCollision(baby: Baby, entities: Entity[]): void {
     for (const entity of entities) {
       if (
         baby.x < entity.x + entity.size &&
@@ -54,27 +55,51 @@ class Level {
         baby.y < entity.y + entity.size &&
         baby.y + baby.size > entity.y
       ) {
-        removeEntity(entity);
-        return entity.constructor.name;
+        this.handleCollision(baby, entity);
       }
     }
-    return null;
+  }
+  /***
+   * Checkar kollision med någon av entiteterna
+   */
+  private handleCollision(baby: Baby, entity: Entity): void {
+    if (entity instanceof Beer) {
+      baby.goSlow();
+      entity.remove();
+      this.music.beerSound.play();
+    }
+    if (entity instanceof Formula) {
+      entity.remove();
+      this.score += 1;
+      this.music.formulaSound.play();
+    }
+    if (entity instanceof Clock) {
+      this.time.freezeTime();
+      entity.remove();
+      this.music.clockSound.play();
+    }
   }
 
-  /**
-   * Ritar ut poäng, samt koordinatern
+  /***
+   * Ritar ut och placerar poängräkning, samt koordinatern för bild
    */
   drawScore() {
-    // Draw the image at a certain position
     image(formulaImg, 36, 4, 30, 30);
 
-    // Draw the score at a certain position
+    push();
+    textSize(22);
+    textFont("Orbitron");
+    fill("#64E12A");
     text(`: ${this.score}`, 71, 29);
+    pop();
   }
 
-  update() {
+  update(): void {
+    if (this.countDownToStart > 0) {
+      this.countDownToStart -= deltaTime;
+      return;
+    }
     let baby: Baby | null = null;
-
     for (let entity of this.entities) {
       if (entity instanceof Baby) {
         baby = entity;
@@ -83,53 +108,42 @@ class Level {
     }
     if (baby) {
       baby.update(this.walls);
-      const beerCollision = this.checkCollision(baby, this.beers, (beer) =>
-        beer.remove()
-      );
-      const formulaCollision = this.checkCollision(
-        baby,
-        this.formulas,
-        (formula) => formula.remove()
-      );
-      const clockCollision = this.checkCollision(baby, this.clocks, (clock) =>
-        clock.remove()
-      );
-
-      if (beerCollision === "Beer") {
-        baby.goSlow(); // Hamnar bebis på beer så går den slow
-        if (this.music.beerSound) {
-          this.music.beerSound.play();
-        }
-      }
-      if (formulaCollision === "Formula") {
-        this.score += 1; // Hamnar bebis på formula så får man poäng
-        if (this.music.formulaSound) {
-          this.music.formulaSound.play();
-        }
-      }
-      if (clockCollision === "Clock") {
-        this.time.freezeTime(); // tiden fryses när bebis tar klocka
-        if (this.music.clockSound) {
-          this.music.clockSound.play();
-        }
-      }
+      this.checkCollision(baby, this.entities);
     }
-    this.drawScore();
+
     this.time.update();
   }
 
   //den som hämtas som level1
   draw() {
-    pop();
+    push();
     image(levelOne, 0, 0, width, height);
     for (let entity of this.entities) {
       entity.draw();
     }
-    push();
-    textSize(22);
-    textFont("Orbitron");
-    fill("#64E12A");
+    pop();
     this.drawScore();
     this.time.draw();
+
+    if (this.countDownToStart > 0) {
+      this.drawCountDown();
+    }
+  }
+
+  private drawCountDown() {
+    push();
+    noStroke();
+    fill(0, 0, 0, 95);
+    circle(500, 300, 500);
+    pop();
+
+    push();
+    textSize(250);
+    textFont("Orbitron");
+    fill("#64E12A");
+    textAlign(CENTER);
+    text(Math.ceil(this.countDownToStart / 1000), 400, 375);
+    pop();
+    //lägg här nedräkning style
   }
 }
