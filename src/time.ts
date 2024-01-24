@@ -2,7 +2,7 @@ class Time {
   private seconds: number;
   private timeLeft: number;
   private isPaused: boolean;
-  private isGameOver: boolean;
+  public isGameOver: boolean;
   private freezeTimeLeft: number;
 
   constructor(seconds: number) {
@@ -32,7 +32,7 @@ class Time {
       if (this.freezeTimeLeft <= 0) {
         this.isPaused = false; // Detta avslutar frysningen
         this.freezeTimeLeft = 0;
-      } 
+      }
     } else {
       //fortsätter nedräkning
       this.timeLeft -= deltaTime / 1000; //milli till sek
@@ -43,7 +43,6 @@ class Time {
       this.isGameOver = true;
     }
   }
-
 
   update() {
     this.countDown();
@@ -70,4 +69,3 @@ class Time {
     pop();
   }
 }
- 

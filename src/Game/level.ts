@@ -2,7 +2,7 @@ class Level {
   private entities: Entity[]; // Level är experten på entiteter!
   private currentLevel: number;
   private score: number;
-  private time: Time;
+  public time: Time;
   private walls: Wall[];
   private beers: Beer[];
   private formulas: Formula[];
@@ -36,6 +36,10 @@ class Level {
     this.clocks = entities.filter(
       (entity) => entity instanceof Clock
     ) as Clock[];
+  }
+
+  getTime(): Time {
+    return this.time;
   }
 
   private checkCollision(
