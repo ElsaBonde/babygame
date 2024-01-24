@@ -49,7 +49,6 @@ class StartPage {
   keyPressedStart() {
     if (keyCode === 32) {
       if (game && game.getCurrentPage() === "start") {
-        console.log("start");
         game.changePage();
       }
     }

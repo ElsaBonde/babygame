@@ -15,7 +15,9 @@ class Level {
   private countDownToStart: number;
   //itemsToBeDeleted [] också en lösning
 
-  // DEFINITION - SPECA VAD VI TAR EMOT
+  /***
+   * DEFINITION - SPECA VAD VI TAR EMOT
+   */
   constructor(
     entities: Entity[],
     music: {
@@ -45,11 +47,7 @@ class Level {
     return this.time;
   }
 
-  private checkCollision(
-    baby: Baby,
-    entities: Entity[],
-    removeEntity: (entity: Entity) => void
-  ): string | null {
+  private checkCollision(baby: Baby, entities: Entity[]): void {
     for (const entity of entities) {
       if (
         baby.x < entity.x + entity.size &&
@@ -57,88 +55,62 @@ class Level {
         baby.y < entity.y + entity.size &&
         baby.y + baby.size > entity.y
       ) {
-        removeEntity(entity);
-        return entity.constructor.name;
+        this.handleCollision(baby, entity);
       }
     }
-    return null;
+  }
+  /***
+   * Checkar kollision med någon av entiteterna
+   */
+  private handleCollision(baby: Baby, entity: Entity): void {
+    if (entity instanceof Beer) {
+      baby.goSlow();
+      entity.remove();
+      this.music.beerSound.play();
+    }
+    if (entity instanceof Formula) {
+      entity.remove();
+      this.score += 1;
+      this.music.formulaSound.play();
+    }
+    if (entity instanceof Clock) {
+      this.time.freezeTime();
+      entity.remove();
+      this.music.clockSound.play();
+    }
   }
 
-  /**
-   * Ritar ut poäng, samt koordinatern
+  /***
+   * Ritar ut och placerar poängräkning, samt koordinatern för bild
    */
   drawScore() {
-    // Draw the image at a certain position
     image(formulaImg, 36, 4, 30, 30);
+
     push();
     textSize(22);
     textFont("Orbitron");
     fill("#64E12A");
-    // Draw the score at a certain position
     text(`: ${this.score}`, 71, 29);
     pop();
   }
 
-  update() {
+  update(): void {
     if (this.countDownToStart > 0) {
       this.countDownToStart -= deltaTime;
       return;
     }
     let baby: Baby | null = null;
-
     for (let entity of this.entities) {
       if (entity instanceof Baby) {
         baby = entity;
-        const b = entity;
-        for (const e of this.entities) {
-          if (b === e) continue;
-          const collided = this.checkCollision(b, e);
-          if (!collided) continue;
-
-          if (e instanceof Beer) {
-            // REAKTION
-            e.remove();
-          }
-          if (e instanceof Formula) {
-            e.remove();
-          }
-        }
         break;
       }
     }
     if (baby) {
       baby.update(this.walls);
-      const beerCollision = this.checkCollision(baby, this.beers, (beer) =>
-        beer.remove()
-      );
-      const formulaCollision = this.checkCollision(
-        baby,
-        this.formulas,
-        (formula) => formula.remove()
-      );
-      const clockCollision = this.checkCollision(baby, this.clocks, (clock) =>
-        clock.remove()
-      );
-
-      if (beerCollision === "Beer") {
-        baby.goSlow(); // Hamnar bebis på beer så går den slow
-        if (this.music.beerSound) {
-          this.music.beerSound.play();
-        }
-      }
-      if (formulaCollision === "Formula") {
-        this.score += 1; // Hamnar bebis på formula så får man poäng
-        if (this.music.formulaSound) {
-          this.music.formulaSound.play();
-        }
-      }
-      if (clockCollision === "Clock") {
-        this.time.freezeTime(); // tiden fryses när bebis tar klocka
-        if (this.music.clockSound) {
-          this.music.clockSound.play();
-        }
-      }
+      this.checkCollision(baby, this.entities);
     }
+
     this.time.update();
   }
 
@@ -159,6 +131,12 @@ class Level {
   }
 
   private drawCountDown() {
+    push();
+    textSize(60);
+    textFont("Orbitron");
+    fill("#64E12A");
+    text("", 270, 500);
+    pop();
     //lägg här nedräkning style
   }
 }
