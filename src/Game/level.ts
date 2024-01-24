@@ -132,10 +132,16 @@ class Level {
 
   private drawCountDown() {
     push();
-    textSize(60);
+    noStroke();
+    fill(0, 0, 0, 95);
+    circle(500, 300, 500);
+    pop();
+
+    push();
+    textSize(250);
     textFont("Orbitron");
     fill("#64E12A");
-    text("", 270, 500);
+    text(Math.ceil(this.countDownToStart / 1000), 400, 375);
     pop();
     //lägg här nedräkning style
   }
