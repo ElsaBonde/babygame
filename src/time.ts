@@ -6,7 +6,7 @@ class Time {
   private freezeTimeLeft: number;
 
   constructor(seconds: number) {
-    this.seconds = seconds; //skapar 60 sek från start
+    this.seconds = seconds - 40; //skapar 60 sek från start
     this.timeLeft = this.seconds;
     this.isPaused = false;
     this.isGameOver = false;
@@ -38,7 +38,7 @@ class Time {
     //om tiden är slut så är spelet också över
     if (this.timeLeft <= 0) {
       this.isGameOver = true;
-    }    
+    }
   }
 
   public setTimeToZero() {
