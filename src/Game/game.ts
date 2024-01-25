@@ -29,12 +29,6 @@ class Game {
   }
 
   update(walls: Wall[], beers: Beer[], formulas: Formula[], clocks: Clock[]) {
-    // if (paused) return;
-    // 60 frames/sekund
-    // 1000 / 60 = deltaTime
-    // deltaTime ≈ 16.6666666
-    // this.clock -= deltaTime;
-
     switch (this.currentPage) {
       case "start":
         this.startPage.startButton();
@@ -50,7 +44,6 @@ class Game {
   }
 
   draw() {
-    // background("white");
     switch (this.currentPage) {
       case "start":
         this.startPage.draw();
@@ -63,6 +56,11 @@ class Game {
         break;
       case "end":
         this.endOfGame.draw();
+        if(this.level.hasBabyReachedDoor === false) {
+          this.endOfGame.setLose();
+        } else if (this.level.hasBabyReachedDoor === true) {
+          this.endOfGame.setWin();
+        }
         break;
     }
   }

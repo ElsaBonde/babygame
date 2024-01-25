@@ -1,13 +1,28 @@
 class EndOfGame {
+  private isWin: boolean;
   private text: string;
   private highscore: number;
   private textButton: string;
 
   constructor() {
-    this.text = "GAME OVER";
+    this.isWin = false;
+    this.text = "";
     this.highscore = 0;
+    this.textButton = "";
+  }
+
+  public setWin() {
+    this.isWin = true;
+    this.text = "WINNER!";
     this.textButton = "PLAY AGAIN";
   }
+
+  public setLose() {
+    this.isWin = false;
+    this.text = "GAME OVER!";
+    this.textButton = "TRY AGAIN";
+  }
+
   draw() {
     push();
     background("#441F61");

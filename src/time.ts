@@ -1,12 +1,12 @@
 class Time {
   private seconds: number;
-  private timeLeft: number;
+  public timeLeft: number;
   private isPaused: boolean;
   public isGameOver: boolean;
   private freezeTimeLeft: number;
 
   constructor(seconds: number) {
-    this.seconds = seconds + 1; //skapar 60 sek från start
+    this.seconds = seconds; //skapar 60 sek från start
     this.timeLeft = this.seconds;
     this.isPaused = false;
     this.isGameOver = false;
@@ -22,9 +22,6 @@ class Time {
   }
 
   private countDown() {
-    //om spelet är "slut" så stängs nedräkningen
-    if (this.isGameOver) return;
-
     //om spelet är pausat (när man tar klocka)
     if (this.isPaused) {
       this.freezeTimeLeft -= deltaTime / 1000;
@@ -41,7 +38,12 @@ class Time {
     //om tiden är slut så är spelet också över
     if (this.timeLeft <= 0) {
       this.isGameOver = true;
-    }
+    }    
+  }
+
+  public setTimeToZero() {
+    this.timeLeft = 0;
+    this.isGameOver = true;
   }
 
   update() {

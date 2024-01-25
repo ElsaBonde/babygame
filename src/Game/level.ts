@@ -14,6 +14,8 @@ class Level {
     clockSound: p5.SoundFile;
   };
   private countDownToStart: number;
+  public hasBabyReachedDoor: boolean;
+  private hasBabyOpenedDoor: boolean = false;
   //itemsToBeDeleted [] också en lösning
 
   /***
@@ -43,6 +45,7 @@ class Level {
       (entity) => entity instanceof Clock
     ) as Clock[];
     this.doors = entities.filter((entity) => entity instanceof Door) as Door[];
+    this.hasBabyReachedDoor = false;
   }
 
   getTime(): Time {
@@ -83,8 +86,9 @@ class Level {
     if (entity instanceof Door) {
       const door = entity as Door;
       door.openDoor();
-      /* if (Door.isOpen) {
-      } */
+      this.hasBabyReachedDoor = true;
+      this.hasBabyOpenedDoor = true;
+      
     }
   }
 
@@ -119,7 +123,13 @@ class Level {
       this.checkCollision(baby, this.entities);
     }
 
-    this.time.update();
+    if (this.hasBabyOpenedDoor) {
+      //this.time.isGameOver === true;
+      this.time.setTimeToZero();
+      
+    } else {
+      this.time.update();
+    }
   }
 
   //den som hämtas som level1
@@ -152,6 +162,5 @@ class Level {
     textAlign(CENTER);
     text(Math.ceil(this.countDownToStart / 1000), 400, 375);
     pop();
-    //lägg här nedräkning style
   }
 }
