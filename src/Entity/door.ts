@@ -20,11 +20,4 @@ class Door extends Entity {
     this.image = this.doorImages.doorOpen;
     this.isOpen = true;
   }
-
-  // metod för att stänga dörren
-  public closeDoor() {
-    this.image = this.doorImages.doorClosed;
-    this.isOpen = false;
-  }
-  // draw() {}
 }
