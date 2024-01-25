@@ -2,6 +2,7 @@
 let game: Game;
 let playerImages: p5.Image[];
 let levelOne: p5.Image;
+let levelTwo: p5.Image;
 let backgroundImg: p5.Image;
 let endOfGameImg: p5.Image;
 let beerImg: p5.Image;

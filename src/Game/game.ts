@@ -53,10 +53,14 @@ class Game {
         if (this.level.getTime().isGameOver) {
           this.currentPage = "end";
         }
+        if (this.level.hasBabyReachedDoor === true) {
+          this.level = this.levelFactory.generateLevel(2); // Generate level 2
+          this.changePage();
+        }
         break;
       case "end":
         this.endOfGame.draw();
-        if(this.level.hasBabyReachedDoor === false) {
+        if (this.level.hasBabyReachedDoor === false) {
           this.endOfGame.setLose();
         } else if (this.level.hasBabyReachedDoor === true) {
           this.endOfGame.setWin();
