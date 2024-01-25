@@ -7,6 +7,7 @@ class Level {
   private beers: Beer[];
   private formulas: Formula[];
   private clocks: Clock[];
+  private doors: Door[];
   private music: {
     beerSound: p5.SoundFile;
     formulaSound: p5.SoundFile;
@@ -41,6 +42,7 @@ class Level {
     this.clocks = entities.filter(
       (entity) => entity instanceof Clock
     ) as Clock[];
+    this.doors = entities.filter((entity) => entity instanceof Door) as Door[];
   }
 
   getTime(): Time {
@@ -77,6 +79,12 @@ class Level {
       this.time.freezeTime();
       entity.remove();
       this.music.clockSound.play();
+    }
+    if (entity instanceof Door) {
+      const door = entity as Door;
+      door.openDoor();
+      /* if (Door.isOpen) {
+      } */
     }
   }
 
