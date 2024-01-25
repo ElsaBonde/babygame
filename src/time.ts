@@ -6,7 +6,7 @@ class Time {
   private freezeTimeLeft: number;
 
   constructor(seconds: number) {
-    this.seconds = seconds - 59; //skapar 60 sek från start
+    this.seconds = seconds; //skapar 60 sek från start
     this.timeLeft = this.seconds;
     this.isPaused = false;
     this.isGameOver = false;
