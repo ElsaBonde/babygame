@@ -38,7 +38,7 @@ class Time {
     //om tiden är slut så är spelet också över
     if (this.timeLeft <= 0) {
       this.isGameOver = true;
-    }    
+    }
   }
 
   public setTimeToZero() {

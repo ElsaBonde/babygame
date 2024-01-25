@@ -46,7 +46,7 @@ class StartPage {
     this.startButton();
   }
 
-  keyPressedStart() {
+  public keyPressedStart() {
     if (keyCode === 32) {
       if (game && game.getCurrentPage() === "start") {
         game.changePage();
