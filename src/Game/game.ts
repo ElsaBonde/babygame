@@ -6,6 +6,7 @@ class Game {
   public startPage: StartPage;
   private endOfGame: EndOfGame;
   private totalScore: number;
+  private currentLevelNumber: number;
 
   constructor() {
     this.currentPage = "start";
@@ -14,8 +15,10 @@ class Game {
     this.level = this.levelFactory.generateLevel(1);
     this.startPage = new StartPage();
     this.endOfGame = new EndOfGame();
+    this.currentLevelNumber = 1;
   }
   public nextLevel() {
+    this.currentLevelNumber++;
     this.level = this.levelFactory.generateLevel(2);
   }
   public getCurrentPage(): "start" | "level" | "end" {
@@ -26,10 +29,10 @@ class Game {
     this.currentPage = "level";
   }
 
-   public changePageToStartPage() {
+  public changePageToStartPage() {
     this.currentPage = "start";
     game = new Game();
-  } 
+  }
 
   public isTimeUp(): boolean {
     return this.level.getTime().isGameOver;
@@ -60,9 +63,12 @@ class Game {
         this.level.draw();
         if (this.level.getTime().isGameOver) {
           this.currentPage = "end";
-        }
-        if (this.level.hasBabyReachedDoor === true) {
-          this.nextLevel();
+        } else if (this.level.hasBabyReachedDoor) {
+          if (this.currentLevelNumber === 1) {
+            this.nextLevel();
+          } else if (this.currentLevelNumber === 2) {
+            this.currentPage = "end";
+          }
         }
         break;
       case "end":
