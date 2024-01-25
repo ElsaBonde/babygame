@@ -15,7 +15,9 @@ class Game {
     this.startPage = new StartPage();
     this.endOfGame = new EndOfGame();
   }
-
+  public nextLevel() {
+    this.level = this.levelFactory.generateLevel(2);
+  }
   public getCurrentPage(): "start" | "level" | "end" {
     return this.currentPage;
   }
@@ -59,10 +61,13 @@ class Game {
         if (this.level.getTime().isGameOver) {
           this.currentPage = "end";
         }
+        if (this.level.hasBabyReachedDoor === true) {
+          this.nextLevel();
+        }
         break;
       case "end":
         this.endOfGame.draw();
-        if(this.level.hasBabyReachedDoor === false) {
+        if (this.level.hasBabyReachedDoor === false) {
           this.endOfGame.setLose();
         } else if (this.level.hasBabyReachedDoor === true) {
           this.endOfGame.setWin();
