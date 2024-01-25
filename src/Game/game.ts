@@ -24,6 +24,11 @@ class Game {
     this.currentPage = "level";
   }
 
+   public changePageToStartPage() {
+    this.currentPage = "start";
+    game = new Game();
+  } 
+
   public isTimeUp(): boolean {
     return this.level.getTime().isGameOver;
   }
@@ -38,6 +43,7 @@ class Game {
         this.level.update(/* walls, beers, formulas, clocks */);
         break;
       case "end":
+        this.endOfGame.keyPressedEnd();
         // this.endOfGame.update();
         break;
     }
