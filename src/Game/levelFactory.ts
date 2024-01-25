@@ -64,58 +64,67 @@ class LevelFactory {
 
   // prettier-ignore
   public generateLevel(levelNumber: number): Level {
-    // här kommer vi behöva lägga en if-sats som kollar vilken level som ska genereras
     const entities: Entity[] = [];
     const blockSize: number = 40;
+    let selectedLevelGrid: number[][];
 
-    for (let y = 0; y < this.numbersGridLevel1.length && this.numbersGridLevel2.length; y++) {
-      for (let x = 0; x < this.numbersGridLevel1[y].length && this.numbersGridLevel2.length; x++) {
-        if (this.numbersGridLevel1[y][x] && this.numbersGridLevel2[y][x] === 10) {
+    //bestämmer vilken nivå som ska ritas ut
+    if (levelNumber === 1) {
+      selectedLevelGrid = this.numbersGridLevel1;
+    } else if (levelNumber === 2) {
+      selectedLevelGrid = this.numbersGridLevel2;
+    } else {
+      selectedLevelGrid = this.numbersGridLevel1;
+    }
+
+    for (let y = 0; y < selectedLevelGrid.length; y++) {
+      for (let x = 0; x < selectedLevelGrid[y].length; x++) {
+        if (selectedLevelGrid[y][x] === 10) {
           entities.push(
             new Wall("black", blockSize, x * blockSize, y * blockSize)
           );
         }
-        if (this.numbersGridLevel1[y][x] && this.numbersGridLevel2[y][x] === 11) {
+        if (selectedLevelGrid[y][x] === 11) {
           entities.push(
             new Wall("#B20076", blockSize, x * blockSize, y * blockSize)
           );
         }
-        if (this.numbersGridLevel1[y][x] && this.numbersGridLevel2[y][x] === 12) {
+        if (selectedLevelGrid[y][x] === 12) {
           const doorSize = blockSize;
           const offset = 0.1 * blockSize;
           entities.push(
             new Door({doorClosed: doorImg.doorClosed, doorOpen: doorImg.doorOpen}, doorSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
-        if (this.numbersGridLevel1[y][x] && this.numbersGridLevel2[y][x] === 13) {
+        if (selectedLevelGrid[y][x]=== 13) {
           const beerSize = 0.9 * blockSize;
           const offset = 0.05 * blockSize;
           entities.push(
             new Beer(beerSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
-        if (this.numbersGridLevel1[y][x]  && this.numbersGridLevel2[y][x] === 14) {
+        if (selectedLevelGrid[y][x] === 14) {
           const formulaSize = 0.7 * blockSize;
           const offset = 0.15 * blockSize;
           entities.push(
             new Formula(formulaSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
-        if (this.numbersGridLevel1[y][x] && this.numbersGridLevel2[y][x] === 15) {
+        if (selectedLevelGrid[y][x] === 15) {
           const babySize = 0.8 * blockSize;
           const offset = 0.1 * blockSize;
           entities.push(
             new Baby(babySize, x * blockSize + offset, y * blockSize + offset)
           );
         }
-        if (this.numbersGridLevel1[y][x] && this.numbersGridLevel2[y][x] === 16) {
+        if (selectedLevelGrid[y][x] === 16) {
           const clockSize = 0.8 * blockSize;
           const offset = 0.1 * blockSize;
           entities.push(
             new Clock(clockSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
-        if (this.numbersGridLevel1[y][x] && this.numbersGridLevel2[y][x]=== 17) {
+        if (selectedLevelGrid[y][x]=== 17) {
           const doorSize = blockSize;
           const offset = 0.1 * blockSize;
           entities.push(
@@ -123,6 +132,7 @@ class LevelFactory {
           );
         }
       }
+      
     }
     // 1. SKAPA DELARNA (entitierna)
     // 2. SKAPA CYKEL (level)

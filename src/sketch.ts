@@ -69,7 +69,7 @@ function setup() {
   frameRate(60);
   music.beerSound.setVolume(0.8);
   music.formulaSound.setVolume(0.8);
-  music.clockSound.setVolume(0.8);
+  music.clockSound.setVolume(0.5);
 
   game = new Game();
 }

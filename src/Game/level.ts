@@ -88,7 +88,7 @@ class Level {
       door.openDoor();
       this.hasBabyReachedDoor = true;
       this.hasBabyOpenedDoor = true;
-      
+      game.nextLevel();
     }
   }
 
@@ -126,7 +126,6 @@ class Level {
     if (this.hasBabyOpenedDoor) {
       //this.time.isGameOver === true;
       this.time.setTimeToZero();
-      
     } else {
       this.time.update();
     }

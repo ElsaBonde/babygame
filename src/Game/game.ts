@@ -15,7 +15,9 @@ class Game {
     this.startPage = new StartPage();
     this.endOfGame = new EndOfGame();
   }
-
+  public nextLevel() {
+    this.level = this.levelFactory.generateLevel(2);
+  }
   public getCurrentPage(): "start" | "level" | "end" {
     return this.currentPage;
   }
@@ -54,8 +56,7 @@ class Game {
           this.currentPage = "end";
         }
         if (this.level.hasBabyReachedDoor === true) {
-          this.level = this.levelFactory.generateLevel(2); // Generate level 2
-          this.changePage();
+          this.nextLevel();
         }
         break;
       case "end":
