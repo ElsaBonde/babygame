@@ -1,11 +1,12 @@
 /* FACIT FÖR GRIDSYSTEM:
 10 = svart vägg
 11 = block / vägg
-12= in/ utgång
+12= ingång
 13 = öl
 14 = välling (formula)
 15 = bebis
 16 = klocka
+17 = utgång
 20 = tom ruta */
 
 class LevelFactory {
@@ -27,7 +28,7 @@ class LevelFactory {
       [10, 14, 11, 20, 11, 20, 14, 11, 20, 11, 20, 20, 20, 20, 11, 20, 20, 13, 11, 11, 11, 20, 11, 20, 10],
       [10, 20, 11, 14, 11, 20, 20, 11, 20, 11, 20, 14, 11, 20, 11, 20, 20, 20, 11, 20, 20, 13, 11, 20, 10],
       [10, 20, 11, 20, 11, 20, 20, 11, 20, 11, 11, 11, 11, 20, 11, 14, 16, 20, 11, 20, 11, 11, 11, 11, 10],
-      [10, 20, 11, 20, 11, 20, 20, 11, 20, 20, 20, 20, 20, 14, 11, 11, 11, 20, 11, 20, 11, 20, 20, 20, 12], 
+      [10, 20, 11, 20, 11, 20, 20, 11, 20, 20, 20, 20, 20, 14, 11, 11, 11, 20, 11, 20, 11, 20, 20, 20, 17], 
       [10, 20, 11, 20, 11, 11, 20, 11, 11, 11, 11, 11, 11, 11, 11, 20, 11, 13, 11, 20, 11, 20, 11, 14, 10],
       [10, 20, 11, 20, 20, 20, 20, 20, 20, 20, 11, 20, 11, 20, 11, 20, 11, 20, 11, 20, 11, 14, 11, 20, 10],
       [10, 20, 11, 20, 11, 20, 14, 13, 11, 20, 11, 20, 11, 20, 11, 20, 20, 20, 20, 20, 11, 13, 11, 20, 10],
@@ -42,8 +43,8 @@ class LevelFactory {
     this.colorLevel1 = color("#B20076");
     // this.colorLevel2 = new p5.color();
   }
-  // prettier-ignore
 
+  // prettier-ignore
   public generateLevel(levelNumber: number): Level {
     // här kommer vi behöva lägga en if-sats som kollar vilken level som ska genereras
     const entities: Entity[] = [];
@@ -59,6 +60,13 @@ class LevelFactory {
         if (this.numbersGridLevel1[y][x] === 11) {
           entities.push(
             new Wall("#B20076", blockSize, x * blockSize, y * blockSize)
+          );
+        }
+        if (this.numbersGridLevel1[y][x] === 12) {
+          const doorSize = blockSize;
+          const offset = 0.1 * blockSize;
+          entities.push(
+            new Door({doorClosed: doorImg.doorClosed, doorOpen: doorImg.doorOpen}, doorSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
         if (this.numbersGridLevel1[y][x] === 13) {
@@ -89,11 +97,11 @@ class LevelFactory {
             new Clock(clockSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
-        if (this.numbersGridLevel1[y][x] === 12) {
+        if (this.numbersGridLevel1[y][x] === 17) {
           const doorSize = blockSize;
           const offset = 0.1 * blockSize;
           entities.push(
-            new Door(doorSize, x * blockSize + offset, y * blockSize + offset)
+            new Door({doorClosed: doorImg.doorClosed, doorOpen: doorImg.doorOpen}, doorSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
       }

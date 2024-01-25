@@ -7,7 +7,10 @@ let endOfGameImg: p5.Image;
 let beerImg: p5.Image;
 let formulaImg: p5.Image;
 let clockImg: p5.Image;
-let doorClosedImg: p5.Image;
+let doorImg: {
+  doorClosed: p5.Image;
+  doorOpen: p5.Image;
+};
 let music: {
   beerSound: p5.SoundFile;
   formulaSound: p5.SoundFile;
@@ -42,7 +45,10 @@ function preload() {
   beerImg = loadImage("./assets/img/beer.png");
   formulaImg = loadImage("./assets/img/formula.png");
   clockImg = loadImage("./assets/img/clock.png");
-  doorClosedImg = loadImage("./assets/img/doorClosed.png");
+  doorImg = {
+    doorClosed: loadImage("./assets/img/doorClosed.png"),
+    doorOpen: loadImage("./assets/img/doorOpen.png"),
+  };
 
   music = {
     beerSound: loadSound("./assets/music/beerSound.mp3"),
