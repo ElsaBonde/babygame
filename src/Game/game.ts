@@ -18,8 +18,12 @@ class Game {
     this.currentLevelNumber = 1;
   }
   public nextLevel() {
-    this.currentLevelNumber++;
-    this.level = this.levelFactory.generateLevel(2);
+    if (this.currentLevelNumber < 2) {
+      this.currentLevelNumber++;
+      this.level = this.levelFactory.generateLevel(this.currentLevelNumber);
+    } else {
+      this.currentPage = "end";
+    }
   }
   public getCurrentPage(): "start" | "level" | "end" {
     return this.currentPage;
@@ -59,18 +63,14 @@ class Game {
       case "start":
         this.startPage.draw();
         break;
+
       case "level":
         this.level.draw();
         if (this.level.getTime().isGameOver) {
           this.currentPage = "end";
-        } else if (this.level.hasBabyReachedDoor) {
-          if (this.currentLevelNumber === 1) {
-            this.nextLevel();
-          } else if (this.currentLevelNumber === 2) {
-            this.currentPage = "end";
-          }
         }
         break;
+
       case "end":
         this.endOfGame.draw();
         if (this.level.hasBabyReachedDoor === false) {
