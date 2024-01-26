@@ -115,7 +115,9 @@ class Baby extends Entity {
       y1 + size1 > e2.y
     );
   }
-
+  /***
+   * Om bebis tar mer än 1 öl så snurrar den
+   */
   public spin() {
     const rotationInterval = 50;
     const totalRotationTime = 1000;
