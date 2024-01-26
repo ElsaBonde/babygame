@@ -88,6 +88,7 @@ function draw(
 ) {
   game.update(walls, beers, formulas, clocks);
   game.draw();
+  h;
 }
 
 /*

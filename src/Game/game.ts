@@ -21,8 +21,11 @@ class Game {
     if (this.currentLevelNumber < 2) {
       this.addLevelScore();
       this.currentLevelNumber++;
-      this.level = this.levelFactory.generateLevel(this.currentLevelNumber, this.totalScore);
-    }  else if (this.currentLevelNumber === 2) {
+      this.level = this.levelFactory.generateLevel(
+        this.currentLevelNumber,
+        this.totalScore
+      );
+    } else if (this.currentLevelNumber === 2) {
       this.level.score = this.getFinalScore();
     } else {
       this.currentPage = "end";
