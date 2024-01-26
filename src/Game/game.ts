@@ -17,16 +17,18 @@ class Game {
   }
 
   public nextLevel() {
-      if (this.currentLevelNumber < 2) {
-        this.currentLevelNumber++;
-        this.level = this.levelFactory.generateLevel(this.currentLevelNumber, this.level.getScore());
-      } else {
-        this.currentPage = "end";
-        this.endOfGame.setHighScore(this.level.getScore());
-        this.endOfGame.setWin();
-      }
+    if (this.currentLevelNumber < 2) {
+      this.currentLevelNumber++;
+      this.level = this.levelFactory.generateLevel(
+        this.currentLevelNumber,
+        this.level.getScore()
+      );
+    } else {
+      this.currentPage = "end";
+      this.endOfGame.setScore(this.level.getScore());
+      this.endOfGame.setWin();
+    }
   }
-  
 
   public getCurrentPage(): "start" | "level" | "end" {
     return this.currentPage;
@@ -52,7 +54,7 @@ class Game {
         if (this.level.isGameOver()) {
           this.currentPage = "end";
           this.endOfGame.setLose();
-          this.endOfGame.setHighScore(this.level.getScore()); //Sätter highscore för endofGame
+          this.endOfGame.setScore(this.level.getScore()); //Sätter highscore för endofGame
         }
         break;
       case "end":

@@ -1,29 +1,31 @@
 class EndOfGame {
-  private isWin: boolean;
   private text: string;
+  private score: number;
   private highscore: number;
   private textButton: string;
 
   constructor() {
-    this.isWin = false;
     this.text = "";
-    this.highscore = 0;
+    this.score = 0;
+    this.highscore = Number(localStorage.getItem("highscore") || 0);
     this.textButton = "";
   }
 
-  //Vad HighScore värdet är
-  public setHighScore(score: number) {
-    this.highscore = score;
+  public setScore(score: number) {
+    this.score = score;
+    // Är det ett nytt highscore?
+    if (this.score > this.highscore) {
+      this.highscore = this.score;
+      localStorage.setItem("highscore", this.highscore.toString());
+    }
   }
 
   public setWin() {
-    this.isWin = true;
     this.text = "WINNER!";
     this.textButton = "PRESS ENTER TO PLAY AGAIN";
   }
 
   public setLose() {
-    this.isWin = false;
     this.text = "GAME OVER!";
     this.textButton = "PRESS ENTER TO TRY AGAIN";
   }
@@ -59,25 +61,28 @@ class EndOfGame {
     pop();
 
     push();
-    textSize(40);
-    fill("#F5B03E");
-    stroke("black");
-    strokeWeight(3);
-    textAlign(CENTER, CENTER);
-    text(`HIGHSCORE: ${this.highscore}`, width / 2, height / 2 - 40);
-    textFont("VT323");
-    pop();
-
-    push();
     textSize(100);
     fill("#EA85DA");
     stroke("black");
     strokeWeight(5);
     textAlign(CENTER, CENTER);
-    text(this.text, width / 2, height / 2 + 60);
+    text(this.text, width / 2, height / 2 -20);
     textFont(" 'Roboto Mono', monospace");
     textStyle(BOLD);
     pop();
     this.endButton();
+
+    push();
+    textSize(40);
+    fill("#F5B03E");
+    stroke("black");
+    strokeWeight(3);
+    textAlign(CENTER, CENTER);
+    text(`HIGHSCORE: ${this.highscore}`, width / 2, height / 2 + 70);
+    textSize(30)
+    text(`YOUR SCORE: ${this.score}`, width / 2, height / 2 + 120);
+    textFont("VT323");
+    pop();
+
   }
 }
