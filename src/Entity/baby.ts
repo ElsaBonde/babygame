@@ -15,8 +15,10 @@ class Baby extends Entity {
   private rightAnimationLoop: number[];
   private upAnimationLoop: number[];
   private downAnimationLoop: number[];
-  private speed: number
+  private speed: number;
   private normalSpeed: number = 2; // skapar variabel med default värde på 2 för bebisen snabbhet i rörelse
+  public beerCount: number = 0;
+  private rotationAngle: number;
 
   constructor(size: number, x: number, y: number) {
     super(playerImages[1], size, x, y);
@@ -34,6 +36,7 @@ class Baby extends Entity {
     this.leftAnimationLoop = [3, 4, 5, 3];
     this.downAnimationLoop = [6, 7, 8, 6];
     this.rightAnimationLoop = [9, 10, 11, 9];
+    this.rotationAngle = 0;
   }
 
   public getX() {
@@ -114,6 +117,26 @@ class Baby extends Entity {
       y1 + size1 > e2.y
     );
   }
+  /***
+   * Om bebis tar mer än 1 öl så snurrar den
+   */
+  public spin() {
+    const rotationInterval = 35; // Intervall för varje steg av rotationen
+    const totalRotationTime = 1000; // Tid för rotationen att slutföras
+    const startTime = millis(); // Tiden då rotationen startar
+
+    const rotateBaby = () => {
+      const elapsedTime = Number(millis()) - startTime;
+
+      if (elapsedTime < totalRotationTime) {
+        this.rotationAngle += rotationInterval; // Ökar vinkeln medurs
+        setTimeout(rotateBaby, rotationInterval); // Fortsätt rotationen med intervall
+      } else {
+        this.rotationAngle = 0; // återställer rotationen och baby-positionen till 0
+      }
+    };
+    rotateBaby();
+  }
 
   //måste vara public för att kunna nås av level
   public goSlow() {
@@ -123,41 +146,46 @@ class Baby extends Entity {
     setTimeout(() => {
       this.speed = this.normalSpeed;
     }, 4000);
-   }
+  }
 
-   //skapar loop för att animera babyns bilder
-private animateLoop(animatinLoop: number[]): void { 
-  this.image =
-    playerImages[
-      animatinLoop[
-        Math.floor(this.animationIndex) % animatinLoop.length
-      ]
-    ];
+  //skapar loop för att animera babyns bilder
+  private animateLoop(animatinLoop: number[]): void {
+    this.image =
+      playerImages[
+        animatinLoop[Math.floor(this.animationIndex) % animatinLoop.length]
+      ];
 
-  this.animationIndex =
-    (this.animationIndex + this.animationSpeed) %
-    (animatinLoop.length * this.animationSpeed);
-}
+    this.animationIndex =
+      (this.animationIndex + this.animationSpeed) %
+      (animatinLoop.length * this.animationSpeed);
+  }
 
-//en metod var för varje riktning som bebisen kan gå i, anropar animateLoop med rätt riktnings loop
-   private animateLeft(): void {
+  //en metod var för varje riktning som bebisen kan gå i, anropar animateLoop med rätt riktnings loop
+  private animateLeft(): void {
     this.animateLoop(this.leftAnimationLoop);
   }
- 
+
   private animateRight(): void {
-   this.animateLoop(this.rightAnimationLoop);
+    this.animateLoop(this.rightAnimationLoop);
   }
- 
+
   private animateUp(): void {
     this.animateLoop(this.upAnimationLoop);
   }
- 
+
   private animateDown(): void {
-   this.animateLoop(this.downAnimationLoop);
+    this.animateLoop(this.downAnimationLoop);
   }
 
   update(walls: Wall[]) {
-
     this.move(walls);
+  }
+
+  draw() {
+    push();
+    translate(this.x + this.size / 2, this.y + this.size / 2); // Säkerställer att orgin är i mitten av bebisen
+    rotate(this.rotationAngle); // Roterar medurs med den aktuella vinkeln
+    image(this.image, -this.size / 2, -this.size / 2, this.size, this.size); // Ritar bilden i mitten av bebisen
+    pop();
   }
 }

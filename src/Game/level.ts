@@ -81,6 +81,10 @@ class Level {
     if (entity instanceof Beer) {
       baby.goSlow();
       entity.remove();
+      baby.beerCount += 1;
+      if (baby.beerCount > 1) {
+        baby.spin();
+      }
       this.music.beerSound.play();
     }
     if (entity instanceof Formula) {
