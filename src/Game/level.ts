@@ -1,5 +1,7 @@
 class Level {
+
   private entities: Entity[]; // Level är experten på entiteter
+
   public score: number;
   public time: Time;
   private walls: Wall[];
