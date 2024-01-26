@@ -11,11 +11,11 @@
 
 class LevelFactory {
   public numbersGridLevel1: number[][];
-  public levelOne: p5.Image;
+  public levelImage: p5.Image;
   private colorLevel1: p5.Color;
 
   public numbersGridLevel2: number[][];
-  public levelTwo: p5.Image;
+  /* public levelTwo: p5.Image; */
   private colorLevel2: p5.Color;
 
   constructor() {
@@ -56,8 +56,7 @@ class LevelFactory {
     [12, 15, 11, 20, 11, 14, 20, 20, 20, 11, 16, 20, 20, 20, 20, 11, 14, 20, 11, 11, 11, 11, 11, 11, 10],
     [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
     ];
-    (this.levelOne = new p5.Image(1000, 600)), levelOne;
-    (this.levelTwo = new p5.Image(1000, 600)), levelTwo;
+    this.levelImage = new p5.Image(1000, 600);
     this.colorLevel1 = color("#B20076");
     this.colorLevel2 = color("#70E000");
   }
@@ -67,14 +66,18 @@ class LevelFactory {
     const entities: Entity[] = [];
     const blockSize: number = 40;
     let selectedLevelGrid: number[][];
+    let levelImage: p5.Image;
 
     //bestämmer vilken nivå som ska ritas ut
     if (levelNumber === 1) {
       selectedLevelGrid = this.numbersGridLevel1;
+      levelImage = levelOne;
     } else if (levelNumber === 2) {
       selectedLevelGrid = this.numbersGridLevel2;
+      levelImage = levelTwo;
     } else {
       selectedLevelGrid = this.numbersGridLevel1;
+      levelImage = levelOne;
     }
 
     for (let y = 0; y < selectedLevelGrid.length; y++) {
@@ -134,11 +137,13 @@ class LevelFactory {
       }
       
     }
-    // 1. SKAPA DELARNA (entitierna)
-    // 2. SKAPA CYKEL (level)
 
     // ANROPA KONSTUKTORN: SKICKA ETT VÄRDE
-    return new Level(entities, music, previousScore);
+    return new Level(entities, music, previousScore, levelImage);
+  }
+
+  getLevelImage(): p5.Image {
+    return this.levelImage;
   }
 }
 

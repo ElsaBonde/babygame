@@ -16,7 +16,7 @@ class Level {
   private countDownToStart: number;
   public hasBabyReachedDoor: boolean;
   private hasBabyOpenedDoor: boolean = false;
-  //itemsToBeDeleted [] också en lösning
+  private levelImage: p5.Image;
 
   /***
    * DEFINITION - SPECA VAD VI TAR EMOT
@@ -28,7 +28,8 @@ class Level {
       formulaSound: p5.SoundFile;
       clockSound: p5.SoundFile;
     },
-    previousScore: number = 0
+    previousScore: number = 0,
+    levelImage: p5.Image
   ) {
     this.entities = entities;
     /* this.currentLevel = 1; */
@@ -49,6 +50,7 @@ class Level {
     ) as Clock[];
     this.doors = entities.filter((entity) => entity instanceof Door) as Door[];
     this.hasBabyReachedDoor = false;
+    this.levelImage = levelImage;
   }
 
   getTime(): Time {
@@ -168,7 +170,7 @@ class Level {
   //den som hämtas som level1
   draw() {
     push();
-    image(levelOne, 0, 0, width, height);
+    image(this.levelImage, 0, 0, width, height);
     for (let entity of this.entities) {
       entity.draw();
     }

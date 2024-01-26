@@ -43,6 +43,7 @@ function preload() {
   backgroundImg = loadImage("./assets/img/startpage.png");
   endOfGameImg = loadImage("./assets/img/endOfGame.png");
   levelOne = loadImage("./assets/img/levelOne.png");
+  levelTwo = loadImage("./assets/img/levelTwo.png");
   beerImg = loadImage("./assets/img/beer.png");
   formulaImg = loadImage("./assets/img/formula.png");
   clockImg = loadImage("./assets/img/clock.png");
