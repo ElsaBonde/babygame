@@ -80,23 +80,11 @@ function setup() {
  * This is a good place to call public methods of the object
  * you created in the setup function above
  */
-function draw(
-  walls: Wall[],
-  beers: Beer[],
-  formulas: Formula[],
-  clocks: Clock[]
-) {
-  game.update(walls, beers, formulas, clocks);
+function draw() {
+  game.update();
   game.draw();
 }
 
-/*
-function keyPressed() {
-  if (game.getCurrentPage() === "end" && keyCode === 32) {
-    game = new Game(); // Skapa ett nytt spel när användaren trycker på mellanslag
-  }
-}
-*/
 /**
  *  Built in windowResize listener function in P5
  */
