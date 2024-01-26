@@ -63,7 +63,7 @@ class LevelFactory {
   }
 
   // prettier-ignore
-  public generateLevel(levelNumber: number): Level {
+  public generateLevel(levelNumber: number, previousScore: number = 0): Level {
     const entities: Entity[] = [];
     const blockSize: number = 40;
     let selectedLevelGrid: number[][];
@@ -138,7 +138,7 @@ class LevelFactory {
     // 2. SKAPA CYKEL (level)
 
     // ANROPA KONSTUKTORN: SKICKA ETT VÄRDE
-    return new Level(entities, music);
+    return new Level(entities, music, previousScore);
   }
 }
 

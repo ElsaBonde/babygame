@@ -1,7 +1,7 @@
 class Level {
   private entities: Entity[]; // Level är experten på entiteter!
   private currentLevel: number;
-  private score: number;
+  public score: number;
   public time: Time;
   private walls: Wall[];
   private beers: Beer[];
@@ -27,14 +27,16 @@ class Level {
       beerSound: p5.SoundFile;
       formulaSound: p5.SoundFile;
       clockSound: p5.SoundFile;
-    }
+    }, previousScore: number = 0
   ) {
     this.entities = entities;
     this.currentLevel = 0;
-    this.score = 0;
+    /* this.score = 0; */
     this.time = new Time(60);
     this.music = music;
     this.countDownToStart = 3000;
+    this.score = previousScore;
+
     //walls är en array som endast innehåller väggarna i aktiv level, detta hämtas med hjälp av filter som i sin tur hämtar alla väggar från entities
     this.walls = entities.filter((entity) => entity instanceof Wall) as Wall[];
     this.beers = entities.filter((entity) => entity instanceof Beer) as Beer[];
