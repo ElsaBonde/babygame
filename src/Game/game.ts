@@ -6,7 +6,7 @@ class Game {
   public startPage: StartPage;
   private endOfGame: EndOfGame;
   private totalScore: number;
-  private currentLevelNumber: number;
+  public currentLevelNumber: number;
 
   constructor() {
     this.currentPage = "start";

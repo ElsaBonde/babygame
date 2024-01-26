@@ -1,6 +1,6 @@
 class Level {
   private entities: Entity[]; // Level är experten på entiteter!
-  private currentLevel: number;
+  /* private currentLevel: number; */
   public score: number;
   public time: Time;
   private walls: Wall[];
@@ -27,10 +27,11 @@ class Level {
       beerSound: p5.SoundFile;
       formulaSound: p5.SoundFile;
       clockSound: p5.SoundFile;
-    }, previousScore: number = 0
+    },
+    previousScore: number = 0
   ) {
     this.entities = entities;
-    this.currentLevel = 0;
+    /* this.currentLevel = 1; */
     /* this.score = 0; */
     this.time = new Time(60);
     this.music = music;
@@ -138,22 +139,6 @@ class Level {
     }
   }
 
-  //den som hämtas som level1
-  draw() {
-    push();
-    image(levelOne, 0, 0, width, height);
-    for (let entity of this.entities) {
-      entity.draw();
-    }
-    pop();
-    this.drawScore();
-    this.time.draw();
-
-    if (this.countDownToStart > 0) {
-      this.drawCountDown();
-    }
-  }
-
   private drawCountDown() {
     push();
     noStroke();
@@ -168,5 +153,32 @@ class Level {
     textAlign(CENTER);
     text(Math.ceil(this.countDownToStart / 1000), 400, 375);
     pop();
+  }
+
+  drawCurrentLevelNumber() {
+    push();
+    textSize(22);
+    textFont("Orbitron");
+    fill("#64E12A");
+    textAlign(CENTER);
+    text(`Level: ${game.currentLevelNumber}`, width/2, 29);
+    pop();
+  }
+
+  //den som hämtas som level1
+  draw() {
+    push();
+    image(levelOne, 0, 0, width, height);
+    for (let entity of this.entities) {
+      entity.draw();
+    }
+    pop();
+    this.drawScore();
+    this.drawCurrentLevelNumber();
+    this.time.draw();
+
+    if (this.countDownToStart > 0) {
+      this.drawCountDown();
+    }
   }
 }
