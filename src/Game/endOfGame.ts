@@ -11,6 +11,11 @@ class EndOfGame {
     this.textButton = "";
   }
 
+  //Vad HighScore värdet är
+  public setHighScore(score: number) {
+    this.highscore = score;
+  }
+
   public setWin() {
     this.isWin = true;
     this.text = "WINNER!";
@@ -59,7 +64,7 @@ class EndOfGame {
     stroke("black");
     strokeWeight(3);
     textAlign(CENTER, CENTER);
-    text("HIGHSCORE:", width / 2, height / 2 - 40);
+    text(`HIGHSCORE: ${this.highscore}`, width / 2, height / 2 - 40);
     textFont("VT323");
     pop();
 

@@ -52,6 +52,11 @@ class Level {
     return this.time;
   }
 
+  // Returnerar poängen från den nuvarande nivån
+  public getScore(): number {
+    return this.score;
+  }
+
   private checkCollision(baby: Baby, entities: Entity[]): void {
     for (const entity of entities) {
       if (

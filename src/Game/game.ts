@@ -18,6 +18,7 @@ class Game {
     this.currentLevelNumber = 1;
   }
   public nextLevel() {
+    this.addLevelScore();
     if (this.currentLevelNumber < 2) {
       this.currentLevelNumber++;
       this.level = this.levelFactory.generateLevel(this.currentLevelNumber);
@@ -40,6 +41,16 @@ class Game {
 
   public isTimeUp(): boolean {
     return this.level.getTime().isGameOver;
+  }
+
+  // Lägger till poängen från den nuvarande ninvån till den TOTALA poängen
+  public addLevelScore() {
+    this.totalScore += this.level.getScore();
+  }
+
+  // Returnerar den TOTALA poängen
+  public getFinalScore(): number {
+    return this.totalScore;
   }
 
   update(walls: Wall[], beers: Beer[], formulas: Formula[], clocks: Clock[]) {
@@ -66,12 +77,16 @@ class Game {
 
       case "level":
         this.level.draw();
+        // kontrollerar om spelet är över
         if (this.level.getTime().isGameOver) {
+          this.addLevelScore(); // lägger till nivåns poäng till den totala poängen
           this.currentPage = "end";
+          this.endOfGame.setHighScore(this.getFinalScore()); //Sätter highscore för endofGame
         }
         break;
 
       case "end":
+        this.endOfGame.setHighScore(this.getFinalScore());
         this.endOfGame.draw();
         if (this.level.hasBabyReachedDoor === false) {
           this.endOfGame.setLose();
