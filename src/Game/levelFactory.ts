@@ -12,11 +12,7 @@
 class LevelFactory {
   public numbersGridLevel1: number[][];
   public levelImage: p5.Image;
-  private colorLevel1: p5.Color;
-
   public numbersGridLevel2: number[][];
-  /* public levelTwo: p5.Image; */
-  private colorLevel2: p5.Color;
 
   constructor() {
     // prettier-ignore
@@ -57,8 +53,6 @@ class LevelFactory {
     [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
     ];
     this.levelImage = new p5.Image(1000, 600);
-    this.colorLevel1 = color("#B20076");
-    this.colorLevel2 = color("#70E000");
   }
 
   // prettier-ignore
@@ -67,17 +61,21 @@ class LevelFactory {
     const blockSize: number = 40;
     let selectedLevelGrid: number[][];
     let levelImage: p5.Image;
+    let colorWall: string;
 
     //bestämmer vilken nivå som ska ritas ut
     if (levelNumber === 1) {
       selectedLevelGrid = this.numbersGridLevel1;
       levelImage = levelOne;
+      colorWall = "#B20076";
     } else if (levelNumber === 2) {
       selectedLevelGrid = this.numbersGridLevel2;
       levelImage = levelTwo;
+      colorWall = "#23676F";
     } else {
       selectedLevelGrid = this.numbersGridLevel1;
       levelImage = levelOne;
+      colorWall = "#B20076";
     }
 
     for (let y = 0; y < selectedLevelGrid.length; y++) {
@@ -89,7 +87,7 @@ class LevelFactory {
         }
         if (selectedLevelGrid[y][x] === 11) {
           entities.push(
-            new Wall("#B20076", blockSize, x * blockSize, y * blockSize)
+            new Wall(colorWall, blockSize, x * blockSize, y * blockSize)
           );
         }
         if (selectedLevelGrid[y][x] === 12) {
