@@ -89,7 +89,6 @@ function draw(
   game.draw();
 }
 
-
 /*
 function keyPressed() {
   if (game.getCurrentPage() === "end" && keyCode === 32) {

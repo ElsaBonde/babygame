@@ -117,6 +117,8 @@ class Baby extends Entity {
   }
 
   public spin() {
+    const rotationInterval = 50;
+    const totalRotationTime = 1000;
     this.animateUp();
     setTimeout(() => this.animateRight(), 250);
     setTimeout(() => this.animateDown(), 500);
