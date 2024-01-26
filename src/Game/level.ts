@@ -1,6 +1,5 @@
 class Level {
   private entities: Entity[]; // Level är experten på entiteter!
-  /* private currentLevel: number; */
   public score: number;
   public time: Time;
   private walls: Wall[];
@@ -32,8 +31,6 @@ class Level {
     levelImage: p5.Image
   ) {
     this.entities = entities;
-    /* this.currentLevel = 1; */
-    /* this.score = 0; */
     this.time = new Time(60);
     this.music = music;
     this.countDownToStart = 3000;
@@ -138,7 +135,6 @@ class Level {
     }
 
     if (this.hasBabyOpenedDoor) {
-      //this.time.isGameOver === true;
       this.time.setTimeToZero();
     } else {
       this.time.update();
@@ -157,7 +153,7 @@ class Level {
     textFont("Orbitron");
     fill("#64E12A");
     textAlign(CENTER);
-    text(Math.ceil(this.countDownToStart / 1000), width/2, 375);
+    text(Math.ceil(this.countDownToStart / 1000), width / 2, 375);
     pop();
   }
 
@@ -167,7 +163,7 @@ class Level {
     textFont("Orbitron");
     fill("#64E12A");
     textAlign(CENTER);
-    text(`Level: ${game.currentLevelNumber}`, width/2, 29);
+    text(`Level: ${game.currentLevelNumber}`, width / 2, 29);
     pop();
   }
 
