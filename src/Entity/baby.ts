@@ -15,8 +15,9 @@ class Baby extends Entity {
   private rightAnimationLoop: number[];
   private upAnimationLoop: number[];
   private downAnimationLoop: number[];
-  private speed: number
+  private speed: number;
   private normalSpeed: number = 2; // skapar variabel med default värde på 2 för bebisen snabbhet i rörelse
+  public beerCount: number = 0;
 
   constructor(size: number, x: number, y: number) {
     super(playerImages[1], size, x, y);
@@ -115,6 +116,14 @@ class Baby extends Entity {
     );
   }
 
+  public spin() {
+    this.animateUp();
+    setTimeout(() => this.animateRight(), 250);
+    setTimeout(() => this.animateDown(), 500);
+    setTimeout(() => this.animateLeft(), 750);
+    setTimeout(() => this.animateUp(), 1000);
+  }
+
   //måste vara public för att kunna nås av level
   public goSlow() {
     //sätter bebisens speed till hälften av default
@@ -123,41 +132,38 @@ class Baby extends Entity {
     setTimeout(() => {
       this.speed = this.normalSpeed;
     }, 4000);
-   }
+  }
 
-   //skapar loop för att animera babyns bilder
-private animateLoop(animatinLoop: number[]): void { 
-  this.image =
-    playerImages[
-      animatinLoop[
-        Math.floor(this.animationIndex) % animatinLoop.length
-      ]
-    ];
+  //skapar loop för att animera babyns bilder
+  private animateLoop(animatinLoop: number[]): void {
+    this.image =
+      playerImages[
+        animatinLoop[Math.floor(this.animationIndex) % animatinLoop.length]
+      ];
 
-  this.animationIndex =
-    (this.animationIndex + this.animationSpeed) %
-    (animatinLoop.length * this.animationSpeed);
-}
+    this.animationIndex =
+      (this.animationIndex + this.animationSpeed) %
+      (animatinLoop.length * this.animationSpeed);
+  }
 
-//en metod var för varje riktning som bebisen kan gå i, anropar animateLoop med rätt riktnings loop
-   private animateLeft(): void {
+  //en metod var för varje riktning som bebisen kan gå i, anropar animateLoop med rätt riktnings loop
+  private animateLeft(): void {
     this.animateLoop(this.leftAnimationLoop);
   }
- 
+
   private animateRight(): void {
-   this.animateLoop(this.rightAnimationLoop);
+    this.animateLoop(this.rightAnimationLoop);
   }
- 
+
   private animateUp(): void {
     this.animateLoop(this.upAnimationLoop);
   }
- 
+
   private animateDown(): void {
-   this.animateLoop(this.downAnimationLoop);
+    this.animateLoop(this.downAnimationLoop);
   }
 
   update(walls: Wall[]) {
-
     this.move(walls);
   }
 }
