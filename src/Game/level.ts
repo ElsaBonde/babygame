@@ -151,7 +151,7 @@ class Level {
     textFont("Orbitron");
     fill("#64E12A");
     textAlign(CENTER);
-    text(Math.ceil(this.countDownToStart / 1000), 400, 375);
+    text(Math.ceil(this.countDownToStart / 1000), width/2, 375);
     pop();
   }
 
