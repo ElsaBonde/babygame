@@ -68,14 +68,10 @@ class LevelFactory {
       selectedLevelGrid = this.numbersGridLevel1;
       levelImage = levelOne;
       colorWall = "#1E77A4";
-    } else if (levelNumber === 2) {
+    } else {
       selectedLevelGrid = this.numbersGridLevel2;
       levelImage = levelTwo;
       colorWall = "#23676F";
-    } else {
-      selectedLevelGrid = this.numbersGridLevel1;
-      levelImage = levelOne;
-      colorWall = "#B20076";
     }
 
     for (let y = 0; y < selectedLevelGrid.length; y++) {
@@ -136,7 +132,6 @@ class LevelFactory {
       
     }
 
-    // ANROPA KONSTUKTORN: SKICKA ETT VÄRDE
     return new Level(entities, music, previousScore, levelImage);
   }
 
@@ -144,5 +139,3 @@ class LevelFactory {
     return this.levelImage;
   }
 }
-
-// Const kollision = babyY > this.y && babyY < this.y + height

@@ -1,12 +1,10 @@
 class Level {
-  private entities: Entity[]; // Level är experten på entiteter!
+
+  private entities: Entity[]; // Level är experten på entiteter
+
   public score: number;
   public time: Time;
   private walls: Wall[];
-  private beers: Beer[];
-  private formulas: Formula[];
-  private clocks: Clock[];
-  private doors: Door[];
   private music: {
     beerSound: p5.SoundFile;
     formulaSound: p5.SoundFile;
@@ -38,20 +36,12 @@ class Level {
 
     //walls är en array som endast innehåller väggarna i aktiv level, detta hämtas med hjälp av filter som i sin tur hämtar alla väggar från entities
     this.walls = entities.filter((entity) => entity instanceof Wall) as Wall[];
-    this.beers = entities.filter((entity) => entity instanceof Beer) as Beer[];
-    this.formulas = entities.filter(
-      (entity) => entity instanceof Formula
-    ) as Formula[];
-    this.clocks = entities.filter(
-      (entity) => entity instanceof Clock
-    ) as Clock[];
-    this.doors = entities.filter((entity) => entity instanceof Door) as Door[];
     this.hasBabyReachedDoor = false;
     this.levelImage = levelImage;
   }
 
-  getTime(): Time {
-    return this.time;
+  isGameOver(): boolean {
+    return this.time.isGameOver;
   }
 
   // Returnerar poängen från den nuvarande nivån
@@ -97,8 +87,6 @@ class Level {
     if (entity instanceof Door) {
       const door = entity as Door;
       door.openDoor();
-      this.hasBabyReachedDoor = true;
-      this.hasBabyOpenedDoor = true;
       game.nextLevel();
     }
   }
