@@ -67,7 +67,7 @@ class LevelFactory {
     if (levelNumber === 1) {
       selectedLevelGrid = this.numbersGridLevel1;
       levelImage = levelOne;
-      colorWall = "#B20076";
+      colorWall = "#1E77A4";
     } else if (levelNumber === 2) {
       selectedLevelGrid = this.numbersGridLevel2;
       levelImage = levelTwo;
