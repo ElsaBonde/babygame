@@ -41,6 +41,7 @@ class Game {
   public changePageToStartPage() {
     this.currentPage = "start";
     game = new Game();
+    clear();
   }
 
   update() {
@@ -72,6 +73,7 @@ class Game {
         this.level.draw();
         break;
       case "end":
+        clear();
         this.endOfGame.draw();
         break;
     }

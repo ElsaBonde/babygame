@@ -6,7 +6,6 @@ class StartPage {
   }
 
   draw() {
-    background("#441F61");
     background(backgroundImg);
     this.startButton();
   }

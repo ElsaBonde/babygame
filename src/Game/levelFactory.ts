@@ -71,7 +71,7 @@ class LevelFactory {
     } else {
       selectedLevelGrid = this.numbersGridLevel2;
       levelImage = levelTwo;
-      colorWall = "#23676F";
+      colorWall = "#460A0A";
     }
 
     for (let y = 0; y < selectedLevelGrid.length; y++) {
