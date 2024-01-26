@@ -119,11 +119,22 @@ class Baby extends Entity {
   public spin() {
     const rotationInterval = 50;
     const totalRotationTime = 1000;
-    this.animateUp();
-    setTimeout(() => this.animateRight(), 250);
-    setTimeout(() => this.animateDown(), 500);
-    setTimeout(() => this.animateLeft(), 750);
-    setTimeout(() => this.animateUp(), 1000);
+    const startTime = millis();
+
+    const rotateBaby = () => {
+      const elapsedTime = Number(millis()) - startTime;
+
+      if (elapsedTime < totalRotationTime) {
+        this.animateUp();
+        setTimeout(() => this.animateRight(), rotationInterval);
+        setTimeout(() => this.animateDown(), rotationInterval * 2);
+        setTimeout(() => this.animateLeft(), rotationInterval * 3);
+        setTimeout(rotateBaby, rotationInterval * 4);
+      } else {
+        this.animateUp();
+      }
+    };
+    rotateBaby();
   }
 
   //måste vara public för att kunna nås av level
