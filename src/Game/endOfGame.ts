@@ -56,7 +56,6 @@ class EndOfGame {
 
   draw() {
     push();
-    background("#441F61");
     background(endOfGameImg);
     pop();
 
