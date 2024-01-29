@@ -7,6 +7,7 @@
 15 = bebis
 16 = klocka
 17 = utgång
+18 = Spöke
 20 = tom ruta */
 
 class LevelFactory {
@@ -29,7 +30,7 @@ class LevelFactory {
       [10, 20, 11, 20, 11, 11, 20, 11, 11, 11, 11, 11, 11, 11, 11, 20, 11, 13, 11, 20, 11, 20, 11, 14, 10],
       [10, 20, 11, 20, 20, 20, 20, 20, 20, 20, 11, 20, 11, 20, 11, 20, 11, 20, 11, 20, 11, 14, 11, 20, 10],
       [10, 20, 11, 20, 11, 20, 14, 13, 11, 20, 11, 20, 11, 20, 11, 20, 20, 20, 20, 20, 11, 13, 11, 20, 10],
-      [10, 20, 11, 20, 11, 11, 11, 11, 11, 20, 20, 20, 20, 20, 20, 20, 11, 20, 11, 20, 11, 11, 11, 20, 10],
+      [10, 20, 11, 20, 11, 11, 11, 11, 11, 20, 20, 20, 20, 20, 20, 20, 11, 20, 11, 20, 11, 11, 11, 18, 10],
       [10, 15, 11, 16, 11, 20, 14, 20, 20, 20, 11, 11, 13, 11, 20, 20, 11, 20, 14, 20, 20, 20, 20, 20, 10],
       [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
 ];
@@ -58,6 +59,7 @@ class LevelFactory {
   // prettier-ignore
   public generateLevel(levelNumber: number, previousScore: number = 0): Level {
     const entities: Entity[] = [];
+    let baby: Baby;
     const blockSize: number = 40;
     let selectedLevelGrid: number[][];
     let levelImage: p5.Image;
@@ -110,9 +112,7 @@ class LevelFactory {
         if (selectedLevelGrid[y][x] === 15) {
           const babySize = 0.8 * blockSize;
           const offset = 0.1 * blockSize;
-          entities.push(
-            new Baby(babySize, x * blockSize + offset, y * blockSize + offset)
-          );
+          baby = new Baby(babySize, x * blockSize + offset, y * blockSize + offset)
         }
         if (selectedLevelGrid[y][x] === 16) {
           const clockSize = 0.8 * blockSize;
@@ -121,18 +121,25 @@ class LevelFactory {
             new Clock(clockSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
-        if (selectedLevelGrid[y][x]=== 17) {
+        if (selectedLevelGrid[y][x] === 17) {
           const doorSize = blockSize;
           const offset = 0.1 * blockSize;
           entities.push(
             new Door({doorClosed: doorImg.doorClosed, doorOpen: doorImg.doorOpen}, doorSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
+        if (selectedLevelGrid[y][x] === 18) {
+          const ghostSize = 0.8 * blockSize;
+          const offset = 0.1 * blockSize;
+          entities.push(
+            new Ghost(ghostSize, x * blockSize + offset, y * blockSize + offset)
+          );
+        }
       }
       
     }
 
-    return new Level(entities, music, previousScore, levelImage);
+    return new Level(entities, baby!, music, previousScore, levelImage);
   }
 
   getLevelImage(): p5.Image {

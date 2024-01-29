@@ -1,7 +1,7 @@
 class Level {
-
   private entities: Entity[]; // Level är experten på entiteter
 
+  private baby: Baby;
   public score: number;
   public time: Time;
   private walls: Wall[];
@@ -20,6 +20,7 @@ class Level {
    */
   constructor(
     entities: Entity[],
+    baby: Baby,
     music: {
       beerSound: p5.SoundFile;
       formulaSound: p5.SoundFile;
@@ -29,6 +30,7 @@ class Level {
     levelImage: p5.Image
   ) {
     this.entities = entities;
+    this.baby = baby;
     this.time = new Time(60);
     this.music = music;
     this.countDownToStart = 3000;
@@ -36,6 +38,7 @@ class Level {
 
     //walls är en array som endast innehåller väggarna i aktiv level, detta hämtas med hjälp av filter som i sin tur hämtar alla väggar från entities
     this.walls = entities.filter((entity) => entity instanceof Wall) as Wall[];
+
     this.hasBabyReachedDoor = false;
     this.levelImage = levelImage;
   }
@@ -110,17 +113,15 @@ class Level {
       this.countDownToStart -= deltaTime;
       return;
     }
-    let baby: Baby | null = null;
+
     for (let entity of this.entities) {
-      if (entity instanceof Baby) {
-        baby = entity;
-        break;
+      if (entity instanceof Ghost) {
+        entity.update(this.baby);
       }
     }
-    if (baby) {
-      baby.update(this.walls);
-      this.checkCollision(baby, this.entities);
-    }
+
+    this.baby.update(this.walls);
+    this.checkCollision(this.baby, this.entities);
 
     if (this.hasBabyOpenedDoor) {
       this.time.setTimeToZero();
@@ -162,6 +163,7 @@ class Level {
     for (let entity of this.entities) {
       entity.draw();
     }
+    this.baby.draw();
     pop();
     this.drawScore();
     this.drawCurrentLevelNumber();

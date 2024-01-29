@@ -36,12 +36,12 @@ class Game {
 
   public changePage() {
     this.currentPage = "level";
+    this.level = this.levelFactory.generateLevel(1);
+    this.currentLevelNumber = 1;
   }
 
   public changePageToStartPage() {
     this.currentPage = "start";
-    game = new Game();
-    clear();
   }
 
   update() {
@@ -65,6 +65,7 @@ class Game {
   }
 
   draw() {
+    clear(0, 0, 0, 0);
     switch (this.currentPage) {
       case "start":
         this.startPage.draw();
@@ -73,7 +74,6 @@ class Game {
         this.level.draw();
         break;
       case "end":
-        clear();
         this.endOfGame.draw();
         break;
     }
