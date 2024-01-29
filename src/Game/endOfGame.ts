@@ -60,28 +60,27 @@ class EndOfGame {
     pop();
 
     push();
-    textSize(100);
+    textSize(90);
     fill("#EA85DA");
     stroke("black");
-    strokeWeight(5);
+    strokeWeight(8);
     textAlign(CENTER, CENTER);
-    text(this.text, width / 2, height / 2 -20);
-    textFont(" 'Roboto Mono', monospace");
+    text(this.text, width / 2, height / 2 - 6);
+    textFont("VT323");
     textStyle(BOLD);
     pop();
     this.endButton();
 
     push();
-    textSize(40);
+    textSize(30);
     fill("#F5B03E");
     stroke("black");
     strokeWeight(3);
     textAlign(CENTER, CENTER);
     text(`HIGHSCORE: ${this.highscore}`, width / 2, height / 2 + 70);
-    textSize(30)
+    textSize(20);
     text(`YOUR SCORE: ${this.score}`, width / 2, height / 2 + 120);
     textFont("VT323");
     pop();
-
   }
 }
