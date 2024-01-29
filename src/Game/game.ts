@@ -17,7 +17,7 @@ class Game {
   }
 
   public nextLevel() {
-    if (this.currentLevelNumber < 2) {
+    if (this.currentLevelNumber < 3) {
       this.currentLevelNumber++;
       this.level = this.levelFactory.generateLevel(
         this.currentLevelNumber,
