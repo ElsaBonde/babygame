@@ -2,6 +2,7 @@ class Level {
   private entities: Entity[]; // Level är experten på entiteter
 
   private baby: Baby;
+  private ghost: Ghost;
   public score: number;
   public time: Time;
   private walls: Wall[];
@@ -21,6 +22,7 @@ class Level {
   constructor(
     entities: Entity[],
     baby: Baby,
+    ghost: Ghost,
     music: {
       beerSound: p5.SoundFile;
       formulaSound: p5.SoundFile;
@@ -31,6 +33,7 @@ class Level {
   ) {
     this.entities = entities;
     this.baby = baby;
+    this.ghost = ghost;
     this.time = new Time(60);
     this.music = music;
     this.countDownToStart = 3000;
@@ -92,7 +95,18 @@ class Level {
       door.openDoor();
       game.nextLevel();
     }
+
+    if (entity instanceof Ghost) {
+      if (!baby.effectedByGhost) {
+      baby.effectedByGhost = true;
+      this.score -= 1; 
+
+      setTimeout(() => {
+        baby.effectedByGhost = false;
+      }, 2000)
+    } 
   }
+}
 
   /***
    * Ritar ut och placerar poängräkning, samt koordinatern för bild
@@ -119,7 +133,7 @@ class Level {
         entity.update(this.baby);
       }
     }
-
+    this.ghost.update(this.baby);
     this.baby.update(this.walls);
     this.checkCollision(this.baby, this.entities);
 
@@ -163,6 +177,7 @@ class Level {
     for (let entity of this.entities) {
       entity.draw();
     }
+    this.ghost.draw();
     this.baby.draw();
     pop();
     this.drawScore();

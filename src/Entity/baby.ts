@@ -16,10 +16,10 @@ class Baby extends Entity {
   private upAnimationLoop: number[];
   private downAnimationLoop: number[];
   private speed: number;
-  private normalSpeed: number = 10; // skapar variabel med default värde på 2 för bebisen snabbhet i rörelse
+  private normalSpeed: number = 3; // skapar variabel med default värde på 2 för bebisen snabbhet i rörelse
   public beerCount: number = 0;
   private rotationAngle: number;
-  private effectedByGhost: boolean = false;
+  public effectedByGhost: boolean = false;
 
   constructor(size: number, x: number, y: number) {
     super(playerImages[1], size, x, y);
@@ -31,7 +31,7 @@ class Baby extends Entity {
     };
     this.animationIndex = 0;
     this.animationSpeed = 0.5;
-    this.speed =10; // skapar variabel med default värde på 2 för bebisen snabbhet i rörelse
+    this.speed = 3; // skapar variabel med default värde på 2 för bebisen snabbhet i rörelse
 
     this.upAnimationLoop = [0, 1, 2, 0];
     this.leftAnimationLoop = [3, 4, 5, 3];
@@ -148,6 +148,7 @@ class Baby extends Entity {
       this.speed = this.normalSpeed;
     }, 4000);
   }
+
 
   //skapar loop för att animera babyns bilder
   private animateLoop(animatinLoop: number[]): void {
