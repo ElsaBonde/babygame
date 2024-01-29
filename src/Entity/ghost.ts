@@ -8,11 +8,18 @@ class Ghost extends Entity {
     this.speed = 1;
   }
  
+  /***
+   * Spöket rör sig mot baby
+   */
   private move(baby: Baby) {
-    this.x -= 1
+    // angle in radians
+    let angle = Math.atan2(baby.y - this.y, baby.x - this.x);
+    this.x += cos(angle) * this.speed;
+    this.y += sin(angle) * this.speed;
   }
 
   public update(baby: Baby) {
   this.move(baby);
   }
 }
+
