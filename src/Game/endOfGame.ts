@@ -3,8 +3,18 @@ class EndOfGame {
   private score: number;
   private highscore: number;
   private textButton: string;
+  private music: {
+    winSound: p5.SoundFile;
+    looseSound: p5.SoundFile;
+  };
 
-  constructor() {
+  constructor(
+    music = {
+      winSound: p5.SoundFile,
+      looseSound: p5.SoundFile,
+    }
+  ) {
+    // this.music = music;
     this.text = "";
     this.score = 0;
     this.highscore = Number(localStorage.getItem("highscore") || 0);
@@ -23,11 +33,13 @@ class EndOfGame {
   public setWin() {
     this.text = "WINNER!";
     this.textButton = "PRESS ENTER TO PLAY AGAIN";
+    this.music.winSound.play();
   }
 
   public setLose() {
     this.text = "GAME OVER!";
     this.textButton = "PRESS ENTER TO TRY AGAIN";
+    this.music.looseSound.play();
   }
 
   //13 är enter
