@@ -35,6 +35,8 @@ class EndOfGame {
     this.textButton = "PRESS ENTER TO PLAY AGAIN";
     this.music.winSound.play();
     this.music.bgSound.stop();
+    this.drawStars();
+
   }
 
   public setLose() {
@@ -68,18 +70,41 @@ class EndOfGame {
     pop();
   }
 
+  private drawStars() {
+    push();
+    image(endScreenStar, 140, 200, 100, 150);
+    image(endScreenStar, 755, 200, 100, 150);
+    image(smallStarsEndScreen, 250, 360, 50, 50);
+    image(smallStarsEndScreen, 700, 360, 50, 50);
+    pop();
+  }
+
+  private drawTears() {
+    //vänster öga
+    push();
+    image(tears, 38, 120, 70, 70);
+    image(tears, 38, 140, 70, 70);
+
+    //höger öga
+    translate(135, 125);
+    rotate(radians(-33));
+    image(tears, -25, -16, 70, 70);
+    image(tears, -25, 4, 70, 70);
+    pop();
+  }
+
   draw() {
     push();
     background(endOfGameImg);
     pop();
 
     push();
-    textSize(90);
+    textSize(75);
     fill("#EA85DA");
     stroke("black");
     strokeWeight(8);
     textAlign(CENTER, CENTER);
-    text(this.text, width / 2, height / 2 - 6);
+    text(this.text, width / 2, height / 2 + 90);
     textFont("VT323");
     textStyle(BOLD);
     pop();
@@ -87,23 +112,29 @@ class EndOfGame {
 
     push();
     textSize(30);
-    fill("#F5B03E");
+    fill("#2EBAD7");
     stroke("black");
     strokeWeight(3);
     textAlign(CENTER, CENTER);
-    text(`HIGHSCORE: ${this.highscore}`, width / 2, height / 2 + 70);
-    textSize(20);
-    text(`YOUR SCORE: ${this.score}`, width / 2, height / 2 + 120);
-    textFont("VT323");
+    text(
+      `HIGHSCORE: ${this.highscore}  |  YOUR SCORE: ${this.score}`,
+      width / 2,
+      height / 2 - 10
+    );
     pop();
+
 
     if (this.text === "WINNER!" && !this.music.winSound.isPlaying()) {
       this.music.winSound.play();
+      this.drawStars();
     } else if (
       this.text === "GAME OVER!" &&
       !this.music.looseSound.isPlaying()
     ) {
       this.music.looseSound.play();
+      this.drawTears();
+    } 
+
     }
   }
 }
