@@ -245,22 +245,6 @@ class Level {
     if (this.countDownToStart > 0) {
       this.drawCountDown();
     }
-
-
-    // if (this.isGameOver()) {
-    //   if (this.hasBabyReachedDoor && !this.hasBabyOpenedDoor) {
-    //     // Spelet vanns
-    //     if (!this.music.winSound.isPlaying()) {
-    //       this.music.winSound.play();
-    //     }
-    //   } else {
-    //     // Spelet förlorades
-    //     if (!this.music.looseSound.isPlaying()) {
-    //       this.music.looseSound.play();
-    //     }
-    //   }
-    // }
-
     this.drawStars();
 
   }
