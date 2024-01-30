@@ -60,12 +60,12 @@ class EndOfGame {
     pop();
 
     push();
-    textSize(90);
+    textSize(75);
     fill("#EA85DA");
     stroke("black");
     strokeWeight(8);
     textAlign(CENTER, CENTER);
-    text(this.text, width / 2, height / 2 - 6);
+    text(this.text, width / 2, height / 2 + 90);
     textFont("VT323");
     textStyle(BOLD);
     pop();
@@ -73,14 +73,11 @@ class EndOfGame {
 
     push();
     textSize(30);
-    fill("#F5B03E");
+    fill("#2EBAD7");
     stroke("black");
     strokeWeight(3);
     textAlign(CENTER, CENTER);
-    text(`HIGHSCORE: ${this.highscore}`, width / 2, height / 2 + 70);
-    textSize(20);
-    text(`YOUR SCORE: ${this.score}`, width / 2, height / 2 + 120);
-    textFont("VT323");
+    text(`HIGHSCORE: ${this.highscore}  |  YOUR SCORE: ${this.score}`, width / 2, height / 2  - 10);
     pop();
   }
 }
