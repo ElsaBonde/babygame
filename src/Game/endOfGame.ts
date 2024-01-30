@@ -35,7 +35,7 @@ class EndOfGame {
     this.textButton = "PRESS ENTER TO PLAY AGAIN";
     this.music.winSound.play();
     this.music.bgSound.stop();
-    this.drawStars();
+ this.drawStars();
 
   }
 
@@ -110,6 +110,13 @@ class EndOfGame {
     pop();
     this.endButton();
 
+
+    if (this.text === "WINNER!") {
+      this.drawStars();
+    } else if (this.text === "GAME OVER!") { 
+      this.drawTears();
+    }
+
     push();
     textSize(30);
     fill("#2EBAD7");
@@ -126,15 +133,11 @@ class EndOfGame {
 
     if (this.text === "WINNER!" && !this.music.winSound.isPlaying()) {
       this.music.winSound.play();
-      this.drawStars();
     } else if (
       this.text === "GAME OVER!" &&
       !this.music.looseSound.isPlaying()
     ) {
       this.music.looseSound.play();
-      this.drawTears();
     } 
-
     }
   }
-}
