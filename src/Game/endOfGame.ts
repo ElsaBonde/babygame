@@ -23,6 +23,7 @@ class EndOfGame {
   public setWin() {
     this.text = "WINNER!";
     this.textButton = "PRESS ENTER TO PLAY AGAIN";
+    this.drawStars();
   }
 
   public setLose() {
@@ -54,6 +55,13 @@ class EndOfGame {
     pop();
   }
 
+  private drawStars() {
+    image(endScreenStar, 140, 200, 100, 150);
+    image(endScreenStar, 755, 200, 100, 150);
+    image(smallStarsEndScreen, 250, 360, 50, 50);
+    image(smallStarsEndScreen, 700, 360, 50, 50);
+  }
+
   draw() {
     push();
     background(endOfGameImg);
@@ -79,5 +87,9 @@ class EndOfGame {
     textAlign(CENTER, CENTER);
     text(`HIGHSCORE: ${this.highscore}  |  YOUR SCORE: ${this.score}`, width / 2, height / 2  - 10);
     pop();
+
+    if (this.text === "WINNER!") {
+    this.drawStars();
+    }
   }
 }
