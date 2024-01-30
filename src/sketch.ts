@@ -16,6 +16,7 @@ let music: {
   beerSound: p5.SoundFile;
   formulaSound: p5.SoundFile;
   clockSound: p5.SoundFile;
+  bgSound: p5.SoundFile;
 };
 
 /**
@@ -56,6 +57,7 @@ function preload() {
     beerSound: loadSound("./assets/music/beerSound.mp3"),
     formulaSound: loadSound("./assets/music/formulaSound.mp3"),
     clockSound: loadSound("./assets/music/clockSound.mp3"),
+    bgSound: loadSound("./assets/music/bgSound.mp3"),
   };
 }
 
@@ -71,6 +73,7 @@ function setup() {
   music.beerSound.setVolume(0.8);
   music.formulaSound.setVolume(0.8);
   music.clockSound.setVolume(0.5);
+  music.bgSound.setVolume(0.1);
 
   game = new Game();
 }
