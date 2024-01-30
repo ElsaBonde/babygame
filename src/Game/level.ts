@@ -39,6 +39,7 @@ class Level {
     levelImage: p5.Image
   ) {
     this.entities = entities;
+    this.stars = [];
     this.baby = baby;
     this.ghost = ghost;
     this.time = new Time(60);
@@ -103,12 +104,21 @@ class Level {
       ) {
         this.handleCollision(baby, entity);
       }
+      if (
+        baby.x < this.ghost.x + this.ghost.size &&
+        baby.x + baby.size > this.ghost.x &&
+        baby.y < this.ghost.y + this.ghost.size &&
+        baby.y + baby.size > this.ghost.y
+      ) {
+        this.handleCollision(baby, this.ghost);
+      }
     }
   }
   /***
    * Checkar kollision med någon av entiteterna
    */
   private handleCollision(baby: Baby, entity: Entity): void {
+    //ÖL
     if (entity instanceof Beer) {
       baby.goSlow();
       entity.remove();
@@ -118,29 +128,39 @@ class Level {
       }
       this.music.beerSound.play();
     }
+
+    //VÄLLING
     if (entity instanceof Formula) {
       entity.remove();
       this.score += 1;
       this.music.formulaSound.play();
     }
+
+    //KLOCKA
     if (entity instanceof Clock) {
       this.time.freezeTime();
       entity.remove();
       this.music.clockSound.play();
     }
+
+    //DÖRR
     if (entity instanceof Door) {
       const door = entity as Door;
       door.openDoor();
       game.nextLevel();
     }
 
+    //SPÖKE
     if (entity instanceof Ghost) {
+      console.log("Ghost collision detected!");
       if (!baby.effectedByGhost) {
+        console.log("Baby is not affected by Ghost. Applying effect.");
         baby.effectedByGhost = true;
         this.score -= 1;
 
         setTimeout(() => {
           baby.effectedByGhost = false;
+          console.log("Effect removed after 2000ms.");
         }, 2000);
       }
     }
@@ -246,6 +266,5 @@ class Level {
       this.drawCountDown();
     }
     this.drawStars();
-
   }
 }
