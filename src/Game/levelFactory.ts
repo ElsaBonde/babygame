@@ -101,7 +101,7 @@ class LevelFactory {
     } else {
       selectedLevelGrid = this.numbersGridLevel3;
       levelImage = levelThree;
-      colorWall = "orange";
+      colorWall = "#b0006b";
     }
 
     for (let y = 0; y < selectedLevelGrid.length; y++) {
