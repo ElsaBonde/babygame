@@ -1,12 +1,25 @@
 /// <reference path="./entity.ts" />
 
 class Ghost extends Entity {
-  constructor(/* image: p5.Image, */ size: number, x: number, y: number) {
-    super(/* image, */ size, x, y);
+  private speed: number;
+
+  constructor(size: number, x: number, y: number) {
+    super(ghostImg, size, x, y);
+    this.speed = 1;
   }
-  private getX(number: number) {}
-  private getY(number: number) {}
-  private moveGhost() {}
-  update() {}
-  draw() {}
+ 
+  /***
+   * Spöket rör sig mot baby
+   */
+  private move(baby: Baby) {
+    // angle in radians
+    let angle = Math.atan2(baby.y - this.y, baby.x - this.x);
+    this.x += cos(angle) * this.speed;
+    this.y += sin(angle) * this.speed;
+  }
+
+  public update(baby: Baby) {
+  this.move(baby);
+  }
 }
+

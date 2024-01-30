@@ -3,11 +3,13 @@ let game: Game;
 let playerImages: p5.Image[];
 let levelOne: p5.Image;
 let levelTwo: p5.Image;
+let levelThree: p5.Image;
 let backgroundImg: p5.Image;
 let endOfGameImg: p5.Image;
 let beerImg: p5.Image;
 let formulaImg: p5.Image;
 let clockImg: p5.Image;
+let ghostImg: p5.Image;
 let doorImg: {
   doorClosed: p5.Image;
   doorOpen: p5.Image;
@@ -45,9 +47,11 @@ function preload() {
   endOfGameImg = loadImage("./assets/img/endOfGame.png");
   levelOne = loadImage("./assets/img/levelOne.png");
   levelTwo = loadImage("./assets/img/levelTwo.png");
+  levelThree = loadImage("./assets/img/levelThree.png");
   beerImg = loadImage("./assets/img/beer.png");
   formulaImg = loadImage("./assets/img/formula.png");
   clockImg = loadImage("./assets/img/clock.png");
+  ghostImg = loadImage("./assets/img/ghost.png");
   doorImg = {
     doorClosed: loadImage("./assets/img/doorClosed.png"),
     doorOpen: loadImage("./assets/img/doorOpen.png"),

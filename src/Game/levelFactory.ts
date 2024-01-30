@@ -7,18 +7,20 @@
 15 = bebis
 16 = klocka
 17 = utgång
+18 = Spöke
 20 = tom ruta */
 
 class LevelFactory {
   public numbersGridLevel1: number[][];
   public levelImage: p5.Image;
   public numbersGridLevel2: number[][];
+  public numbersGridLevel3: number[][];
 
   constructor() {
     // prettier-ignore
     this.numbersGridLevel1 = [
       [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
-      [10, 14, 14, 20, 13, 20, 20, 14, 20, 20, 20, 20, 20, 20, 11, 14, 11, 11, 20, 14, 20, 20, 20, 20, 10],
+      [10, 14, 14, 20, 13, 20, 20, 14, 20, 20, 20, 20, 20, 20, 11, 14, 11, 11, 20, 14, 20, 20, 18, 20, 10],
       [10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 13, 11, 14, 20, 20, 20, 11, 11, 11, 11, 20, 20, 14, 10],
       [10, 20, 20, 20, 20, 20, 20, 11, 20, 20, 20, 20, 11, 20, 11, 20, 20, 20, 20, 14, 11, 20, 11, 20, 10],
       [10, 20, 11, 11, 11, 20, 20, 11, 20, 11, 11, 11, 11, 11, 11, 20, 11, 11, 11, 14, 11, 20, 11, 20, 10],
@@ -37,7 +39,7 @@ class LevelFactory {
     // prettier-ignore
     this.numbersGridLevel2 = [
     [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
-    [10, 20, 11, 16, 14, 11, 20, 20, 20, 11, 20, 20, 20, 20, 20, 11, 11, 11, 11, 20, 20, 14, 11, 20, 10],
+    [10, 20, 11, 16, 14, 11, 20, 20, 20, 11, 20, 20, 20, 20, 20, 11, 11, 11, 11, 20, 20, 14, 11, 18, 10],
     [10, 14, 11, 20, 20, 20, 14, 20, 20, 20, 20, 11, 20, 20, 11, 11, 20, 14, 11, 20, 20, 20, 11, 20, 10],
     [10, 20, 11, 13, 11, 11, 11, 11, 11, 20, 11, 11, 11, 20, 14, 11, 20, 20, 20, 20, 20, 11, 11, 20, 10],
     [10, 20, 11, 20, 11, 14, 11, 20, 11, 14, 11, 14, 11, 20, 11, 11, 13, 11, 11, 11, 14, 11, 13, 14, 10],
@@ -52,12 +54,36 @@ class LevelFactory {
     [10, 15, 11, 20, 11, 14, 20, 20, 20, 11, 16, 20, 20, 20, 20, 11, 14, 20, 11, 11, 11, 11, 11, 11, 10],
     [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
     ];
+
+    // prettier-ignore
+    this.numbersGridLevel3=  [
+    [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+    [10, 14, 14, 20, 13, 20, 20, 14, 20, 20, 20, 20, 20, 20, 11, 14, 11, 11, 20, 14, 20, 20, 18, 20, 10],
+    [10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 13, 11, 14, 20, 20, 20, 11, 11, 11, 11, 20, 20, 14, 10],
+    [10, 20, 20, 20, 20, 20, 20, 11, 20, 20, 20, 20, 11, 20, 11, 20, 20, 20, 20, 14, 11, 20, 11, 20, 10],
+    [10, 20, 11, 11, 11, 20, 20, 11, 20, 11, 11, 11, 11, 11, 11, 20, 11, 11, 11, 14, 11, 20, 11, 20, 10],
+    [10, 14, 11, 20, 11, 20, 14, 11, 20, 11, 20, 20, 20, 20, 11, 20, 20, 13, 11, 11, 11, 20, 11, 20, 10],
+    [10, 20, 11, 14, 11, 20, 20, 11, 20, 11, 20, 14, 11, 20, 11, 20, 20, 20, 11, 20, 20, 13, 11, 20, 10],
+    [10, 20, 11, 20, 11, 20, 20, 11, 20, 11, 11, 11, 11, 20, 11, 14, 16, 20, 11, 20, 11, 11, 11, 11, 10],
+    [10, 20, 11, 20, 11, 20, 20, 11, 20, 20, 20, 20, 20, 14, 11, 11, 11, 20, 11, 20, 11, 20, 20, 20, 17],
+    [10, 20, 11, 20, 11, 11, 20, 11, 11, 11, 11, 11, 11, 11, 11, 20, 11, 13, 11, 20, 11, 20, 11, 14, 10],
+    [10, 20, 11, 20, 20, 20, 20, 20, 20, 20, 20, 11, 20, 11, 20, 11, 20, 11, 20, 11, 20, 11, 14, 11, 10],
+    [10, 20, 11, 20, 11, 20, 14, 13, 11, 20, 11, 20, 11, 20, 11, 20, 20, 20, 20, 20, 11, 13, 11, 20, 10],
+    [10, 20, 11, 20, 11, 11, 11, 11, 11, 20, 20, 20, 20, 20, 20, 20, 11, 20, 11, 20, 11, 11, 11, 20, 10],
+    [10, 15, 11, 16, 11, 20, 14, 20, 20, 20, 11, 11, 13, 11, 20, 20, 11, 20, 14, 20, 20, 20, 20, 20, 10],
+    [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+];
+
+
+    
     this.levelImage = new p5.Image(1000, 600);
   }
 
   // prettier-ignore
   public generateLevel(levelNumber: number, previousScore: number = 0): Level {
     const entities: Entity[] = [];
+    let baby: Baby;
+    let ghost: Ghost;
     const blockSize: number = 40;
     let selectedLevelGrid: number[][];
     let levelImage: p5.Image;
@@ -68,10 +94,14 @@ class LevelFactory {
       selectedLevelGrid = this.numbersGridLevel1;
       levelImage = levelOne;
       colorWall = "#1E77A4";
-    } else {
+    } else if (levelNumber === 2) {
       selectedLevelGrid = this.numbersGridLevel2;
       levelImage = levelTwo;
       colorWall = "#7851A9";
+    } else {
+      selectedLevelGrid = this.numbersGridLevel3;
+      levelImage = levelThree;
+      colorWall = "orange";
     }
 
     for (let y = 0; y < selectedLevelGrid.length; y++) {
@@ -110,9 +140,7 @@ class LevelFactory {
         if (selectedLevelGrid[y][x] === 15) {
           const babySize = 0.8 * blockSize;
           const offset = 0.1 * blockSize;
-          entities.push(
-            new Baby(babySize, x * blockSize + offset, y * blockSize + offset)
-          );
+          baby = new Baby(babySize, x * blockSize + offset, y * blockSize + offset)
         }
         if (selectedLevelGrid[y][x] === 16) {
           const clockSize = 0.8 * blockSize;
@@ -121,18 +149,26 @@ class LevelFactory {
             new Clock(clockSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
-        if (selectedLevelGrid[y][x]=== 17) {
+        if (selectedLevelGrid[y][x] === 17) {
           const doorSize = blockSize;
           const offset = 0.1 * blockSize;
           entities.push(
             new Door({doorClosed: doorImg.doorClosed, doorOpen: doorImg.doorOpen}, doorSize, x * blockSize + offset, y * blockSize + offset)
           );
         }
+        if (selectedLevelGrid[y][x] === 18) {
+          const ghostSize = 0.8 * blockSize;
+          const offset = 0.1 * blockSize;
+          ghost = new Ghost(ghostSize, x * blockSize + offset, y * blockSize + offset)
+         /*  entities.push(
+            new Ghost(ghostSize, x * blockSize + offset, y * blockSize + offset)
+          ); */
+        }
       }
       
     }
 
-    return new Level(entities, music, previousScore, levelImage);
+    return new Level(entities, baby!, ghost!, music, previousScore, levelImage);
   }
 
   getLevelImage(): p5.Image {
