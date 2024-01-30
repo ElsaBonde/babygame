@@ -12,7 +12,7 @@ class Game {
     this.levelFactory = new LevelFactory();
     this.level = this.levelFactory.generateLevel(1);
     this.startPage = new StartPage();
-    this.endOfGame = new EndOfGame();
+    this.endOfGame = new EndOfGame(music);
     this.currentLevelNumber = 1;
   }
 

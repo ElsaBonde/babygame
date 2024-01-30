@@ -78,12 +78,12 @@ function preload() {
 function setup() {
   createCanvas(1000, 600);
   frameRate(60);
-  music.beerSound.setVolume(0.8);
-  music.formulaSound.setVolume(0.8);
+  music.beerSound.setVolume(0.6);
+  music.formulaSound.setVolume(0.6);
   music.clockSound.setVolume(0.5);
   music.bgSound.setVolume(0.1);
-  music.winSound.setVolume(0.5);
-  music.looseSound.setVolume(0.5);
+  music.winSound.setVolume(0.6);
+  music.looseSound.setVolume(0.6);
 
   game = new Game();
 }

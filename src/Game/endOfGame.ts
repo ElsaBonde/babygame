@@ -6,15 +6,15 @@ class EndOfGame {
   private music: {
     winSound: p5.SoundFile;
     looseSound: p5.SoundFile;
+    bgSound: p5.SoundFile;
   };
 
-  constructor(
-    music = {
-      winSound: p5.SoundFile,
-      looseSound: p5.SoundFile,
-    }
-  ) {
-    // this.music = music;
+  constructor(music: {
+    winSound: p5.SoundFile;
+    looseSound: p5.SoundFile;
+    bgSound: p5.SoundFile;
+  }) {
+    this.music = music;
     this.text = "";
     this.score = 0;
     this.highscore = Number(localStorage.getItem("highscore") || 0);
@@ -34,12 +34,14 @@ class EndOfGame {
     this.text = "WINNER!";
     this.textButton = "PRESS ENTER TO PLAY AGAIN";
     this.music.winSound.play();
+    this.music.bgSound.stop();
   }
 
   public setLose() {
     this.text = "GAME OVER!";
     this.textButton = "PRESS ENTER TO TRY AGAIN";
     this.music.looseSound.play();
+    this.music.bgSound.stop();
   }
 
   //13 är enter
@@ -94,5 +96,14 @@ class EndOfGame {
     text(`YOUR SCORE: ${this.score}`, width / 2, height / 2 + 120);
     textFont("VT323");
     pop();
+
+    if (this.text === "WINNER!" && !this.music.winSound.isPlaying()) {
+      this.music.winSound.play();
+    } else if (
+      this.text === "GAME OVER!" &&
+      !this.music.looseSound.isPlaying()
+    ) {
+      this.music.looseSound.play();
+    }
   }
 }
