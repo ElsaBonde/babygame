@@ -1,6 +1,7 @@
 class Level {
   private entities: Entity[]; // Level är experten på entiteter
 
+  private stars: Star[];
   private baby: Baby;
   private ghost: Ghost;
   public score: number;
@@ -46,6 +47,37 @@ class Level {
 
     this.hasBabyReachedDoor = false;
     this.levelImage = levelImage;
+    this.createStars(70);
+  }
+
+  private createStars(numStars: number): void {
+    this.stars = [];
+    for (let i = 0; i < numStars; i++) {
+      let star: Star;
+      do {
+        const x = random(width);
+        const y = random(height);
+        const size = random(1, 3);
+        const maxBrightness = random(100, 255);
+
+        star = new Star(x, y, size, maxBrightness);
+      } while (this.isStarOverlappingWalls(star));
+      this.stars.push(star);
+    }
+  }
+
+  private isStarOverlappingWalls(star: Star): boolean {
+    for (const wall of this.walls) {
+      if (
+        star.x < wall.x + wall.size &&
+        star.x + star.size > wall.x &&
+        star.y < wall.y + wall.size &&
+        star.y + star.size > wall.y
+      ) {
+        return true;
+      }
+    }
+    return false;
   }
 
   isGameOver(): boolean {
@@ -100,15 +132,15 @@ class Level {
 
     if (entity instanceof Ghost) {
       if (!baby.effectedByGhost) {
-      baby.effectedByGhost = true;
-      this.score -= 1; 
+        baby.effectedByGhost = true;
+        this.score -= 1;
 
-      setTimeout(() => {
-        baby.effectedByGhost = false;
-      }, 2000)
-    } 
+        setTimeout(() => {
+          baby.effectedByGhost = false;
+        }, 2000);
+      }
+    }
   }
-}
 
   /***
    * Ritar ut och placerar poängräkning, samt koordinatern för bild
@@ -122,6 +154,12 @@ class Level {
     fill("#64E12A");
     text(`: ${this.score}`, 71, 29);
     pop();
+  }
+
+  updateStars(): void {
+    for (let star of this.stars) {
+      star.update();
+    }
   }
 
   update(): void {
@@ -143,6 +181,14 @@ class Level {
       this.time.setTimeToZero();
     } else {
       this.time.update();
+    }
+
+    this.updateStars();
+  }
+
+  drawStars(): void {
+    for (let star of this.stars) {
+      star.draw();
     }
   }
 
@@ -195,5 +241,6 @@ class Level {
     if (this.countDownToStart > 0) {
       this.drawCountDown();
     }
+    this.drawStars();
   }
 }
