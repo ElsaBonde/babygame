@@ -10,6 +10,7 @@ class Level {
     beerSound: p5.SoundFile;
     formulaSound: p5.SoundFile;
     clockSound: p5.SoundFile;
+    bgSound: p5.SoundFile;
   };
   private countDownToStart: number;
   public hasBabyReachedDoor: boolean;
@@ -27,6 +28,7 @@ class Level {
       beerSound: p5.SoundFile;
       formulaSound: p5.SoundFile;
       clockSound: p5.SoundFile;
+      bgSound: p5.SoundFile;
     },
     previousScore: number = 0,
     levelImage: p5.Image
@@ -177,8 +179,14 @@ class Level {
     for (let entity of this.entities) {
       entity.draw();
     }
+
+    if (!this.music.bgSound.isPlaying()) {
+      this.music.bgSound.play();
+    }
+   
     this.ghost.draw();
     this.baby.draw();
+
     pop();
     this.drawScore();
     this.drawCurrentLevelNumber();
