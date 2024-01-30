@@ -12,6 +12,8 @@ class Level {
     formulaSound: p5.SoundFile;
     clockSound: p5.SoundFile;
     bgSound: p5.SoundFile;
+    winSound: p5.SoundFile;
+    looseSound: p5.SoundFile;
   };
   private countDownToStart: number;
   public hasBabyReachedDoor: boolean;
@@ -30,6 +32,8 @@ class Level {
       formulaSound: p5.SoundFile;
       clockSound: p5.SoundFile;
       bgSound: p5.SoundFile;
+      winSound: p5.SoundFile;
+      looseSound: p5.SoundFile;
     },
     previousScore: number = 0,
     levelImage: p5.Image
@@ -229,7 +233,7 @@ class Level {
     if (!this.music.bgSound.isPlaying()) {
       this.music.bgSound.play();
     }
-   
+
     this.ghost.draw();
     this.baby.draw();
 
@@ -241,6 +245,23 @@ class Level {
     if (this.countDownToStart > 0) {
       this.drawCountDown();
     }
+
+
+    // if (this.isGameOver()) {
+    //   if (this.hasBabyReachedDoor && !this.hasBabyOpenedDoor) {
+    //     // Spelet vanns
+    //     if (!this.music.winSound.isPlaying()) {
+    //       this.music.winSound.play();
+    //     }
+    //   } else {
+    //     // Spelet förlorades
+    //     if (!this.music.looseSound.isPlaying()) {
+    //       this.music.looseSound.play();
+    //     }
+    //   }
+    // }
+
     this.drawStars();
+
   }
 }
