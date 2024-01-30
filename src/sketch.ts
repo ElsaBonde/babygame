@@ -7,6 +7,7 @@ let levelThree: p5.Image;
 let backgroundImg: p5.Image;
 let endScreenStar: p5.Image;
 let smallStarsEndScreen: p5.Image;
+let tears: p5.Image;
 let endOfGameImg: p5.Image;
 let beerImg: p5.Image;
 let formulaImg: p5.Image;
@@ -48,6 +49,7 @@ function preload() {
   backgroundImg = loadImage("./assets/img/startpage.png");
   endScreenStar = loadImage("./assets/img/endScreenStars.gif");
   smallStarsEndScreen = loadImage("./assets/img/smallStarsEndScreen.gif");
+  tears = loadImage("./assets/img/tears.gif");
   endOfGameImg = loadImage("./assets/img/endOfGame.png");
   levelOne = loadImage("./assets/img/levelOne.png");
   levelTwo = loadImage("./assets/img/levelTwo.png");
