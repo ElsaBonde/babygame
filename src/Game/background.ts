@@ -22,13 +22,13 @@ class Background {
     }
   }
 
-  update(): void {
+  public update(): void {
     for (let star of this.stars) {
       star.update();
     }
   }
 
-  draw(): void {
+  public draw(): void {
     image(this.levelImage, 0, 0, width, height);
     for (let star of this.stars) {
       star.draw();

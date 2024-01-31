@@ -92,7 +92,7 @@ class EndOfGame {
     pop();
   }
 
-  draw() {
+ public draw() {
     push();
     background(endOfGameImg);
     pop();

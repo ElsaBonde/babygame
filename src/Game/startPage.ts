@@ -5,15 +5,10 @@ class StartPage {
     this.buttonColor = color(150);
   }
 
-  draw() {
-    background(backgroundImg);
-    this.startButton();
-  }
-
   /**
    * Create 'start button' to welcome page
    */
-  startButton() {
+  private startButton() {
     push();
     //ger glittereffekt till bakgrunden
     fill(this.glitterColor(this.buttonColor));
@@ -29,7 +24,7 @@ class StartPage {
   }
 
   // Skapa en glittrande effekt på färgen
-  glitterColor(baseColor: p5.Color) {
+  private glitterColor(baseColor: p5.Color) {
     const glitteredColor = color(baseColor);
     const variance = 10; //bestämmer hur snabbt det ska "glittra"
 
@@ -41,7 +36,7 @@ class StartPage {
     return glitteredColor;
   }
 
-  update() {
+  public update() {
     this.startButton();
   }
 
@@ -51,5 +46,10 @@ class StartPage {
         game.changePage();
       }
     }
+  }
+
+  public draw() {
+    background(backgroundImg);
+    this.startButton();
   }
 }

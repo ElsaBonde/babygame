@@ -118,6 +118,7 @@ class Baby extends Entity {
       y1 + size1 > e2.y
     );
   }
+  
   /***
    * Om bebis tar mer än 1 öl så snurrar den
    */
@@ -179,7 +180,7 @@ class Baby extends Entity {
     this.animateLoop(this.downAnimationLoop);
   }
 
-  update(walls: Wall[], hasReachedDoor: boolean) {
+  public update(walls: Wall[], hasReachedDoor: boolean) {
     if (!hasReachedDoor) {
       this.move(walls);
     } else {
@@ -190,7 +191,7 @@ class Baby extends Entity {
     }
   }
 
-  draw() {
+ public draw() {
     push();
     translate(this.x + this.size / 2, this.y + this.size / 2); // Säkerställer att orgin är i mitten av bebisen
     rotate(this.rotationAngle); // Roterar medurs med den aktuella vinkeln
