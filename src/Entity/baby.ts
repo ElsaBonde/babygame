@@ -179,8 +179,15 @@ class Baby extends Entity {
     this.animateLoop(this.downAnimationLoop);
   }
 
-  update(walls: Wall[]) {
-    this.move(walls);
+  update(walls: Wall[], hasReachedDoor: boolean) {
+    if (!hasReachedDoor) {
+      this.move(walls);
+    } else {
+      this.x += this.speed * 0.18;
+      this.y += this.speed * 0.05;
+      this.size -= 0.3;
+      this.animateRight();
+    }
   }
 
   draw() {

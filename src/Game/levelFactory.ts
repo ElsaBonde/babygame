@@ -150,10 +150,9 @@ class LevelFactory {
           );
         }
         if (selectedLevelGrid[y][x] === 17) {
-          const doorSize = blockSize;
-          const offset = 0.1 * blockSize;
+          const doorSize = blockSize * 1.2;
           entities.push(
-            new Door({doorClosed: doorImg.doorClosed, doorOpen: doorImg.doorOpen}, doorSize, x * blockSize + offset, y * blockSize + offset)
+            new Door({doorClosed: doorImg.doorClosed, doorOpen: doorImg.doorOpen}, doorSize, x * blockSize, y * blockSize)
           );
         }
         if (selectedLevelGrid[y][x] === 18) {

@@ -41,11 +41,6 @@ class Time {
     }
   }
 
-  public setTimeToZero() {
-    this.timeLeft = 0;
-    this.isGameOver = true;
-  }
-
   update() {
     this.countDown();
   }
