@@ -151,7 +151,6 @@ class LevelFactory {
       [10, 11, 11, 13, 20, 14, 14, 20, 20, 16, 20, 20, 16, 20, 18, 20, 14, 20, 11, 11, 11, 14, 20, 20, 10],
       [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
       ]
-
     this.levelImage = new p5.Image(1000, 600);
   }
 
@@ -250,10 +249,7 @@ class LevelFactory {
         if (selectedLevelGrid[y][x] === 18) {
           const ghostSize = 0.8 * blockSize;
           const offset = 0.1 * blockSize;
-          ghost = new Ghost(ghostSize, x * blockSize + offset, y * blockSize + offset)
-         /*  entities.push(
-            new Ghost(ghostSize, x * blockSize + offset, y * blockSize + offset)
-          ); */
+          ghost = new Ghost(ghostSize, x * blockSize + offset, y * blockSize + offset);
         }
       }
       
@@ -262,7 +258,7 @@ class LevelFactory {
     return new Level(entities, baby!, ghost!, music, previousScore, levelImage);
   }
 
-  getLevelImage(): p5.Image {
+  public getLevelImage(): p5.Image {
     return this.levelImage;
   }
 }
