@@ -24,6 +24,7 @@ let music: {
   bgSound: p5.SoundFile;
   winSound: p5.SoundFile;
   looseSound: p5.SoundFile;
+  ghostSound: p5.SoundFile;
 };
 
 /**
@@ -72,6 +73,7 @@ function preload() {
     bgSound: loadSound("./assets/music/bgSound.mp3"),
     winSound: loadSound("./assets/music/winSound.mp3"),
     looseSound: loadSound("./assets/music/looseSound.mp3"),
+    ghostSound: loadSound("./assets/music/ghostSound.mp3"),
   };
 }
 
@@ -90,6 +92,7 @@ function setup() {
   music.bgSound.setVolume(0.1);
   music.winSound.setVolume(0.6);
   music.looseSound.setVolume(0.6);
+  music.ghostSound.setVolume(0.6);
 
   game = new Game();
 }
