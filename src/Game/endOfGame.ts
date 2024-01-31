@@ -126,11 +126,13 @@ class EndOfGame {
       this.drawStars();
       if (!this.music.winSound.isPlaying()) {
         this.music.winSound.play();
+        this.music.bgSound.stop();
       }
     } else if (this.text === "GAME OVER!") {
       this.drawTears();
       if (!this.music.looseSound.isPlaying()) {
         this.music.looseSound.play();
+        this.music.bgSound.stop();
       }
     }
   }
