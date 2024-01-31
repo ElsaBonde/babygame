@@ -1,9 +1,9 @@
 class Star {
-  x: number;
-  y: number;
-  size: number;
-  maxBrightness: number;
-  currentBrightness: number;
+  private x: number;
+  private y: number;
+  private size: number;
+  private maxBrightness: number;
+  private currentBrightness: number;
 
   constructor(x: number, y: number, size: number, maxBrightness: number = 255) {
     this.x = x;
@@ -13,11 +13,11 @@ class Star {
     this.currentBrightness = random(0, maxBrightness);
   }
 
-  update() {
+  public update() {
     this.currentBrightness = random(0, this.maxBrightness);
   }
 
-  draw() {
+  public draw() {
     push();
     fill(255, 255, 255, this.currentBrightness);
     noStroke();

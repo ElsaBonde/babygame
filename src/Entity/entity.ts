@@ -11,12 +11,12 @@ class Entity {
     this.y = y;
   }
 
-  remove() {
+  public remove() {
     this.x = -100;
     this.y = -100;
   }
 
-  draw() {
+  public draw() {
     push();
     image(this.image, this.x, this.y, this.size, this.size);
     pop();

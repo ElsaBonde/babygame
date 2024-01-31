@@ -14,7 +14,7 @@ class Time {
   }
 
   //metod som anropas för att frysa tiden
-  freezeTime() {
+  public freezeTime() {
     //sätter frystiden till 5 sekunder
     this.freezeTimeLeft = 5;
     //sätter isPaused till true så att nedräkningen stannar
@@ -41,11 +41,11 @@ class Time {
     }
   }
 
-  update() {
+  public update() {
     this.countDown();
   }
 
-  formateTimer() {
+  private formateTimer() {
     let minutes = "0" + Math.floor(this.timeLeft / 60);
     let seconds = Math.floor(this.timeLeft % 60);
     let formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
@@ -57,7 +57,7 @@ class Time {
     }
   }
 
-  draw() {
+  public draw() {
     push();
     textSize(22);
     textFont("Orbitron");
