@@ -1,7 +1,5 @@
 class Level {
   private entities: Entity[]; // Level är experten på entiteter
-
-  private stars: Star[];
   private baby: Baby;
   private ghost: Ghost;
   public score: number;
@@ -12,18 +10,13 @@ class Level {
     formulaSound: p5.SoundFile;
     clockSound: p5.SoundFile;
     bgSound: p5.SoundFile;
-    winSound: p5.SoundFile;
-    looseSound: p5.SoundFile;
     ghostSound: p5.SoundFile;
   };
   private countDownToStart: number;
   public hasBabyReachedDoor: boolean;
   private hasBabyOpenedDoor: boolean = false;
-  private levelImage: p5.Image;
+  private background: Background;
 
-  /***
-   * DEFINITION - SPECA VAD VI TAR EMOT
-   */
   constructor(
     entities: Entity[],
     baby: Baby,
@@ -33,15 +26,13 @@ class Level {
       formulaSound: p5.SoundFile;
       clockSound: p5.SoundFile;
       bgSound: p5.SoundFile;
-      winSound: p5.SoundFile;
-      looseSound: p5.SoundFile;
       ghostSound: p5.SoundFile;
     },
     previousScore: number = 0,
     levelImage: p5.Image
   ) {
     this.entities = entities;
-    this.stars = [];
+    this.background = new Background(levelImage);
     this.baby = baby;
     this.ghost = ghost;
     this.time = new Time(60);
@@ -53,38 +44,6 @@ class Level {
     this.walls = entities.filter((entity) => entity instanceof Wall) as Wall[];
 
     this.hasBabyReachedDoor = false;
-    this.levelImage = levelImage;
-    this.createStars(70);
-  }
-
-  private createStars(numStars: number): void {
-    this.stars = [];
-    for (let i = 0; i < numStars; i++) {
-      let star: Star;
-      do {
-        const x = random(width);
-        const y = random(height);
-        const size = random(1, 3);
-        const maxBrightness = random(100, 255);
-
-        star = new Star(x, y, size, maxBrightness);
-      } while (this.isStarOverlappingWalls(star));
-      this.stars.push(star);
-    }
-  }
-
-  private isStarOverlappingWalls(star: Star): boolean {
-    for (const wall of this.walls) {
-      if (
-        star.x < wall.x + wall.size &&
-        star.x + star.size > wall.x &&
-        star.y < wall.y + wall.size &&
-        star.y + star.size > wall.y
-      ) {
-        return true;
-      }
-    }
-    return false;
   }
 
   isGameOver(): boolean {
@@ -96,6 +55,7 @@ class Level {
     return this.score;
   }
 
+  //Kollar av mellan bebisen och andra entiter
   private checkCollision(baby: Baby, entities: Entity[]): void {
     for (const entity of entities) {
       if (
@@ -117,7 +77,7 @@ class Level {
     }
   }
   /***
-   * Checkar kollision med någon av entiteterna
+   * Tar hand om kollisionen med olika entiteter
    */
   private handleCollision(baby: Baby, entity: Entity): void {
     //ÖL
@@ -154,16 +114,13 @@ class Level {
 
     //SPÖKE
     if (entity instanceof Ghost) {
-      console.log("Ghost collision detected!");
       if (!baby.effectedByGhost) {
-        console.log("Baby is not affected by Ghost. Applying effect.");
         this.music.ghostSound.play();
         baby.effectedByGhost = true;
         this.score -= 1;
 
         setTimeout(() => {
           baby.effectedByGhost = false;
-          console.log("Effect removed after 2000ms.");
         }, 2000);
       }
     }
@@ -181,12 +138,6 @@ class Level {
     fill("#64E12A");
     text(`: ${this.score}`, 71, 29);
     pop();
-  }
-
-  updateStars(): void {
-    for (let star of this.stars) {
-      star.update();
-    }
   }
 
   update(): void {
@@ -210,13 +161,7 @@ class Level {
       this.time.update();
     }
 
-    this.updateStars();
-  }
-
-  drawStars(): void {
-    for (let star of this.stars) {
-      star.draw();
-    }
+    this.background.update();
   }
 
   private drawCountDown() {
@@ -245,10 +190,10 @@ class Level {
     pop();
   }
 
-  //den som hämtas som level1
   draw() {
     push();
-    image(this.levelImage, 0, 0, width, height);
+    this.background.draw();
+
     for (let entity of this.entities) {
       entity.draw();
     }
@@ -268,6 +213,5 @@ class Level {
     if (this.countDownToStart > 0) {
       this.drawCountDown();
     }
-    this.drawStars();
   }
 }
