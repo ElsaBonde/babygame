@@ -14,6 +14,7 @@ class Level {
     bgSound: p5.SoundFile;
     winSound: p5.SoundFile;
     looseSound: p5.SoundFile;
+    ghostSound: p5.SoundFile;
   };
   private countDownToStart: number;
   public hasBabyReachedDoor: boolean;
@@ -34,6 +35,7 @@ class Level {
       bgSound: p5.SoundFile;
       winSound: p5.SoundFile;
       looseSound: p5.SoundFile;
+      ghostSound: p5.SoundFile;
     },
     previousScore: number = 0,
     levelImage: p5.Image
@@ -155,6 +157,7 @@ class Level {
       console.log("Ghost collision detected!");
       if (!baby.effectedByGhost) {
         console.log("Baby is not affected by Ghost. Applying effect.");
+        this.music.ghostSound.play();
         baby.effectedByGhost = true;
         this.score -= 1;
 
