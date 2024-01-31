@@ -2,8 +2,8 @@ class Level {
   private entities: Entity[]; // Level är experten på entiteter
   private baby: Baby;
   private ghost: Ghost;
-  public score: number;
-  public time: Time;
+  private score: number;
+  private time: Time;
   private walls: Wall[];
   private music: {
     beerSound: p5.SoundFile;
@@ -45,7 +45,7 @@ class Level {
     this.hasBabyReachedDoor = false;
   }
 
-  isGameOver(): boolean {
+  public isGameOver(): boolean {
     return this.time.isGameOver;
   }
 
@@ -131,7 +131,7 @@ class Level {
   /***
    * Ritar ut och placerar poängräkning, samt koordinatern för bild
    */
-  drawScore() {
+  private drawScore() {
     image(formulaImg, 36, 4, 30, 30);
 
     push();
@@ -142,7 +142,7 @@ class Level {
     pop();
   }
 
-  update(): void {
+  public update(): void {
     if (this.countDownToStart > 0) {
       this.countDownToStart -= deltaTime;
       return;
@@ -180,7 +180,7 @@ class Level {
     pop();
   }
 
-  drawCurrentLevelNumber() {
+  private drawCurrentLevelNumber() {
     push();
     textSize(22);
     textFont("Orbitron");
@@ -190,7 +190,7 @@ class Level {
     pop();
   }
 
-  draw() {
+  public draw() {
     push();
     this.background.draw();
 

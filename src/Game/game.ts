@@ -3,7 +3,7 @@ class Game {
   private currentPage: "start" | "level" | "end";
   private levelFactory: LevelFactory;
   private level: Level;
-  public startPage: StartPage;
+  private startPage: StartPage;
   private endOfGame: EndOfGame;
   public currentLevelNumber: number;
 
@@ -44,7 +44,7 @@ class Game {
     this.currentPage = "start";
   }
 
-  update() {
+  public update() {
     switch (this.currentPage) {
       case "start":
         this.startPage.startButton();
@@ -64,7 +64,7 @@ class Game {
     }
   }
 
-  draw() {
+ public draw() {
     clear(0, 0, 0, 0);
     switch (this.currentPage) {
       case "start":

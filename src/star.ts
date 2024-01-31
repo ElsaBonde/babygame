@@ -1,10 +1,11 @@
 class Star {
-  x: number;
-  y: number;
-  size: number;
-  maxBrightness: number;
-  currentBrightness: number;
-  isWarm: boolean;
+
+  private x: number;
+  private y: number;
+  private size: number;
+  private maxBrightness: number;
+  private currentBrightness: number;
+  private isWarm: boolean;
 
   constructor(
     x: number,
@@ -21,7 +22,8 @@ class Star {
     this.isWarm = isWarm;
   }
 
-  update() {
+
+ public update() {
     let brightnessChange;
     if (this.isWarm) {
       brightnessChange = random(-30, 30);
@@ -34,27 +36,9 @@ class Star {
       0,
       this.maxBrightness
     );
-    /* if (this.isWarm) {
-      let brightnessChange = random(-20, 20);
-      this.currentBrightness += brightnessChange;
-
-      if (
-        this.currentBrightness > this.maxBrightness - 10 ||
-        this.currentBrightness < 10
-      ) {
-        this.currentBrightness = constrain(
-          this.currentBrightness,
-          0,
-          this.maxBrightness
-        );
-      }
-    } else {
-      this.currentBrightness = random(0, this.maxBrightness);
-    }
-    */
   }
 
-  draw() {
+  public draw() {
     push();
     if (this.isWarm) {
       let warmColor = color(255, 204, 0, this.currentBrightness);

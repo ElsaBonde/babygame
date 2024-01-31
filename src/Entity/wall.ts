@@ -8,7 +8,7 @@ class Wall extends Entity {
     this.color = color;
   }
 
-  draw() {
+  public draw() {
     push();
     fill(this.color);
     noStroke();

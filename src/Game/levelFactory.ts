@@ -11,10 +11,10 @@
 20 = tom ruta */
 
 class LevelFactory {
-  public numbersGridLevel1: number[][];
-  public levelImage: p5.Image;
-  public numbersGridLevel2: number[][];
-  public numbersGridLevel3: number[][];
+  private numbersGridLevel1: number[][];
+  private levelImage: p5.Image;
+  private numbersGridLevel2: number[][];
+  private numbersGridLevel3: number[][];
 
   constructor() {
     // prettier-ignore
@@ -73,9 +73,6 @@ class LevelFactory {
       [10, 14, 20, 20, 11, 14, 11, 14, 20, 20, 11, 16, 14, 20, 13, 20, 11, 20, 20, 13, 20, 20, 20, 20, 17],
       [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
 ];
-
-
-    
     this.levelImage = new p5.Image(1000, 600);
   }
 
@@ -158,10 +155,7 @@ class LevelFactory {
         if (selectedLevelGrid[y][x] === 18) {
           const ghostSize = 0.8 * blockSize;
           const offset = 0.1 * blockSize;
-          ghost = new Ghost(ghostSize, x * blockSize + offset, y * blockSize + offset)
-         /*  entities.push(
-            new Ghost(ghostSize, x * blockSize + offset, y * blockSize + offset)
-          ); */
+          ghost = new Ghost(ghostSize, x * blockSize + offset, y * blockSize + offset);
         }
       }
       
@@ -170,7 +164,7 @@ class LevelFactory {
     return new Level(entities, baby!, ghost!, music, previousScore, levelImage);
   }
 
-  getLevelImage(): p5.Image {
+  public getLevelImage(): p5.Image {
     return this.levelImage;
   }
 }
