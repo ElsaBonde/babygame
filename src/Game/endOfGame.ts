@@ -122,15 +122,16 @@ class EndOfGame {
     );
     pop();
 
-    if (this.text === "WINNER!" && !this.music.winSound.isPlaying()) {
-      this.music.winSound.play();
+    if (this.text === "WINNER!") {
       this.drawStars();
-    } else if (
-      this.text === "GAME OVER!" &&
-      !this.music.looseSound.isPlaying()
-    ) {
-      this.music.looseSound.play();
+      if (!this.music.winSound.isPlaying()) {
+        this.music.winSound.play();
+      }
+    } else if (this.text === "GAME OVER!") {
       this.drawTears();
+      if (!this.music.looseSound.isPlaying()) {
+        this.music.looseSound.play();
+      }
     }
   }
 }
