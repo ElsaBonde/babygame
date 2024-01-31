@@ -13,8 +13,7 @@ class Level {
     ghostSound: p5.SoundFile;
   };
   private countDownToStart: number;
-  public hasBabyReachedDoor: boolean;
-  private hasBabyOpenedDoor: boolean = false;
+  private hasBabyReachedDoor: boolean;
   private background: Background;
 
   constructor(
@@ -108,8 +107,11 @@ class Level {
     //DÖRR
     if (entity instanceof Door) {
       const door = entity as Door;
-      door.openDoor();
-      game.nextLevel();
+      if (!this.hasBabyReachedDoor) {
+        this.hasBabyReachedDoor = true;
+        door.openDoor();
+        setTimeout(() => game.nextLevel(), 2000);
+      }
     }
 
     //SPÖKE
@@ -121,7 +123,7 @@ class Level {
 
         setTimeout(() => {
           baby.effectedByGhost = false;
-        }, 2000);
+        }, 1000);
       }
     }
   }
@@ -151,16 +153,14 @@ class Level {
         entity.update(this.baby);
       }
     }
-    this.ghost.update(this.baby);
-    this.baby.update(this.walls);
-    this.checkCollision(this.baby, this.entities);
 
-    if (this.hasBabyOpenedDoor) {
-      this.time.setTimeToZero();
-    } else {
+    if (!this.hasBabyReachedDoor) {
       this.time.update();
+      this.ghost.update(this.baby);
     }
+    this.baby.update(this.walls, this.hasBabyReachedDoor);
 
+    this.checkCollision(this.baby, this.entities);
     this.background.update();
   }
 
