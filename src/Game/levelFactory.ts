@@ -28,19 +28,19 @@ class LevelFactory {
       colorWall = "#7851A9";
     } else if (levelNumber === 3) {
       levelImage = levelThree;
-      colorWall = "#c47eb1";
+      colorWall = "#d08dbd";
     } else if (levelNumber === 4) {
       levelImage = levelFour;
-      colorWall = "#900002";
+      colorWall = "#841810";
     } else if (levelNumber === 5) {
       levelImage = levelFive;
       colorWall = "#53185d";
     } else if (levelNumber === 6) {
       levelImage = levelSix;
-      colorWall = "#10740b";
+      colorWall = "#357222";
     } else {
       levelImage = levelSeven;
-      colorWall = "#1E77A4";
+      colorWall = "#1C2566";
     }
 
     //ritar ut alla entiteter på rätt plats i nivåerna
