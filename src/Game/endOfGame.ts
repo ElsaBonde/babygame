@@ -47,7 +47,7 @@ class EndOfGame {
 
   //13 är enter
   public keyPressedEnd() {
-    if (keyCode === 13) {
+    if (keyCode === ENTER) {
       if (game.getCurrentPage() === "end") {
         game.changePageToStartPage();
       }

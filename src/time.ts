@@ -4,6 +4,7 @@ class Time {
   private isPaused: boolean;
   public isGameOver: boolean;
   private freezeTimeLeft: number;
+  private paused: boolean;
 
   constructor(seconds: number) {
     this.seconds = seconds; //skapar 60 sek från start
@@ -11,6 +12,15 @@ class Time {
     this.isPaused = false;
     this.isGameOver = false;
     this.freezeTimeLeft = 0;
+    this.paused = false;
+  }
+
+  public pause() {
+    this.paused = true;
+  }
+
+  public resume() {
+    this.paused = false;
   }
 
   //metod som anropas för att frysa tiden
@@ -43,6 +53,9 @@ class Time {
 
   public update() {
     this.countDown();
+    if (this.paused) {
+      return;
+    }
   }
 
   private formateTimer() {

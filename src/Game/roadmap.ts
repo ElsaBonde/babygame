@@ -8,7 +8,6 @@ class Roadmap {
   public handleLevelSelection(key: string) {
     switch (key) {
       case "1":
-        console.log("1");
         this.selectLevel(1);
         break;
       case "2":
@@ -29,10 +28,17 @@ class Roadmap {
       case "7":
         this.selectLevel(7);
         break;
+      case "8":
+        this.selectLevel(8);
+        break;
     }
   }
   public selectLevel(levelNumber: number) {
     this.game.startLevel(levelNumber);
+  }
+
+  private drawEscape() {
+    image(escapeButton, 86, 78, 38, 38);
   }
 
   private drawCircle() {
@@ -97,6 +103,13 @@ class Roadmap {
     );
     pop();
 
+    push();
+    textSize(15);
+    textFont("VT323");
+    textAlign(CENTER);
+    text("(Press 'ESC' to go back to the start page.)", width / 2, 235);
+    pop();
+
     image(placeHolderLevel1, 100, 245, 200, 130);
     image(placeHolderLevel2, 300, 245, 200, 130);
     image(placeHolderLevel3, 500, 245, 200, 130);
@@ -104,8 +117,9 @@ class Roadmap {
     image(placeHolderLevel5, 100, 395, 200, 130);
     image(placeHolderLevel6, 300, 395, 200, 130);
     image(placeHolderLevel7, 500, 395, 200, 130);
-    image(placeHolderLevel1, 700, 395, 200, 130);
+    image(placeHolderLevel8, 700, 395, 200, 130);
 
     this.drawCircle();
+    this.drawEscape();
   }
 }

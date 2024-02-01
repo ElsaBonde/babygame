@@ -37,11 +37,11 @@ class StartPage {
     textSize(25);
     fill("black");
     textFont("VT323");
-    text("PRESS", 527, 580);
+    text("PRESS", 540, 580);
     textStyle(BOLD);
-    text("ENTER", 586, 580);
+    text("R", 605, 580);
     textStyle(NORMAL);
-    text("FOR ROADMAP", 643, 580);
+    text("FOR ROADMAP", 628, 580);
     pop();
   }
 
@@ -68,7 +68,7 @@ class StartPage {
         game.changePage();
       }
     }
-    if (keyCode === ENTER) {
+    if (keyCode === 82) {
       game.changePageToRoadmap();
     }
   }

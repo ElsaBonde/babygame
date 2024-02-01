@@ -5,6 +5,7 @@ class Level {
   private score: number;
   private time: Time;
   private walls: Wall[];
+  private isPaused: boolean;
   private music: {
     beerSound: p5.SoundFile;
     formulaSound: p5.SoundFile;
@@ -42,7 +43,18 @@ class Level {
     //walls är en array som endast innehåller väggarna i aktiv level, detta hämtas med hjälp av filter som i sin tur hämtar alla väggar från entities
     this.walls = entities.filter((entity) => entity instanceof Wall) as Wall[];
 
+    this.isPaused = false;
+
     this.hasBabyReachedDoor = false;
+  }
+
+  public togglePause() {
+    this.isPaused = !this.isPaused;
+    if (this.isPaused) {
+      this.time.pause();
+    } else {
+      this.time.resume();
+    }
   }
 
   public isGameOver(): boolean {
@@ -123,7 +135,7 @@ class Level {
 
         setTimeout(() => {
           baby.effectedByGhost = false;
-        }, 1000);
+        }, 2000);
       }
     }
   }
@@ -143,6 +155,9 @@ class Level {
   }
 
   public update(): void {
+    if (this.isPaused) {
+      return;
+    }
     if (this.countDownToStart > 0) {
       this.countDownToStart -= deltaTime;
       return;
@@ -167,7 +182,7 @@ class Level {
   private drawCountDown() {
     push();
     noStroke();
-    fill(0, 0, 0, 95);
+    fill(0, 0, 0, 150);
     circle(500, 300, 500);
     pop();
 
@@ -187,6 +202,23 @@ class Level {
     fill("#64E12A");
     textAlign(CENTER);
     text(`Level: ${game.currentLevelNumber}`, width / 2, 29);
+    pop();
+  }
+
+  private drawPause() {
+    push();
+    noStroke();
+    fill(0, 0, 0, 150);
+    circle(500, 300, 500);
+    pop();
+
+    push();
+    textSize(250);
+    textFont("Orbitron");
+    textStyle(BOLD);
+    fill("#64E12A");
+    textAlign(CENTER);
+    text("| |", width / 2, 385);
     pop();
   }
 
@@ -212,6 +244,9 @@ class Level {
 
     if (this.countDownToStart > 0) {
       this.drawCountDown();
+    }
+    if (this.isPaused) {
+      this.drawPause();
     }
   }
 }

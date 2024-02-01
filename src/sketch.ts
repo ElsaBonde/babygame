@@ -19,6 +19,7 @@ let beerImg: p5.Image;
 let formulaImg: p5.Image;
 let clockImg: p5.Image;
 let ghostImg: p5.Image;
+let escapeButton: p5.Image;
 let doorImg: {
   doorClosed: p5.Image;
   doorOpen: p5.Image;
@@ -31,6 +32,7 @@ let placeHolderLevel4: p5.Image;
 let placeHolderLevel5: p5.Image;
 let placeHolderLevel6: p5.Image;
 let placeHolderLevel7: p5.Image;
+let placeHolderLevel8: p5.Image;
 
 let music: {
   beerSound: p5.SoundFile;
@@ -85,6 +87,7 @@ function preload() {
   formulaImg = loadImage("./assets/img/formula.png");
   clockImg = loadImage("./assets/img/clock.png");
   ghostImg = loadImage("./assets/img/ghost.png");
+  escapeButton = loadImage("./assets/img/escapeButton.png");
   doorImg = {
     doorClosed: loadImage("./assets/img/doorClosed.png"),
     doorOpen: loadImage("./assets/img/doorOpen.png"),
@@ -97,6 +100,7 @@ function preload() {
   placeHolderLevel5 = loadImage("./assets/img/placeholderLevel5.png");
   placeHolderLevel6 = loadImage("./assets/img/placeholderLevel6.png");
   placeHolderLevel7 = loadImage("./assets/img/placeholderLevel7.png");
+  placeHolderLevel8 = loadImage("./assets/img/placeholderLevel8.png");
 
   music = {
     beerSound: loadSound("./assets/music/beerSound.mp3"),
