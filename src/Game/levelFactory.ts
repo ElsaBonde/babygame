@@ -10,7 +10,6 @@ class LevelFactory {
   public generateLevel(levelNumber: number, previousScore: number = 0): Level {
     const entities: Entity[] = [];
     let baby: Baby;
-    let ghost: Ghost;
     const blockSize: number = 40;
     let selectedLevelGrid: number[][] | undefined;
     let levelImage: p5.Image;
@@ -22,33 +21,48 @@ class LevelFactory {
      * Bestämmer vilken nivå som ska ritas ut och vilken färg väggarna ska ha + vilken bakgrundsbild som ska visas
      */
     if (selectedLevelGrid) {
+      //skapar en array för spöken så man kan ha mer än 1 på spelplanen
+      const ghosts: Ghost[] = [];
 
       //bestämmer vilken nivå som ska ritas ut och vilken färg väggarna ska ha + vilken bakgrundbild som ska visas
-    if (levelNumber === 1) {
-      levelImage = levelOne;
-      colorWall = "#1E77A4";
-    } else if (levelNumber === 2) {
-      levelImage = levelTwo;
-      colorWall = "#7851A9";
-    } else if (levelNumber === 3) {
-      levelImage = levelThree;
-      colorWall = "#d08dbd";
-    } else if (levelNumber === 4) {
-      levelImage = levelFour;
-      colorWall = "#841810";
-    } else if (levelNumber === 5) {
-      levelImage = levelFive;
-      colorWall = "#53185d";
-    } else if (levelNumber === 6) {
-      levelImage = levelSix;
-      colorWall = "#357222";
-    } else if (levelNumber === 7) {
-      levelImage = levelSeven;
-      colorWall = "#1C2566";
-    } else {
-      levelImage = levelEight;
-      colorWall = "#b4436c";
-    }
+      switch (levelNumber) {
+        case 1:
+          levelImage = levelOne;
+          colorWall = "#1E77A4";
+          break;
+        case 2:
+          levelImage = levelTwo;
+          colorWall = "#7851A9";
+          break;
+        case 3:
+          levelImage = levelThree;
+          colorWall = "#d08dbd";
+          break;
+        case 4:
+          levelImage = levelFour;
+          colorWall = "#841810";
+          break;
+        case 5:
+          levelImage = levelFive;
+          colorWall = "#53185d";
+          break;
+        case 6:
+          levelImage = levelSix;
+          colorWall = "#357222";
+          break;
+        case 7:
+          levelImage = levelSeven;
+          colorWall = "#1C2566";
+          break;
+        case 8:
+          levelImage = levelEight;
+          colorWall = "#b4436c";
+          break;
+          default:
+            levelImage = levelOne;
+            colorWall = "#1E77A4";
+            break;
+      }
       /***
        * Ritar ut alla entiteter på rätt plats i nivåerna
        */
@@ -128,11 +142,12 @@ class LevelFactory {
           if (selectedLevelGrid[y][x] === 18) {
             const ghostSize = 0.8 * blockSize;
             const offset = 0.1 * blockSize;
-            ghost = new Ghost(
+            const newGhost = new Ghost(
               ghostSize,
               x * blockSize + offset,
               y * blockSize + offset
             );
+            ghosts.push(newGhost);
           }
         }
       }
@@ -140,13 +155,15 @@ class LevelFactory {
       return new Level(
         entities,
         baby!,
-        ghost!,
+        ghosts,
         music,
         previousScore,
         levelImage
       );
-    } /*varför behöver detta ens finnas?*/ else {
+    }  else {
+      //kommer aldrig hända
       console.log("Level does not exit");
+      return new Level(entities, baby!, [], music, previousScore, levelOne);
     }
   }
 

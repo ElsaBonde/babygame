@@ -1,7 +1,7 @@
 class Level {
   private entities: Entity[]; // Level är experten på entiteter
   private baby: Baby;
-  private ghost: Ghost;
+  private ghosts: Ghost[];
   private score: number;
   private time: Time;
   private walls: Wall[];
@@ -20,7 +20,7 @@ class Level {
   constructor(
     entities: Entity[],
     baby: Baby,
-    ghost: Ghost,
+    ghosts: Ghost[],
     music: {
       beerSound: p5.SoundFile;
       formulaSound: p5.SoundFile;
@@ -34,7 +34,7 @@ class Level {
     this.entities = entities;
     this.background = new Background(levelImage);
     this.baby = baby;
-    this.ghost = ghost;
+    this.ghosts = ghosts;
     this.time = new Time(60);
     this.music = music;
     this.countDownToStart = 3000;
@@ -77,16 +77,20 @@ class Level {
       ) {
         this.handleCollision(baby, entity);
       }
-      if (
-        baby.x < this.ghost.x + this.ghost.size &&
-        baby.x + baby.size > this.ghost.x &&
-        baby.y < this.ghost.y + this.ghost.size &&
-        baby.y + baby.size > this.ghost.y
-      ) {
-        this.handleCollision(baby, this.ghost);
+
+      for (const ghost of this.ghosts) {
+        if (
+          baby.x < ghost.x + ghost.size &&
+          baby.x + baby.size > ghost.x &&
+          baby.y < ghost.y + ghost.size &&
+          baby.y + baby.size > ghost.y
+        ) {
+          this.handleCollision(baby, ghost);
+        }
       }
     }
   }
+  
   /***
    * Tar hand om kollisionen med olika entiteter
    */
@@ -171,7 +175,9 @@ class Level {
 
     if (!this.hasBabyReachedDoor) {
       this.time.update();
-      this.ghost.update(this.baby);
+      for (let ghost of this.ghosts) {
+        ghost.update(this.baby);
+      }
     }
     this.baby.update(this.walls, this.hasBabyReachedDoor);
 
@@ -234,7 +240,9 @@ class Level {
       this.music.bgSound.play();
     }
 
-    this.ghost.draw();
+    for (let ghost of this.ghosts) {
+      ghost.draw();
+    }
     this.baby.draw();
 
     pop();
