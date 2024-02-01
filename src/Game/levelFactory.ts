@@ -22,32 +22,31 @@ class LevelFactory {
      * Bestämmer vilken nivå som ska ritas ut och vilken färg väggarna ska ha + vilken bakgrundsbild som ska visas
      */
     if (selectedLevelGrid) {
-      if (levelNumber === 1) {
-        levelImage = levelOne;
-        colorWall = "#1E77A4";
-      } else if (levelNumber === 2) {
-        levelImage = levelTwo;
-        colorWall = "#7851A9";
-      } else if (levelNumber === 3) {
-        levelImage = levelThree;
-        colorWall = "#c47eb1";
-      } else if (levelNumber === 4) {
-        levelImage = levelFour;
-        colorWall = "#900002";
-      } else if (levelNumber === 5) {
-        levelImage = levelFive;
-        colorWall = "#53185d";
-      } else if (levelNumber === 6) {
-        levelImage = levelSix;
-        colorWall = "#10740b";
-      } else if (levelNumber === 7) {
-        levelImage = levelSeven;
-        colorWall = "#1E77A4";
-      } else {
-        levelImage = levelEight;
-        colorWall = "#b4436c";
-      }
 
+      //bestämmer vilken nivå som ska ritas ut och vilken färg väggarna ska ha + vilken bakgrundbild som ska visas
+    if (levelNumber === 1) {
+      levelImage = levelOne;
+      colorWall = "#1E77A4";
+    } else if (levelNumber === 2) {
+      levelImage = levelTwo;
+      colorWall = "#7851A9";
+    } else if (levelNumber === 3) {
+      levelImage = levelThree;
+      colorWall = "#d08dbd";
+    } else if (levelNumber === 4) {
+      levelImage = levelFour;
+      colorWall = "#841810";
+    } else if (levelNumber === 5) {
+      levelImage = levelFive;
+      colorWall = "#53185d";
+    } else if (levelNumber === 6) {
+      levelImage = levelSix;
+      colorWall = "#357222";
+    } else {
+      levelImage = levelSeven;
+      colorWall = "#1C2566";
+    }
+      
       /***
        * Ritar ut alla entiteter på rätt plats i nivåerna
        */
