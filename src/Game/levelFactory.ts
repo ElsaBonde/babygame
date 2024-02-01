@@ -42,11 +42,13 @@ class LevelFactory {
     } else if (levelNumber === 6) {
       levelImage = levelSix;
       colorWall = "#357222";
-    } else {
+    } else if (levelNumber === 7) {
       levelImage = levelSeven;
       colorWall = "#1C2566";
+    } else {
+      levelImage = levelEight;
+      colorWall = "#b4436c";
     }
-      
       /***
        * Ritar ut alla entiteter på rätt plats i nivåerna
        */
