@@ -12,14 +12,36 @@ class StartPage {
     push();
     //ger glittereffekt till bakgrunden
     fill(this.glitterColor(this.buttonColor));
-    rect(372.5, 542, 255, 60, 15);
+    rect(235, 542, 255, 60, 15);
     pop();
 
     push();
-    textSize(28);
+    textSize(25);
     fill("black");
     textFont("VT323");
-    text("PRESS SPACE TO START", 388, 580);
+    text("PRESS", 265, 580);
+    textStyle(BOLD);
+    text("SPACE", 325, 580)
+    textStyle(NORMAL);
+    text("TO START", 382, 580);
+    pop();
+  }
+
+  public roadmapButton() {
+    push();
+    fill(this.glitterColor(this.buttonColor));
+    rect(510, 542, 255, 60, 15);
+    pop();
+
+    push();
+    textSize(25);
+    fill("black");
+    textFont("VT323");
+    text("PRESS", 527, 580);
+    textStyle(BOLD);
+    text("ENTER", 586, 580);
+    textStyle(NORMAL);
+    text("FOR ROADMAP", 643, 580);
     pop();
   }
 
@@ -46,10 +68,14 @@ class StartPage {
         game.changePage();
       }
     }
+    if (keyCode === ENTER) {
+      game.changePageToRoadmap();
+    }
   }
 
   public draw() {
     background(backgroundImg);
     this.startButton();
+    this.roadmapButton();
   }
 }

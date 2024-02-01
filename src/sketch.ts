@@ -10,6 +10,7 @@ let levelSix: p5.Image;
 let levelSeven: p5.Image;
 let levelEight: p5.Image;
 let backgroundImg: p5.Image;
+let roadmapImg: p5.Image;
 let endScreenStar: p5.Image;
 let smallStarsEndScreen: p5.Image;
 let tears: p5.Image;
@@ -22,6 +23,15 @@ let doorImg: {
   doorClosed: p5.Image;
   doorOpen: p5.Image;
 };
+
+let placeHolderLevel1: p5.Image;
+let placeHolderLevel2: p5.Image;
+let placeHolderLevel3: p5.Image;
+let placeHolderLevel4: p5.Image;
+let placeHolderLevel5: p5.Image;
+let placeHolderLevel6: p5.Image;
+let placeHolderLevel7: p5.Image;
+
 let music: {
   beerSound: p5.SoundFile;
   formulaSound: p5.SoundFile;
@@ -31,6 +41,7 @@ let music: {
   looseSound: p5.SoundFile;
   ghostSound: p5.SoundFile;
 };
+const totalLevels = 7;
 
 /**
  * Built in preload function in P5
@@ -55,6 +66,7 @@ function preload() {
   ];
 
   backgroundImg = loadImage("./assets/img/startpage.png");
+  roadmapImg = loadImage("./assets/img/roadmapImg.png");
   endScreenStar = loadImage("./assets/img/endScreenStars.gif");
   smallStarsEndScreen = loadImage("./assets/img/smallStarsEndScreen.gif");
   tears = loadImage("./assets/img/tears.gif");
@@ -66,7 +78,9 @@ function preload() {
   levelFive = loadImage("./assets/img/levelFive.png");
   levelSix = loadImage("./assets/img/levelSix.png");
   levelSeven = loadImage("./assets/img/levelSeven.png");
+
   levelEight = loadImage("./assets/img/levelEight.png");
+
   beerImg = loadImage("./assets/img/beer.png");
   formulaImg = loadImage("./assets/img/formula.png");
   clockImg = loadImage("./assets/img/clock.png");
@@ -75,6 +89,14 @@ function preload() {
     doorClosed: loadImage("./assets/img/doorClosed.png"),
     doorOpen: loadImage("./assets/img/doorOpen.png"),
   };
+
+  placeHolderLevel1 = loadImage("./assets/img/placeholderLevel1.png");
+  placeHolderLevel2 = loadImage("./assets/img/placeholderLevel2.png");
+  placeHolderLevel3 = loadImage("./assets/img/placeholderLevel3.png");
+  placeHolderLevel4 = loadImage("./assets/img/placeholderLevel4.png");
+  placeHolderLevel5 = loadImage("./assets/img/placeholderLevel5.png");
+  placeHolderLevel6 = loadImage("./assets/img/placeholderLevel6.png");
+  placeHolderLevel7 = loadImage("./assets/img/placeholderLevel7.png");
 
   music = {
     beerSound: loadSound("./assets/music/beerSound.mp3"),
@@ -105,6 +127,10 @@ function setup() {
   music.ghostSound.setVolume(0.6);
 
   game = new Game();
+}
+
+function keyPressed() {
+  game.keyPressed(key);
 }
 
 /**

@@ -1,11 +1,12 @@
 class Game {
   // STATE - TILLSTÅND - ATTRIBUT - INSTANSVARIABLER
-  private currentPage: "start" | "level" | "end";
+  private currentPage: "start" | "roadmap" | "level" | "end";
   private levelFactory: LevelFactory;
   private level: Level;
   private startPage: StartPage;
   private endOfGame: EndOfGame;
   public currentLevelNumber: number;
+  private roadMap: Roadmap;
 
   constructor() {
     this.currentPage = "start";
@@ -14,6 +15,7 @@ class Game {
     this.startPage = new StartPage();
     this.endOfGame = new EndOfGame(music);
     this.currentLevelNumber = 1;
+    this.roadMap = new Roadmap(this);
   }
 
   public nextLevel() {
@@ -30,8 +32,14 @@ class Game {
     }
   }
 
-  public getCurrentPage(): "start" | "level" | "end" {
+  public getCurrentPage(): "start" | "roadmap" | "level" | "end" {
     return this.currentPage;
+  }
+
+  public startLevel(levelNumber: number) {
+    this.currentLevelNumber = levelNumber;
+    this.level = this.levelFactory.generateLevel(levelNumber);
+    this.currentPage = "level";
   }
 
   public changePage() {
@@ -44,11 +52,24 @@ class Game {
     this.currentPage = "start";
   }
 
+  public changePageToRoadmap() {
+    this.currentPage = "roadmap";
+  }
+
+  public keyPressed(key: string) {
+    console.log("Current page:", this.currentPage);
+    if (this.currentPage === "roadmap") {
+      this.roadMap.handleLevelSelection(key);
+    }
+  }
+
   public update() {
     switch (this.currentPage) {
       case "start":
         this.startPage.startButton();
         this.startPage.keyPressedStart();
+        break;
+      case "roadmap":
         break;
       case "level":
         this.level.update();
@@ -69,6 +90,9 @@ class Game {
     switch (this.currentPage) {
       case "start":
         this.startPage.draw();
+        break;
+      case "roadmap":
+        this.roadMap.draw();
         break;
       case "level":
         this.level.draw();
