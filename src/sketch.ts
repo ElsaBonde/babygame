@@ -124,11 +124,11 @@ function setup() {
 
   game = new Game();
 }
-/*
+
 function keyPressed() {
   game.keyPressed(key);
 }
-*/
+
 /**
  * Built in draw function in P5
  * This is a good place to call public methods of the object
