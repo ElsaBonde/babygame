@@ -8,7 +8,7 @@ class StartPage {
   /**
    * Create 'start button' to welcome page
    */
-  private startButton() {
+  public startButton() {
     push();
     //ger glittereffekt till bakgrunden
     fill(this.glitterColor(this.buttonColor));
