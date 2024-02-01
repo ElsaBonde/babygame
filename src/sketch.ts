@@ -65,7 +65,7 @@ function preload() {
   ];
 
   backgroundImg = loadImage("./assets/img/startpage.png");
-  roadmapImg = loadImage("./assets/img/roadmap.png");
+  roadmapImg = loadImage("./assets/img/roadmapImg.png");
   endScreenStar = loadImage("./assets/img/endScreenStars.gif");
   smallStarsEndScreen = loadImage("./assets/img/smallStarsEndScreen.gif");
   tears = loadImage("./assets/img/tears.gif");
@@ -124,7 +124,11 @@ function setup() {
 
   game = new Game();
 }
-
+/*
+function keyPressed() {
+  game.keyPressed(key);
+}
+*/
 /**
  * Built in draw function in P5
  * This is a good place to call public methods of the object

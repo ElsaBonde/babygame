@@ -13,7 +13,7 @@ class Game {
     this.levelFactory = new LevelFactory();
     this.level = this.levelFactory.generateLevel(1);
     this.startPage = new StartPage();
-    this.roadMap = new Roadmap();
+    this.roadMap = new Roadmap(game);
     this.endOfGame = new EndOfGame(music);
     this.currentLevelNumber = 1;
   }
@@ -56,12 +56,12 @@ class Game {
     this.currentPage = "roadmap";
   }
 
-  public keyPressed() {
+  public keyPressed(key: string) {
     if(this.currentPage === "roadmap") {
       this.roadMap.handleLevelSelection(key);
     }
   }
-
+  
   public update() {
     switch (this.currentPage) {
       case "start":

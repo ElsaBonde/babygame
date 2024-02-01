@@ -1,13 +1,16 @@
 class Roadmap {
   private iconLevels: number;
+  private game: Game;
 
-  constructor() {
+  constructor(game: Game) {
     this.iconLevels = 1;
+    this.game = game;
   }
 
-  public handleLevelSelection() {
+  public handleLevelSelection(key: string) {
     switch (key) {
       case "1":
+        console.log("1");
         this.selectLevel(1);
         break;
       case "2":
@@ -31,7 +34,7 @@ class Roadmap {
     }
   }
   public selectLevel(levelNumber: number) {
-    game.startLevel(levelNumber);
+    this.game.startLevel(levelNumber);
   }
 
   draw() {
