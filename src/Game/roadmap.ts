@@ -8,7 +8,6 @@ class Roadmap {
   public handleLevelSelection(key: string) {
     switch (key) {
       case "1":
-        console.log("1");
         this.selectLevel(1);
         break;
       case "2":
@@ -28,6 +27,9 @@ class Roadmap {
         break;
       case "7":
         this.selectLevel(7);
+        break;
+      case "8":
+        this.selectLevel(8);
         break;
     }
   }
