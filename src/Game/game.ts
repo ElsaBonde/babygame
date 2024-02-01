@@ -57,12 +57,23 @@ class Game {
   }
 
   public keyPressed(key: string) {
+    if (this.currentPage === "level") {
+      if (key === "P" || key === "p") {
+        this.level.togglePause();
+      }
+    }
+    if (this.currentPage === "end") {
+      if (keyCode === ENTER) {
+        this.changePageToStartPage();
+      }
+    }
+
     if (this.currentPage === "roadmap") {
       //klicka på escape OM man är i roadmap för att komma tillbaka till startpage
-      if(key === "Escape") {
+      if (key === "Escape") {
         this.changePageToStartPage();
       } else {
-      this.roadMap.handleLevelSelection(key);
+        this.roadMap.handleLevelSelection(key);
       }
     }
   }

@@ -77,15 +77,15 @@ class LevelFactory {
             );
           }
           if (selectedLevelGrid[y][x] === 13) {
-            const beerSize = 0.9 * blockSize;
-            const offset = 0.05 * blockSize;
+            const beerSize = 0.95 * blockSize;
+            const offset = 0.025 * blockSize;
             entities.push(
               new Beer(beerSize, x * blockSize + offset, y * blockSize + offset)
             );
           }
           if (selectedLevelGrid[y][x] === 14) {
-            const formulaSize = 0.7 * blockSize;
-            const offset = 0.15 * blockSize;
+            const formulaSize = 0.95 * blockSize;
+            const offset = 0.025 * blockSize;
             entities.push(
               new Formula(
                 formulaSize,
