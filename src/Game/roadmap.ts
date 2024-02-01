@@ -1,9 +1,7 @@
 class Roadmap {
-  private iconLevels: number;
   private game: Game;
 
   constructor(game: Game) {
-    this.iconLevels = 1;
     this.game = game;
   }
 
