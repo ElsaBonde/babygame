@@ -17,7 +17,7 @@ class Game {
   }
 
   public nextLevel() {
-    if (this.currentLevelNumber < 7) {
+    if (this.currentLevelNumber < 8) {
       this.currentLevelNumber++;
       this.level = this.levelFactory.generateLevel(
         this.currentLevelNumber,
@@ -64,7 +64,7 @@ class Game {
     }
   }
 
- public draw() {
+  public draw() {
     clear(0, 0, 0, 0);
     switch (this.currentPage) {
       case "start":
