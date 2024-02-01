@@ -57,9 +57,13 @@ class Game {
   }
 
   public keyPressed(key: string) {
-    console.log("Current page:", this.currentPage);
     if (this.currentPage === "roadmap") {
+      //klicka på escape OM man är i roadmap för att komma tillbaka till startpage
+      if(key === "Escape") {
+        this.changePageToStartPage();
+      } else {
       this.roadMap.handleLevelSelection(key);
+      }
     }
   }
 
