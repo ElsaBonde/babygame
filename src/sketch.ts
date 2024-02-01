@@ -8,6 +8,7 @@ let levelFour: p5.Image;
 let levelFive: p5.Image;
 let levelSix: p5.Image;
 let levelSeven: p5.Image;
+let levelEight: p5.Image;
 let backgroundImg: p5.Image;
 let roadmapImg: p5.Image;
 let endScreenStar: p5.Image;
@@ -77,6 +78,9 @@ function preload() {
   levelFive = loadImage("./assets/img/levelFive.png");
   levelSix = loadImage("./assets/img/levelSix.png");
   levelSeven = loadImage("./assets/img/levelSeven.png");
+
+  levelEight = loadImage("./assets/img/levelEight.png");
+
   beerImg = loadImage("./assets/img/beer.png");
   formulaImg = loadImage("./assets/img/formula.png");
   clockImg = loadImage("./assets/img/clock.png");
