@@ -20,7 +20,7 @@ To construct the game, we utilized p5.js and TypeScript with an Object-Oriented 
 
 ## Contributors
 
-Thanks to everyone who contributed to this project!
+Thanks to everyone who contributed to this project! 😍
 
 - [Daniela Byström](https://github.com/danibystrom)
 - [Elin Vahlberg](https://github.com/mypinkworld)
