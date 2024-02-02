@@ -55,8 +55,8 @@ class Roadmap {
         pop();
       }
     }
-    for (let x of [100, 300, 500, 700]) {
-      for (let y of [245, 395]) {
+    for (let y of [245, 395]) {
+      for (let x of [100, 300, 500, 700]) {
         push();
         textSize(50);
         fill("black");
