@@ -11,6 +11,10 @@ Yet, succeed, and a window unveils your triumphant score as the baby erupts in j
 
 Embrace the exhilarating quest, where every second carries the weight of destiny. Can you guide the baby through the labyrinth, reach the door in time, and emerge victorious? The clock is ticking, the bottles beckon, and the labyrinth awaits your daring pursuit. May fortune favor the swift!
 
+### Shortcut to game
+>**_[Milk Mayhem]_** (https://milkmayhem-o2vgwiylk-elsa-bondes-projects.vercel.app/)
+
+
 ## Installation and getting started with the game
 To begin, run the command `npm install` to install the required modules (p5, typescript, etc). To launch the game, execute `npm run dev`.
 
@@ -20,7 +24,7 @@ To construct the game, we utilized p5.js and TypeScript with an Object-Oriented 
 
 ## Contributors
 
-Thanks to everyone who contributed to this project!
+Thanks to everyone who contributed to this project! 😍
 
 - [Daniela Byström](https://github.com/danibystrom)
 - [Elin Vahlberg](https://github.com/mypinkworld)
