@@ -1,46 +1,22 @@
-# Slutprojektet
+# Milk Mayhem
 
-Välkommen till den förinställda kodbasen för slutprojektet.
-Se filen [Sketch](./src/sketch.ts) och [Game](./src/game.ts) filerna för hur ni bör börja skriva er kod!
+## Game description
+Deep within the intricate corridors of a labyrinth, a daring infant embarks on a high-stakes mission. The clock is ticking - within a mere 60 seconds, the baby must snatch up as many formula bottles as possible. Each precious formula bottle secured contributes to your escalating score. But tread cautiously, for the devious beer bottles lurk, threatening to impede the baby's progress and points. (Should the baby indulge in more than one beer, it careens into a 360-degree spin - a hazardous state best avoided).
 
-Kom ihåg att använda git!
+As you navigate the labyrinth's twists and turns, seizing every opportunity, keep an eye out for the elusive clocks. Grabbing one of these time-stopping devices provides a crucial advantage - freezing time, enabling you to amass points while the countdown timer remains suspended in stillness for 5 seconds.
 
-Projektet använder sig av [Typescript](https://www.typescriptlang.org/) och [p5.js](https://p5js.org/). Det är varmt rekommenderat att ni läser på om dessa två teknologier innan ni börjar skriva kod.
+But the ultimate challenge looms: the door to the next level must be reached within the unforgiving 60-second timeframe. Failure means the abrupt conclusion of the game, the echoes of the baby's cries marking the end of your valiant attempt.
 
-OBS: Undvik [DOM funktionerna i p5.js](https://p5js.org/reference/#group-DOM) eftersom de **inte** är canvasspecifika och kommer inte fungera som ni förväntar er.
+Yet, succeed, and a window unveils your triumphant score as the baby erupts in joyous laughter. Now stands the moment of decision - will you boldly venture forth into the next level or restart your perilous journey for an even greater triumph?
 
-## Utveckling
+Embrace the exhilarating quest, where every second carries the weight of destiny. Can you guide the baby through the labyrinth, reach the door in time, and emerge victorious? The clock is ticking, the bottles beckon, and the labyrinth awaits your daring pursuit. May fortune favor the swift!
 
-### Installation
 
-Först behöver ni köra kommandot `npm install` för att installera nödvändiga moduler (p5, typescript, etc).
 
-### Starta projektet
+## Installation and getting started with the game
+To begin, run the command `npm install` to install the required modules (p5, typescript, etc). To launch the game, execute `npm run dev`.
 
-Kör kommandot `npm run dev` för att starta projektet och se det live i din webbläsare!
 
-### Debugger
+## Tools used to write game
+To construct the game, we utilized p5.js and TypeScript with an Object-Oriented Programming (OOP) approach. Additionally, we designed images using Adobe Photoshop and Figma.
 
-Det är starkt rekommenderat att ni använder debug-verktyget i VSCode för att hitta och lösa problem. Metoden vi primärt har använt tidigare är att skriva `console.log` men vi kan bli mer effektiva!
-
-Debuggern låter er stanna programmet och stega rad för rad samtidigt som ni kan titta på vad variablerna innehåller. Det är speciellt användbart när ni arbetar med funktioner som anropas 60 gånger per sekund - console overload otherwise... 🤯
-
-#### Starta Debuggern
-
-För att starta debuggern tycker du på `F5` eller via play-knappen i "ActionBaren", se dock till att du har startat projektet innan (`npm run dev`). Ett nytt fönster kommer att öppnas som behöver användas för att få koden att stanna vid utsatta debugg-punkter.
-
-### Potentiella problem
-
-Versionen av p5.js är 1.5.0 medan senaste version av p5 typerna endast är uppdaterad till 1.4.3. Detta skulle kunna orsaka problem och det kan vara så att ni hittar något i p5's dokumentation som inte finns tillgängligt i detta projektet - dock osannolikt.
-
-Typings för de globala variablerna relaterat till p5.sound fungerar tyvärr inte - exempel finns för hur ni kan kringgå detta. Se [loadSound funktionen](global.d.ts) för hur det kan göras.
-
-Eftersom det här projektet är konfigurerat till att fungera utan `import/export` så det ibland vara så att typescript kompilatorn inte hittar en klass. För att lösa det kan du lägga till en referens kommentar som berättar för typescript vart klassen är deklarerad.
-
-Lägg till följande `/// <reference path="to-file-with-class" />` längst upp i filen som genererade felet och skriv korrekt sökväg.
-
-## TODO
-
-Lägg till ytterligare information som är specifikt för ert projekt!
-
-**LYCKA TILL!**
